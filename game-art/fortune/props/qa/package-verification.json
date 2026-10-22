@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-22",
+  "archive": "props/qa/static-art-delivery.zip",
+  "bytes": 48209297,
+  "sha256": "573559e7f3db01f222eff20ef6c96831cb051af651a2bc5aa159f2aeb9fdb57e",
+  "file_count": 198,
+  "payload_file_count": 197,
+  "all_zip_entries_read_back_and_hash_match": true,
+  "zip_crc_test_passed": true,
+  "native_asset_count": 51,
+  "master_4x_asset_count": 51,
+  "all_native_and_master_hashes_match_asset_manifests": true,
+  "new_generation_source_pngs": 33,
+  "existing_shell_source_included": true,
+  "videos_included": false
+}

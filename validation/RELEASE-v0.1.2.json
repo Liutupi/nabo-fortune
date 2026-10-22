@@ -1,0 +1,15 @@
+{
+  "version": "0.1.2",
+  "all_four_build_images_digest_verified_on_device": true,
+  "new_build_bootloader_installed_and_booted": true,
+  "nvs_written": false,
+  "profile_preserved": true,
+  "startup_version_verified": true,
+  "initial_menu_responded": true,
+  "images": {
+    "bootloader": "d19fe10d519d95f3ae1dc06d45f2cc07b29922585c32004635b650be7af9a12d",
+    "partition_table": "43311cbc95711332aa26b5e5002a58a9099b1a3be0b394408bc7b2b5dd986d86",
+    "app": "d46453682debe1f4199b66bf2d5e84eda9f256964210cb883c41c9e0aaa72834",
+    "assets": "fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664"
+  }
+}

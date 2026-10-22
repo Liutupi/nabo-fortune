@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-22",
+  "status": "costume-C-final-and-round2-start-images-delivered",
+  "checks": {
+    "canonical_images": 10,
+    "canvas": [
+      1024,
+      1024
+    ],
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "white_cap_top_y_all_images": 27,
+    "unique_pose_hashes": 4,
+    "neutral_images_identical": true,
+    "shell_images_identical": true,
+    "character_opaque_palette_colors": 19,
+    "shell_start_opaque_palette_colors": 23,
+    "prop_opaque_palette_colors": 4,
+    "previews_visually_reviewed": [
+      120,
+      100,
+      76,
+      56
+    ],
+    "zip_entries_hash_verified": 13
+  },
+  "visual_review": {
+    "cap_logo_unmirrored": true,
+    "costume_C_consistent": true,
+    "shell_opening_up_and_visible": true,
+    "calc_hand": "anatomical left, viewer right",
+    "tube_gaze": "lower right",
+    "extra_text_or_loose_coins_cards_sticks": false
+  },
+  "pending": [
+    "per-frame head drift and shell deformation",
+    "loop first-last match",
+    "final video aperture anchors",
+    "keying and indexed-palette frame decoding",
+    "physical device validation"
+  ],
+  "video_receipt": {
+    "received": true,
+    "count": 10,
+    "decode_ok": 10,
+    "raw_source_files": 12,
+    "selected_revisions": {
+      "N-TUBE": "N-TUBE_v2.mp4",
+      "N-CALC": "N-CALC_v2.mp4"
+    },
+    "production_acceptance": false,
+    "review": "../grok-clips/qa/v2/REVIEW.md",
+    "selection_manifest": "../grok-clips/selected-clips.json"
+  }
+}

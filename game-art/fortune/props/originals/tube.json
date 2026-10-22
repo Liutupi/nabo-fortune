@@ -1,0 +1,11 @@
+{
+  "id": "tube",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single EMPTY traditional Chinese fortune-stick cylinder, straight upright and exact frontal level view, never tilted. Tall narrow bamboo cylinder proportion 64 wide to 110 high. Vermilion red body, one darker red cel-shadow, gold hoops near top and bottom, a small dark oval EMPTY opening at top with gold rim. Center-front has a large EMPTY pale parchment oval label, intentionally blank for typesetting the Chinese character later. No sticks protrude, no actual writing, no hands, no perspective lean.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/tube.png",
+  "target": [
+    64,
+    110
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

@@ -1,0 +1,929 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "asset_root": "game-art/fortune",
+  "cards": [
+    {
+      "id": "00-fool",
+      "index": 0,
+      "chinese_name": "愚者",
+      "native": {
+        "path": "tarot/00-fool.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "cb907befa0d231f91e96e9e235ec675ffdd9c973c22adddafbd47535b373d0da",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/00-fool-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "cbe254ab98f82b2527ed83d9c85f16cebb845cf050bac12e1ee317bb7639d588",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/00-fool.png",
+      "source_sha256": "218e329caeff1f27fee548b296e06545b72df7414f22437a5322d8ec0541b8f3"
+    },
+    {
+      "id": "01-magician",
+      "index": 1,
+      "chinese_name": "魔术师",
+      "native": {
+        "path": "tarot/01-magician.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "54b96918a1c9623167b90fc5fd899c562d0dd32ebdd4e9ef212a251bd443347d",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/01-magician-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "39d96e0b63e68edde0c4965f5414a5151f5b0c908ed2269e1aa6fa3d51d88fe2",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/01-magician.png",
+      "source_sha256": "3bbc1435857cd225a4491905e075f52c52fe91818c93309e083671c33bd07f5f"
+    },
+    {
+      "id": "02-high-priestess",
+      "index": 2,
+      "chinese_name": "女祭司",
+      "native": {
+        "path": "tarot/02-high-priestess.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "74efb9b22d97e285434faa8387cdb277aa2779ebc3145a8069c730520114e244",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/02-high-priestess-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "b711d24b79bc008362f8437a1915d4011596da179637d7f99c87a7aa997d8ccb",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/02-high-priestess.png",
+      "source_sha256": "55903eebff507fa5112a95ba3e13438d2e15e5e629c493de51db8cda4f4ef2e7"
+    },
+    {
+      "id": "03-empress",
+      "index": 3,
+      "chinese_name": "皇后",
+      "native": {
+        "path": "tarot/03-empress.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "4688ef69e221f074e622942e187399529732d4bf8ad98e99309b78d110888cec",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/03-empress-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "9964a401342c564b702f869e961da41bf8ed3e684bcc5a31e2dbef55a389daa2",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/03-empress.png",
+      "source_sha256": "45b9757e74cfc02a42aef280c354a0be14359952894f291c387008e57217e391"
+    },
+    {
+      "id": "04-emperor",
+      "index": 4,
+      "chinese_name": "皇帝",
+      "native": {
+        "path": "tarot/04-emperor.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "8f2f7c388ab0c68045fe416994e4b0306b9ae57d5e42c5733d3fa426fb3f2677",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/04-emperor-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "712f97af29b867666be3318a0dc9ec75f0da4371a113f1cd052c45a58eb9f938",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 34,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/04-emperor.png",
+      "source_sha256": "d19a687665399c9d3fe51930a8f118fa6387f195a10094554f2236340bec8cea"
+    },
+    {
+      "id": "05-hierophant",
+      "index": 5,
+      "chinese_name": "教皇",
+      "native": {
+        "path": "tarot/05-hierophant.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "06618b71f7c89c58115f2e0b8022d27c48fc2105918826a8f9d8ae2b78a857b2",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/05-hierophant-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "8c1b86edbde9ef5084b0cc52c554e14e0c3559efb86d998d08741bfc5572288c",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/05-hierophant.png",
+      "source_sha256": "b4882afd55d5daa4c581fd8115cae53493dabed0f04f08c569024f86e2700e77"
+    },
+    {
+      "id": "06-lovers",
+      "index": 6,
+      "chinese_name": "恋人",
+      "native": {
+        "path": "tarot/06-lovers.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "529bb68bf4b7004edccf34425d376d08f8c3d87e9ca5697547836f92b3c6db3a",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/06-lovers-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "ac300a6a32322fd048c6e710e2a5f540cc5eb569df30a9c12b23357c749c6318",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/06-lovers.png",
+      "source_sha256": "7cf71060e89698ab66f395ba5c48a1a7eeda68cce4130a3374603171fc30bd1f"
+    },
+    {
+      "id": "07-chariot",
+      "index": 7,
+      "chinese_name": "战车",
+      "native": {
+        "path": "tarot/07-chariot.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "b6b0c7213355a8c7073573bf3bf5bdc1fbc120c3150d0e29ac6c14a2b65597ee",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/07-chariot-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "1d54c97c3aae9f829e29cf55bf446d64ea9680a587562c827efcc247b1415059",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/07-chariot.png",
+      "source_sha256": "c1516a554af2b2c9f21a67990b062dc2cbbf7ebe723a010e4314bf9d277aca06"
+    },
+    {
+      "id": "08-strength",
+      "index": 8,
+      "chinese_name": "力量",
+      "native": {
+        "path": "tarot/08-strength.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "c98828b50b32e0f4d38d7af3e031c4d7d288901f78045d620909d5edd24b5a54",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/08-strength-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "89931d93c2c51030c65d182c0c7c22dc84b27b5f8d4ebd07f13f37bddfbec1a3",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/08-strength.png",
+      "source_sha256": "9daab7b5397be4ac5625b50954a44f7b127db9517a2e27e04dd8485e19cff779"
+    },
+    {
+      "id": "09-hermit",
+      "index": 9,
+      "chinese_name": "隐士",
+      "native": {
+        "path": "tarot/09-hermit.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "2dc1d813d24cbee4e91d9805b4b3fc1fdc4009c0e4f8937203fc7933472a8dd2",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/09-hermit-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "680c6d4b649aaa1d78a38f2a213571fd83a0cd8a3d0ab1153e6a6e3e629d6ca1",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/09-hermit.png",
+      "source_sha256": "f2ac0ce6671f0b0221f8d5d198fb811c097dd5dc57208ba8e1cd5d89c3c41449"
+    },
+    {
+      "id": "10-wheel-of-fortune",
+      "index": 10,
+      "chinese_name": "命运之轮",
+      "native": {
+        "path": "tarot/10-wheel-of-fortune.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "783a6900b9ceb2ee2b22619716067c6fceba5e574e5c434d4389e90b11b58cc8",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/10-wheel-of-fortune-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "26fd969859748774393f944b7892fb83edcd34dc84ba1ff3a509c4353005f266",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/10-wheel-of-fortune.png",
+      "source_sha256": "9a884222325bfb43721964c8288ae9db3b34271669a1122d62e5881d0e624341"
+    },
+    {
+      "id": "11-justice",
+      "index": 11,
+      "chinese_name": "正义",
+      "native": {
+        "path": "tarot/11-justice.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "5a76dba96845cbd0cfbda539fb5876d823f952aea14457573c28eb9b371b4752",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/11-justice-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "3439f10665414c6a480cf2d7f1fbd589b96af4474d8e1634fab453f7eb039383",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/11-justice.png",
+      "source_sha256": "b9802838bf64d208fe541bd0dfd61fec9db036b0a004c7c57df3a1ad7320427e"
+    },
+    {
+      "id": "12-hanged-man",
+      "index": 12,
+      "chinese_name": "倒吊人",
+      "native": {
+        "path": "tarot/12-hanged-man.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "620b7f88a15cc4d7027520d23efcc23bd029d86cbca106ce340ba6cbd3d0ece5",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/12-hanged-man-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "2c570ebd71745720faad765155fea1a256f388b14f87d37a19c2610d0180d46f",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/12-hanged-man.png",
+      "source_sha256": "425e870815322c5f266632306fc69200f6504e9d6210a9caf184dc21f14b7db8"
+    },
+    {
+      "id": "13-death",
+      "index": 13,
+      "chinese_name": "死神",
+      "native": {
+        "path": "tarot/13-death.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "590d6c77990dd8b26bdd1d5f23148dbbba148218c5f0e63295c4bf9ad9872228",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/13-death-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "8dc1b8e139958211fd9f1fac310647a623660eb69c0f6743f67ebf1e8ab53d31",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/13-death.png",
+      "source_sha256": "8467f534bece2b8ce63ddda2942374b3a3a876169f553bac9a19d4d3b767d141"
+    },
+    {
+      "id": "14-temperance",
+      "index": 14,
+      "chinese_name": "节制",
+      "native": {
+        "path": "tarot/14-temperance.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "41faf1c582e34c0803131099c8968869653cc757c898394bfb2f1081eedbc54b",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/14-temperance-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "279d06e9f025063151b10384ac91d3702039461a0198193acdcab3eadd7be5ae",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/14-temperance.png",
+      "source_sha256": "b308e65af5302c6949d78fd816c1807f2015b9a70f3b3aac1c8e6191f84c9d54"
+    },
+    {
+      "id": "15-devil",
+      "index": 15,
+      "chinese_name": "恶魔",
+      "native": {
+        "path": "tarot/15-devil.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "b1e6601631d0cbbbaf08544ff5aacb3fb7be4df81ba323e230d87d5bf10afc0a",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/15-devil-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "e163f51fc85cd03b1a83dacf21588baf0a8781422353afc9a299c2ad63262161",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 34,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/15-devil.png",
+      "source_sha256": "13649e100aea56b2a950b2c11d0bebe804e7f22d003de5bb51136367df8d253f"
+    },
+    {
+      "id": "16-tower",
+      "index": 16,
+      "chinese_name": "高塔",
+      "native": {
+        "path": "tarot/16-tower.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "5e828e2e0f87c53c64b33576f786446f3faa1fdf01e88b1f420a643c78f62aa3",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/16-tower-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "faad8ccdf74527d10c4f62019a34ec84a67fb5301f820f2a93e1ef80617acdb5",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/16-tower.png",
+      "source_sha256": "d7e5bc3fd20e5e027ecb11caaba544fc2e9f98575f7b9cda997775a8135295c0"
+    },
+    {
+      "id": "17-star",
+      "index": 17,
+      "chinese_name": "星星",
+      "native": {
+        "path": "tarot/17-star.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "dc34005554ecaa6e93beac03e34d0b674b0bd36a37edfbf3f3a2bd4c797b1aa9",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/17-star-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "827f26007edfd057839e45507795b03e41a1e3ec193ae24e87817c7cfb5fac40",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/17-star.png",
+      "source_sha256": "bdeda904398b6f7a2947c7d017565aa2586ccc35b7b8ee453385398ba0fa19ab"
+    },
+    {
+      "id": "18-moon",
+      "index": 18,
+      "chinese_name": "月亮",
+      "native": {
+        "path": "tarot/18-moon.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "ee06477b1360f90b2fed9dd11466f6cab0992439a0d8146f40617d4453c3e660",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/18-moon-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "5a7a6bbe16d6cafb6d13dc0d1be0f420d7c9ced751fde2da4383f773416f0082",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/18-moon.png",
+      "source_sha256": "f78a8478489c5e3e5762eccbd2794017b727d244e709ce98bb2151d365c3363e"
+    },
+    {
+      "id": "19-sun",
+      "index": 19,
+      "chinese_name": "太阳",
+      "native": {
+        "path": "tarot/19-sun.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "d1effbefabbcabcad2e77d955a5ea95363d55ff37c878c8acc76a7d8340929d5",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 33,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/19-sun-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "e58797b3d4d13099f4a398ba1af6d131e2bb4c62ec1ab661ed69fc362f301370",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 34,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/19-sun.png",
+      "source_sha256": "4782e60a96e0db570fdc33cd1b9f065577e4c8a3bab568842605c719fe6fd3b5"
+    },
+    {
+      "id": "20-judgement",
+      "index": 20,
+      "chinese_name": "审判",
+      "native": {
+        "path": "tarot/20-judgement.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "9aca0033d3579b0f687ff761df6bcc5f3c1ca7de7b848b05ffe76a0c9eddbfad",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/20-judgement-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "23fb7fa0dd250f70153583833130938d075cf2cc2816d2d2ffe412c945989339",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 32,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/20-judgement.png",
+      "source_sha256": "bbd52cd49b3db3ef124bd12d7fdb7b60a53ee3dc8c61f82a7a408a3908a31da6"
+    },
+    {
+      "id": "21-world",
+      "index": 21,
+      "chinese_name": "世界",
+      "native": {
+        "path": "tarot/21-world.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "de36b9552a19de4df8a762c2f194f8f8e4293156353d2a9945bee51d753515fd",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 30,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11070
+      },
+      "master_4x": {
+        "path": "tarot/masters/21-world-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "7bd6a993d76b14f4250d3f35b50ebc367d39ef0b1fc290c1cffa518d8e5775ec",
+        "alpha_values": [
+          255
+        ],
+        "opaque_rgb_colors": 31,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 177120
+      },
+      "source": "tarot/originals/21-world.png",
+      "source_sha256": "2f1a0e24095e96b75a4a04c808bf4fe38f4c1e6af22cca94eaf5c05d352ee18b"
+    }
+  ],
+  "number_rect_native": [
+    6,
+    5,
+    70,
+    8
+  ],
+  "name_rect_native": [
+    6,
+    119,
+    70,
+    10
+  ],
+  "illustration_rect_native": [
+    6,
+    14,
+    70,
+    103
+  ],
+  "baked_text": "Only original NABO cap logo; no numerals or card names. Engine supplies all labels.",
+  "index_order_note": "8 strength / 11 justice; 9 hermit is labelled 隐士 in current prototype, synonym 隐者; 20 filename uses judgement."
+}

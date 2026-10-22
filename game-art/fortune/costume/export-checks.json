@@ -1,0 +1,98 @@
+[
+  {
+    "file": "A.png",
+    "width": 1024,
+    "height": 1024,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "ced4fe71bae0c2a0af08754d10ae98ef34feeef4092c68c3e559d2f3bcfba92f"
+  },
+  {
+    "file": "A-120.png",
+    "width": 120,
+    "height": 120,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "02b3fe1d9025c3d178bb2dfa6e5b69fdbbcdf5f1e75b38fd215f644b208b371c"
+  },
+  {
+    "file": "A-100.png",
+    "width": 100,
+    "height": 100,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "0dcbf09136d85dd802b2e2aa3a0a3e8f4589ae346143f2116ed1d756968378af"
+  },
+  {
+    "file": "A-76.png",
+    "width": 76,
+    "height": 76,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "41199bb0699cc666cf981a7c2cb7940bd234477792a3d423a5e2a649390dac8d"
+  },
+  {
+    "file": "B.png",
+    "width": 1024,
+    "height": 1024,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "2f457a5d7e92bb3437f0ac9a0b977e10b5c2ffba8a1dd91ecd0489e00441fe69"
+  },
+  {
+    "file": "B-120.png",
+    "width": 120,
+    "height": 120,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "bf682294b60410df91b5039d7c585430baef7915ec7079175d5317060e3dc99b"
+  },
+  {
+    "file": "B-100.png",
+    "width": 100,
+    "height": 100,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "b8649f63202b5f989a6220e91ecb5b9a1b74affb04995c36751c531d782fa397"
+  },
+  {
+    "file": "B-76.png",
+    "width": 76,
+    "height": 76,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "12e171ca7bc8568a8a44a02b749e05deef174a76981575d6986ef794863ed33e"
+  },
+  {
+    "file": "C.png",
+    "width": 1024,
+    "height": 1024,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "78aff9d43b519ab1e2b76bf5a7e7e0311654e9af61ea7cfdb88ec4ae16d66b0e"
+  },
+  {
+    "file": "C-120.png",
+    "width": 120,
+    "height": 120,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "fb6fa6d6c61af2f2c8e58fea7a4db219cb7e69e10975c15b8c5fea1b96b6df35"
+  },
+  {
+    "file": "C-100.png",
+    "width": 100,
+    "height": 100,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "6a0b7aba975b3b899f72658600b13dba7c38b1b8b13b8e03c0acd21ad2d98bed"
+  },
+  {
+    "file": "C-76.png",
+    "width": 76,
+    "height": 76,
+    "size_ok": true,
+    "corner_ok": true,
+    "sha256": "8f8ea1b495cc185b5e12e7f94aec9a4c16addea92ba00b72d472aedf28658e9b"
+  }
+]

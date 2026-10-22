@@ -1,0 +1,102 @@
+[
+  {
+    "id": "N-IDLE",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  },
+  {
+    "id": "N-WELCOME",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  },
+  {
+    "id": "N-SHELL",
+    "scale": 0.8167741935483871,
+    "offset_x": 0.3406451612903254,
+    "offset_y": 0.04645161290322619,
+    "hat_x": 197,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 347
+  },
+  {
+    "id": "N-SHELL-TOSS",
+    "scale": 0.8167741935483871,
+    "offset_x": 0.3406451612903254,
+    "offset_y": 0.04645161290322619,
+    "hat_x": 197,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 347
+  },
+  {
+    "id": "N-TUBE",
+    "scale": 0.8146718146718147,
+    "offset_x": 1.6640926640926637,
+    "offset_y": 0.11583011583011427,
+    "hat_x": 199,
+    "hat_y": 27,
+    "hat_width": 632,
+    "hat_height": 347
+  },
+  {
+    "id": "N-WOW",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  },
+  {
+    "id": "N-NOD",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  },
+  {
+    "id": "N-SIGH",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  },
+  {
+    "id": "N-CALC",
+    "scale": 0.8178294573643411,
+    "offset_x": -0.7325581395348877,
+    "offset_y": -0.8062015503875983,
+    "hat_x": 197,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 347
+  },
+  {
+    "id": "N-PRINT",
+    "scale": 1.0,
+    "offset_x": 0.0,
+    "offset_y": 0.0,
+    "hat_x": 198,
+    "hat_y": 27,
+    "hat_width": 633,
+    "hat_height": 348
+  }
+]

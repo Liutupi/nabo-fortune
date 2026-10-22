@@ -1,0 +1,11 @@
+{
+  "id": "weight-blank",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One small squat solid BRASS WEIGHT BLOCK, frontal near-square silhouette. Simple beveled cube with a broad flat EMPTY front face, tiny visible top bevel and thick dark brown outline. Warm gold/bronze flat base plus one darker ochre shadow. Leave the whole front face BLANK for a single exact Chinese character to be typeset later. No numerals or lettering, no hook, no scale or backdrop. The final icon is only 12x12 pixels, so use few large shapes.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/weight-blank.png",
+  "target": [
+    12,
+    12
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "scroll",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single fully OPEN Chinese paper scroll viewed straight-on. Near-square vertical format ratio 208:216. Flat pale warm parchment central writing area, extremely faint subtle fiber marks only near edges, large clean empty center suitable for text. Wooden horizontal roller rods across TOP and BOTTOM, gold end caps extending a little beyond paper width, no tied cord or text. Balanced symmetric frontend, no tilt, no scenic illustration.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/scroll.png",
+  "target": [
+    208,
+    216
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

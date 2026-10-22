@@ -1,0 +1,16 @@
+{
+  "status": "static-start-frame-reference-only",
+  "origin": "top-left, zero-based",
+  "video_validated": false,
+  "items": {
+    "N-SHELL": {
+      "shell_mouth_1024": [510, 794],
+      "shell_mouth_120": [59.765625, 93.046875]
+    },
+    "N-SHELL-TOSS": {
+      "shell_mouth_1024": [510, 794],
+      "shell_mouth_120": [59.765625, 93.046875]
+    }
+  },
+  "note": "Approximate visually located aperture center in the delivered static image. Re-measure on decoded video frames before producing final anchors.json."
+}

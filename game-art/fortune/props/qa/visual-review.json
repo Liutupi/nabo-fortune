@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-22",
+  "reviewed_on_background": "#0D0820",
+  "props_native_overview_reviewed": true,
+  "props_detail_reviewed": true,
+  "tarot_batches_reviewed": ["00-07", "08-14", "15-21"],
+  "all_22_overview_reviewed": true,
+  "hanged_man_identity_checked_upright_without_mirroring": true,
+  "review_notes": [
+    "New prop silhouettes and hard transparent edges checked in native-size and enlarged contact sheets.",
+    "Stamp text and four 12px weight glyphs checked after final export.",
+    "Tarot reserved label areas remain blank; overview captions are outside production cards.",
+    "This visual review covers static PNG delivery, not engine integration or physical display."
+  ]
+}

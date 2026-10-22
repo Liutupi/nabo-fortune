@@ -1,0 +1,18 @@
+{
+ "schema_version": 1,
+ "date": "2026-10-22",
+ "status": "measured-on-processed-frames",
+ "N-SHELL-TOSS": {
+  "release_frame": 8,
+  "basis": "120px 精灵帧左上角为原点；第 release_frame 帧（12 fps）龟甲金色像素上缘中心",
+  "mouth_120": [
+   64.8,
+   71.5
+  ],
+  "mouth_src480": [
+   259.0,
+   286.0
+  ],
+  "engine": "铜钱在该帧从口部生成；整段口坐标不要求固定，N-SHELL 待机和摇动期间不生成铜钱"
+ }
+}

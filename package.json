@@ -1,0 +1,15 @@
+{
+  "name": "nabo-fortune-dev",
+  "private": true,
+  "description": "只用于在开发机上生成农历表和录制对拍标准答案，固件不依赖这些包",
+  "scripts": {
+    "tables": "node tools/gen_fortune_tables.js",
+    "golden": "node tests/fortune_host/record_golden.js",
+    "test": "python tests/test_fortune.py && python tests/test_fortune.py --mutate"
+  },
+  "devDependencies": {
+    "lunar-javascript": "1.7.7",
+    "iztro": "2.6.1",
+    "kinqimen": "0.3.1"
+  }
+}

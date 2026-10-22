@@ -1,0 +1,10 @@
+* -text
+*.png binary
+*.mp4 binary
+*.mp3 binary
+*.wav binary
+*.ttf binary
+*.otf binary
+*.woff2 binary
+*.fnt binary
+*.zip binary

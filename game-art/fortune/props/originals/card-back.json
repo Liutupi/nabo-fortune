@@ -1,0 +1,11 @@
+{
+  "id": "card-back",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. ONE original cyber-oracle TAROT CARD BACK decorative design, portrait 2:3 aspect ratio, no character. Deep purple flat background, central crisp cyan stylized EYE wrapped around a small GOLD BAGUA octagon, exact rotationally balanced decorative geometry, a few cyan/gold circuit-like corner lines. Very simple high-contrast pattern readable at 44x72 pixels. No realistic eyeball, no characters, letters, numerals or logos. No blurry glow, no gradient. Keep design centered with generous margins, do not draw any external scene. Frame may be a simple gold double line; the project will impose exact border dimensions.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/card-back.png",
+  "target": [
+    82,
+    135
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

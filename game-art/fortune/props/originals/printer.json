@@ -1,0 +1,11 @@
+{
+  "id": "printer",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One cyber-styled miniature THERMAL PRINTER housing only, front-on horizontal view. Extremely wide low-profile silhouette about 212 wide to 28 high, approximately 7.6:1 ratio. Deep purple metal body with one darker shadow plane, crisp cyan trim along top lip, a long dark horizontal PAPER-OUTPUT SLOT across the middle, one tiny cyan indicator on right. Symmetric simple bold game prop, no paper emerging, no display, no text, no buttons with lettering, no desk or hands, no perspective angle. Entire machine fits one thin horizontal strip.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/printer.png",
+  "target": [
+    212,
+    28
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

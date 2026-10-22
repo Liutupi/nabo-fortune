@@ -1,0 +1,382 @@
+[
+  {
+    "id": "N-IDLE",
+    "source_sha256": "7d07cf46648e9f88845a6341ed6e5e6a7adc9e915bc39ba96049ec419d10d650",
+    "bytes": 510926,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": true,
+    "cap_center_span_at_120": [
+      3.047,
+      2.109
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      2.344,
+      2.109
+    ],
+    "cap_width_span_at_120": 0.469,
+    "cap_height_span_at_120": 2.344,
+    "first_last_foreground_mean_abs_rgb_error": 2.563,
+    "first_last_silhouette_iou": 0.99851,
+    "border_median_first": [
+      0.0,
+      176.0,
+      61.0
+    ],
+    "border_median_last": [
+      0.0,
+      176.0,
+      63.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-WELCOME",
+    "source_sha256": "789995c91f2110c01e49fe3a222726887ae9066bb68ffbeae43381344ce926cd",
+    "bytes": 804000,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      1.172,
+      11.016
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      1.172,
+      10.547
+    ],
+    "cap_width_span_at_120": 2.344,
+    "cap_height_span_at_120": 3.75,
+    "first_last_foreground_mean_abs_rgb_error": 2.607,
+    "first_last_silhouette_iou": 0.99869,
+    "border_median_first": [
+      0.0,
+      175.0,
+      61.0
+    ],
+    "border_median_last": [
+      0.0,
+      174.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-SHELL",
+    "source_sha256": "3255c9ebe00f357d6ec07165fffdd21773c3af652751b52cc91713ac49b4446b",
+    "bytes": 754984,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": true,
+    "cap_center_span_at_120": [
+      0.469,
+      0.234
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      0.234,
+      0.234
+    ],
+    "cap_width_span_at_120": 0.469,
+    "cap_height_span_at_120": 0.469,
+    "first_last_foreground_mean_abs_rgb_error": 3.513,
+    "first_last_silhouette_iou": 0.99519,
+    "border_median_first": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-SHELL-TOSS",
+    "source_sha256": "e4b13f922649b51811b8d247039df1f2e521b394716506fcf7a919e87a9df6e8",
+    "bytes": 529832,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      0.234,
+      0.703
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      0.234,
+      0.469
+    ],
+    "cap_width_span_at_120": 0.469,
+    "cap_height_span_at_120": 0.469,
+    "first_last_foreground_mean_abs_rgb_error": 2.702,
+    "first_last_silhouette_iou": 0.99655,
+    "border_median_first": [
+      0.0,
+      176.0,
+      60.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-TUBE",
+    "source_sha256": "b25fbbbaee57e3283904b6b67dd43c01426ab4dcf759d03023972fd12d84159f",
+    "bytes": 1046612,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": true,
+    "cap_center_span_at_120": [
+      12.422,
+      7.969
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      9.609,
+      7.5
+    ],
+    "cap_width_span_at_120": 0.938,
+    "cap_height_span_at_120": 3.281,
+    "first_last_foreground_mean_abs_rgb_error": 2.855,
+    "first_last_silhouette_iou": 0.99885,
+    "border_median_first": [
+      0.0,
+      176.0,
+      61.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-WOW",
+    "source_sha256": "9daf20a6f3b40a884cfebacea2c67f65877a86c33c733188a26690838c5ad04f",
+    "bytes": 650094,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      1.406,
+      6.328
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      1.172,
+      4.688
+    ],
+    "cap_width_span_at_120": 1.406,
+    "cap_height_span_at_120": 12.656,
+    "first_last_foreground_mean_abs_rgb_error": 2.667,
+    "first_last_silhouette_iou": 0.99869,
+    "border_median_first": [
+      0.0,
+      175.0,
+      61.0
+    ],
+    "border_median_last": [
+      0.0,
+      174.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-NOD",
+    "source_sha256": "0142c69503eee8b1d722e01cd8180ae8669a272c028a917f52b4a2494fd12b61",
+    "bytes": 661753,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      0.469,
+      6.328
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      0.234,
+      6.328
+    ],
+    "cap_width_span_at_120": 2.344,
+    "cap_height_span_at_120": 2.812,
+    "first_last_foreground_mean_abs_rgb_error": 2.493,
+    "first_last_silhouette_iou": 0.99878,
+    "border_median_first": [
+      0.0,
+      176.0,
+      60.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      61.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-SIGH",
+    "source_sha256": "6a0a3a3991a00fc0b6e9a5969a2a456107d05963e40e08393d23a696dc06caaf",
+    "bytes": 650952,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      7.266,
+      2.812
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      6.562,
+      2.578
+    ],
+    "cap_width_span_at_120": 0.938,
+    "cap_height_span_at_120": 4.219,
+    "first_last_foreground_mean_abs_rgb_error": 2.559,
+    "first_last_silhouette_iou": 0.99878,
+    "border_median_first": [
+      0.0,
+      178.0,
+      61.0
+    ],
+    "border_median_last": [
+      0.0,
+      178.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-CALC",
+    "source_sha256": "65c2cb8e3c966ca88b0d8abfbabe9a2021161ee681744f87f1c5c7e7cc3e5162",
+    "bytes": 426832,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": true,
+    "cap_center_span_at_120": [
+      0.0,
+      0.0
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      0.0,
+      0.0
+    ],
+    "cap_width_span_at_120": 0.0,
+    "cap_height_span_at_120": 0.0,
+    "first_last_foreground_mean_abs_rgb_error": 2.478,
+    "first_last_silhouette_iou": 0.99881,
+    "border_median_first": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      63.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  },
+  {
+    "id": "N-PRINT",
+    "source_sha256": "daa1c851f3feda2e80e2389c0749aaa7e43cc4d1e9f2836773defd38193cf70c",
+    "bytes": 740818,
+    "duration_seconds": 4.04,
+    "width": 480,
+    "height": 480,
+    "fps": 24.0,
+    "decoded_frames": 97,
+    "decode_ok": true,
+    "contains_audio": true,
+    "contains_attached_cover": true,
+    "analysis_size": 256,
+    "loop_required": false,
+    "cap_center_span_at_120": [
+      7.5,
+      3.984
+    ],
+    "cap_center_max_abs_from_first_at_120": [
+      6.094,
+      3.516
+    ],
+    "cap_width_span_at_120": 0.938,
+    "cap_height_span_at_120": 4.219,
+    "first_last_foreground_mean_abs_rgb_error": 2.766,
+    "first_last_silhouette_iou": 0.99854,
+    "border_median_first": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "border_median_last": [
+      0.0,
+      175.0,
+      62.0
+    ],
+    "metrics_are_review_indicators_not_automatic_acceptance": true
+  }
+]

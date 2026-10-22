@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-22",
+  "status": "start-images-complete-video-not-generated",
+  "background": "#00B140",
+  "character": "costume-C-final",
+  "common_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends.",
+  "items": [
+    {
+      "id": "N-IDLE",
+      "start_image": "N-IDLE.png",
+      "output_video": "../grok-clips/N-IDLE.mp4",
+      "requested_generation_seconds": 4,
+      "intended_animation_seconds": 3,
+      "loop": true,
+      "target_pixel_sizes": [
+        76,
+        120
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character stands calmly, breathing gently with subtle shoulder movement, blinks twice, and once pushes up the glasses with one finger, then returns to the exact starting pose. Seamless loop: last frame matches first frame.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character stands calmly, breathing gently with subtle shoulder movement, blinks twice, and once pushes up the glasses with one finger, then returns to the exact starting pose. Seamless loop: last frame matches first frame."
+    },
+    {
+      "id": "N-WELCOME",
+      "start_image": "N-WELCOME.png",
+      "output_video": "../grok-clips/N-WELCOME.mp4",
+      "requested_generation_seconds": 3,
+      "intended_animation_seconds": 2,
+      "loop": false,
+      "target_pixel_sizes": [
+        120
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character raises both hands and performs a traditional Chinese fist-and-palm salute, bows slightly, then straightens up with a warm smile and lowers the hands back to the exact starting pose.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character raises both hands and performs a traditional Chinese fist-and-palm salute, bows slightly, then straightens up with a warm smile and lowers the hands back to the exact starting pose."
+    },
+    {
+      "id": "N-SHELL",
+      "start_image": "N-SHELL.png",
+      "output_video": "../grok-clips/N-SHELL.mp4",
+      "requested_generation_seconds": 2.5,
+      "intended_animation_seconds": 1.5,
+      "loop": true,
+      "target_pixel_sizes": [
+        120
+      ],
+      "shared_start_group": "shell",
+      "action_prompt": "The character holds the SAME golden turtle-shell vessel with both hands at chest level, eyes closed in concentration, and shakes it up and down rhythmically. Keep its shape, plate pattern and opening unchanged. Only arms and shell move; head stays steady. The upward-facing aperture stays unobstructed. No coins. Seamless loop; last frame exactly matches first.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character holds the SAME golden turtle-shell vessel with both hands at chest level, eyes closed in concentration, and shakes it up and down rhythmically. Keep its shape, plate pattern and opening unchanged. Only arms and shell move; head stays steady. The upward-facing aperture stays unobstructed. No coins. Seamless loop; last frame exactly matches first."
+    },
+    {
+      "id": "N-SHELL-TOSS",
+      "start_image": "N-SHELL-TOSS.png",
+      "output_video": "../grok-clips/N-SHELL-TOSS.mp4",
+      "requested_generation_seconds": 1.5,
+      "intended_animation_seconds": 0.7,
+      "loop": false,
+      "target_pixel_sizes": [
+        120
+      ],
+      "shared_start_group": "shell",
+      "action_prompt": "Holding the SAME golden turtle shell at chest level, the character flicks it upward and forward once, then brings it back to the exact starting pose. Keep the shell shape and opening unchanged and visible. Do not show any coins or any loose objects. Head stays steady.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. Holding the SAME golden turtle shell at chest level, the character flicks it upward and forward once, then brings it back to the exact starting pose. Keep the shell shape and opening unchanged and visible. Do not show any coins or any loose objects. Head stays steady."
+    },
+    {
+      "id": "N-TUBE",
+      "start_image": "N-TUBE.png",
+      "output_video": "../grok-clips/N-TUBE.mp4",
+      "requested_generation_seconds": 3,
+      "intended_animation_seconds": 2,
+      "loop": true,
+      "target_pixel_sizes": [
+        76
+      ],
+      "shared_start_group": "tube",
+      "action_prompt": "The character leans slightly forward, fists clenched at chest, eyes fixed on something OFFSCREEN at the lower right, bouncing a little with excited anticipation. No tube or sticks in the frame. Seamless loop with exact starting pose restored.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character leans slightly forward, fists clenched at chest, eyes fixed on something OFFSCREEN at the lower right, bouncing a little with excited anticipation. No tube or sticks in the frame. Seamless loop with exact starting pose restored."
+    },
+    {
+      "id": "N-WOW",
+      "start_image": "N-WOW.png",
+      "output_video": "../grok-clips/N-WOW.mp4",
+      "requested_generation_seconds": 2,
+      "intended_animation_seconds": 1.2,
+      "loop": false,
+      "target_pixel_sizes": [
+        76
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character's eyes widen with delight, both hands fly up in celebration within the frame, then hands come back down to the exact starting pose with a big smile.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character's eyes widen with delight, both hands fly up in celebration within the frame, then hands come back down to the exact starting pose with a big smile."
+    },
+    {
+      "id": "N-NOD",
+      "start_image": "N-NOD.png",
+      "output_video": "../grok-clips/N-NOD.mp4",
+      "requested_generation_seconds": 1.5,
+      "intended_animation_seconds": 1,
+      "loop": false,
+      "target_pixel_sizes": [
+        76
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character smiles and nods twice approvingly, then returns to the exact starting pose.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character smiles and nods twice approvingly, then returns to the exact starting pose."
+    },
+    {
+      "id": "N-SIGH",
+      "start_image": "N-SIGH.png",
+      "output_video": "../grok-clips/N-SIGH.mp4",
+      "requested_generation_seconds": 2,
+      "intended_animation_seconds": 1.4,
+      "loop": false,
+      "target_pixel_sizes": [
+        76
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character gives a soft, gentle sigh with a slight shrug, then smiles encouragingly and makes a small fist pump. Friendly and warm, not sad. Ends in the exact starting pose.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character gives a soft, gentle sigh with a slight shrug, then smiles encouragingly and makes a small fist pump. Friendly and warm, not sad. Ends in the exact starting pose."
+    },
+    {
+      "id": "N-CALC",
+      "start_image": "N-CALC.png",
+      "output_video": "../grok-clips/N-CALC.mp4",
+      "requested_generation_seconds": 3,
+      "intended_animation_seconds": 2,
+      "loop": true,
+      "target_pixel_sizes": [
+        56,
+        100
+      ],
+      "shared_start_group": "calc",
+      "action_prompt": "The character's ANATOMICAL LEFT hand, on the viewer's RIGHT, stays raised near the chin. Its thumb taps across the other fingertips one by one as if counting; eyes look upward in thought; lips move slightly as if muttering. Never swap hands or mirror the character. Keep hand clear of face. Seamless loop with exact starting pose restored.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character's ANATOMICAL LEFT hand, on the viewer's RIGHT, stays raised near the chin. Its thumb taps across the other fingertips one by one as if counting; eyes look upward in thought; lips move slightly as if muttering. Never swap hands or mirror the character. Keep hand clear of face. Seamless loop with exact starting pose restored."
+    },
+    {
+      "id": "N-PRINT",
+      "start_image": "N-PRINT.png",
+      "output_video": "../grok-clips/N-PRINT.mp4",
+      "requested_generation_seconds": 2.5,
+      "intended_animation_seconds": 1.5,
+      "loop": false,
+      "target_pixel_sizes": [
+        120
+      ],
+      "shared_start_group": "neutral",
+      "action_prompt": "The character looks down and points toward the bottom of the frame, then looks back up and gives a thumbs-up with a cheerful smile, returning to the exact starting pose. No printer, paper or ticket in frame.",
+      "full_prompt": "Locked static camera, no zoom, no pan, no camera shake. Half-body front view. Preserve exactly the same NABO face, glasses, hairstyle, white cap and original readable UNMIRRORED NABO heartbeat logo. Preserve the costume C: opaque flat pale-lavender open over-robe, deep-purple crossed collar and cyan edging. Flat base plus one hard-edged shadow per material, no gradients, motion blur, lighting changes or particles. Plain solid green #00B140 background remains unchanged. No captions or extra writing; preserve the mandatory original cap logo. No coins, sticks or cards. No extra objects. Only N-SHELL and N-SHELL-TOSS retain their required turtle-shell vessel. All hands and props stay inside frame. Return to the identical starting pose when the action ends. The character looks down and points toward the bottom of the frame, then looks back up and gives a thumbs-up with a cheerful smile, returning to the exact starting pose. No printer, paper or ticket in frame."
+    }
+  ]
+}

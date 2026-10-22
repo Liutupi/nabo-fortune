@@ -1,0 +1,23 @@
+[
+  {
+    "file": "costume\\final-transparent.png",
+    "width": 1024,
+    "height": 1024,
+    "opaque_colors": 19,
+    "sha256": "8407b437e6e4bede1412ec44018fca49b147dd1a22ad15a509786b48f942a016"
+  },
+  {
+    "file": "props\\shell.png",
+    "width": 68,
+    "height": 40,
+    "opaque_colors": 4,
+    "sha256": "a3eaf4d8b58e9b454909423fd9eb3dd5bc9de2df85bfa25f466125e9f8e8d66e"
+  },
+  {
+    "file": "props\\shell-4x.png",
+    "width": 272,
+    "height": 160,
+    "opaque_colors": 4,
+    "sha256": "3e44e242de90e296b9386fdd52d418e91b825e02a8c5db5df85c11503e72ef99"
+  }
+]

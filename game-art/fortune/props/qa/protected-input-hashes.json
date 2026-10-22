@@ -1,0 +1,26 @@
+[
+  {
+    "path": "AGENTS.md",
+    "sha256": "f3ddfcc9f67aab39d9f34cbea20b84d5cfd0769aa66bba8c925c09a576c64fff"
+  },
+  {
+    "path": "game-art\\fortune\\ART_BRIEF.md",
+    "sha256": "3fc6b6da708599a27101c4bad10b96cdcd6d033a5595de4e508c495099e04d3c"
+  },
+  {
+    "path": "game-art\\fortune\\CODEX_PROMPTS.md",
+    "sha256": "be2c73f18d0d8a95b27da0c45e33aae8dc9c86954a7c3fcfa9d75540bfc41099"
+  },
+  {
+    "path": "game-art\\fortune\\GROK_PROMPTS.md",
+    "sha256": "838fc99121824f3b454897a7dbe4b3a5fc3bfcc30ebb14f32453da6136e43858"
+  },
+  {
+    "path": "game-art\\fortune\\DESIGN.md",
+    "sha256": "a708d3a53a6ab1a4f13db2c7b8114802084638926601507a1bf5b0f40b8dfd9e"
+  },
+  {
+    "path": "game-art\\fortune\\reference\\nabo-idle.png",
+    "sha256": "c63575691d15220e8d6fafdab911a10767a5fc1c13925992dbd10e3a5e93d3fa"
+  }
+]

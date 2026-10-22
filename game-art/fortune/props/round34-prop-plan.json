@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-22",
+  "generator": "built-in image_gen",
+  "generated_props": [
+    {
+      "id": "coin-front",
+      "width": 22,
+      "height": 22,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single antique Chinese round brass coin, perfectly front-on circular silhouette. Actual transparent square hole through the exact center, four bold short dark pseudo-calligraphic stroke clusters around the hole, thick raised outer rim. Warm gold base and one ochre shadow; dark brown outline. The four marks need not form readable words. No perspective, no extra coins. Clearly readable at 22 pixels."
+    },
+    {
+      "id": "coin-back",
+      "width": 22,
+      "height": 22,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single reverse side of an antique Chinese round brass coin, perfectly front-on circular silhouette. Actual transparent square hole through the exact center. Plain smooth reverse with a thick raised outer rim and one simple inner circular ridge, NO characters or letters. Same warm gold and dark outline as a traditional bronze coin. Visibly simpler than the inscribed obverse. No perspective."
+    },
+    {
+      "id": "tube",
+      "width": 64,
+      "height": 110,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single EMPTY traditional Chinese fortune-stick cylinder, straight upright and exact frontal level view, never tilted. Tall narrow bamboo cylinder proportion 64 wide to 110 high. Vermilion red body, one darker red cel-shadow, gold hoops near top and bottom, a small dark oval EMPTY opening at top with gold rim. Center-front has a large EMPTY pale parchment oval label, intentionally blank for typesetting the Chinese character later. No sticks protrude, no actual writing, no hands, no perspective lean."
+    },
+    {
+      "id": "scroll",
+      "width": 208,
+      "height": 216,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single fully OPEN Chinese paper scroll viewed straight-on. Near-square vertical format ratio 208:216. Flat pale warm parchment central writing area, extremely faint subtle fiber marks only near edges, large clean empty center suitable for text. Wooden horizontal roller rods across TOP and BOTTOM, gold end caps extending a little beyond paper width, no tied cord or text. Balanced symmetric frontend, no tilt, no scenic illustration."
+    },
+    {
+      "id": "seal-blank",
+      "width": 52,
+      "height": 40,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single Chinese cinnabar seal INK IMPRESSION, flat rectangular silhouette ratio 52:40. Opaque vermilion red ink field with thick slightly irregular double rectangular edge and very sparse small chipped transparent holes near outside edge. Center is PLAIN SOLID RED and EMPTY for exact white characters to be typeset later. Top-down 2D ink print, NOT a physical stamp handle, no letters or fake symbols, no paper. Confident clean readable outline at 52x40."
+    },
+    {
+      "id": "scale-beam",
+      "width": 182,
+      "height": 6,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single detached Chinese steelyard brass BEAM only, exactly horizontal with extremely slender 182:6 overall silhouette. Long straight warm brass rod, squared-rounded ends, dark brown thin outline, one ochre lower shadow strip. Clear tiny dark and gold graduation dots and star-like notch marks along the rod. No hanging threads, pans, weights, hook, stand, numerals or lettering. Place one very long thin beam across the center of a wide canvas with empty transparent space above and below. Its length must be about thirty times its thickness."
+    },
+    {
+      "id": "scale-pan",
+      "width": 56,
+      "height": 16,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One detached shallow weighing PAN for a traditional Chinese steelyard balance. Direct frontal view, gold/brass wide shallow dish, silhouette 56:16. Thick dark rim, clean shallow concave bowl face with one ochre shadow plane and dark outline. No strings, chains, hanging arms, support stand, weights, lettering or numbers. Single simple readable component."
+    },
+    {
+      "id": "scale-weight",
+      "width": 18,
+      "height": 16,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One detached small Chinese steelyard COUNTERWEIGHT. Frontal view, compact trapezoidal dark bronze weight with rounded corners, wider heavy base, one short thick integral loop at top for threading. Silhouette ratio 18:16. Gold-bronze flat base plus one darker brown shadow, dark outline, no separate hanging string, no writing, no scale beam or other objects."
+    },
+    {
+      "id": "weight-blank",
+      "width": 12,
+      "height": 12,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One small squat solid BRASS WEIGHT BLOCK, frontal near-square silhouette. Simple beveled cube with a broad flat EMPTY front face, tiny visible top bevel and thick dark brown outline. Warm gold/bronze flat base plus one darker ochre shadow. Leave the whole front face BLANK for a single exact Chinese character to be typeset later. No numerals or lettering, no hook, no scale or backdrop. The final icon is only 12x12 pixels, so use few large shapes."
+    },
+    {
+      "id": "printer",
+      "width": 212,
+      "height": 28,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. One cyber-styled miniature THERMAL PRINTER housing only, front-on horizontal view. Extremely wide low-profile silhouette about 212 wide to 28 high, approximately 7.6:1 ratio. Deep purple metal body with one darker shadow plane, crisp cyan trim along top lip, a long dark horizontal PAPER-OUTPUT SLOT across the middle, one tiny cyan indicator on right. Symmetric simple bold game prop, no paper emerging, no display, no text, no buttons with lettering, no desk or hands, no perspective angle. Entire machine fits one thin horizontal strip."
+    },
+    {
+      "id": "card-back",
+      "width": 82,
+      "height": 135,
+      "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. ONE original cyber-oracle TAROT CARD BACK decorative design, portrait 2:3 aspect ratio, no character. Deep purple flat background, central crisp cyan stylized EYE wrapped around a small GOLD BAGUA octagon, exact rotationally balanced decorative geometry, a few cyan/gold circuit-like corner lines. Very simple high-contrast pattern readable at 44x72 pixels. No realistic eyeball, no characters, letters, numerals or logos. No blurry glow, no gradient. Keep design centered with generous margins, do not draw any external scene. Frame may be a simple gold double line; the project will impose exact border dimensions."
+    }
+  ],
+  "shared_variants": {
+    "seal-blank": [
+      "seal-shangshang",
+      "seal-shang",
+      "seal-zhong",
+      "seal-xia"
+    ],
+    "weight-blank": [
+      "weight-nian",
+      "weight-yue",
+      "weight-ri",
+      "weight-shi"
+    ],
+    "card-back": [
+      "card-back-s",
+      "card-back-l"
+    ]
+  },
+  "existing": "shell",
+  "geometric_and_typeset_assets": [
+    "stick",
+    "title",
+    "trigram-0",
+    "trigram-1",
+    "trigram-2",
+    "trigram-3",
+    "trigram-4",
+    "trigram-5",
+    "trigram-6",
+    "trigram-7"
+  ]
+}

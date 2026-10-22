@@ -1,0 +1,92 @@
+[
+  {
+    "id": "N-IDLE",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  },
+  {
+    "id": "N-WELCOME",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  },
+  {
+    "id": "N-SHELL",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 23,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "2668a20807f253f5978011a05ad3190ef51bd13194bf8e2c50899216e5f8f343"
+  },
+  {
+    "id": "N-SHELL-TOSS",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 23,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "2668a20807f253f5978011a05ad3190ef51bd13194bf8e2c50899216e5f8f343"
+  },
+  {
+    "id": "N-TUBE",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "d4f0b6b4ce001fa83e0f558d6b8fc79d554a622d8fcdedf656cfee34d64ce6ed"
+  },
+  {
+    "id": "N-WOW",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  },
+  {
+    "id": "N-NOD",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  },
+  {
+    "id": "N-SIGH",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  },
+  {
+    "id": "N-CALC",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "621f89a003455f4c2883339e479fe8db0229252562875cfc5e5bb2e533c161e4"
+  },
+  {
+    "id": "N-PRINT",
+    "width": 1024,
+    "height": 1024,
+    "opaque_interior_colors": 19,
+    "background": "#00B140",
+    "keying_border_mismatches": 0,
+    "sha256": "389a24d7a59df0ec427133795169c08c631a53a720bc858f48c69e41cf983aff"
+  }
+]

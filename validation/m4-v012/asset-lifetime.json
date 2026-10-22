@@ -1,0 +1,96 @@
+{
+  "long_tarot_repeats": 200,
+  "all_prop_lookups": 147,
+  "scale_parts_present": true,
+  "all_22_cards_decode_nontransparent": true,
+  "cards": [
+    {
+      "name": "tarot-00-fool",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-01-magician",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-02-high-priestess",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-03-empress",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-04-emperor",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-05-hierophant",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-06-lovers",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-07-chariot",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-08-strength",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-09-hermit",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-10-wheel-of-fortune",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-11-justice",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-12-hanged-man",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-13-death",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-14-temperance",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-15-devil",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-16-tower",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-17-star",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-18-moon",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-19-sun",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-20-judgement",
+      "visible_pixels": 11070
+    },
+    {
+      "name": "tarot-21-world",
+      "visible_pixels": 11070
+    }
+  ]
+}

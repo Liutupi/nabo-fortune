@@ -1,0 +1,11 @@
+{
+  "id": "scale-beam",
+  "prompt": "Create ONE production-ready 2D raster game prop for NABO cyber fortune machine. Match the supplied references' clean flat base colors with one sharply bounded darker cel-shadow per material, dark LOCAL-COLOR outlines. Palette: gold #FFC94A / ochre #A66D36, cinnabar #E0402C, parchment #F2E4C0, purple #4B2A9A, cyan #35F0DC. No smooth gradients, photographic texture, soft lighting, blur, bloom, white stroke or cast shadow. Truly transparent empty background outside the prop, with crisp hard silhouette and no feathering. One isolated prop only, NOT a contact sheet, no labels or captions. High-resolution original at least 1024px on long edge, large object centered and fully inside the canvas with clear margin. Exact output dimensions will be exported at 4x and native size. A single detached Chinese steelyard brass BEAM only, exactly horizontal with extremely slender 182:6 overall silhouette. Long straight warm brass rod, squared-rounded ends, dark brown thin outline, one ochre lower shadow strip. Clear tiny dark and gold graduation dots and star-like notch marks along the rod. No hanging threads, pans, weights, hook, stand, numerals or lettering. Place one very long thin beam across the center of a wide canvas with empty transparent space above and below. Its length must be about thirty times its thickness.",
+  "generator": "built-in image_gen",
+  "raw_file": "originals/scale-beam.png",
+  "target": [
+    182,
+    6
+  ],
+  "status": "generated-awaiting-export-and-review"
+}

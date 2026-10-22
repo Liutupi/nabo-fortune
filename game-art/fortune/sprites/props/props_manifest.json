@@ -1,0 +1,412 @@
+{
+ "tube-tilt": {
+  "w": 96,
+  "h": 116,
+  "frames": 11,
+  "bytes": 63747,
+  "roundtrip_ok": true,
+  "mean_color_err": 3.2,
+  "deg": [
+   -16.0,
+   -12.8,
+   -9.6,
+   -6.4,
+   -3.2,
+   0.0,
+   3.2,
+   6.4,
+   9.6,
+   12.8,
+   16.0
+  ],
+  "pivot": [
+   48,
+   112
+  ]
+ },
+ "coin-flip": {
+  "w": 22,
+  "h": 22,
+  "frames": 16,
+  "bytes": 5087,
+  "roundtrip_ok": true,
+  "mean_color_err": 1.05
+ },
+ "shell": {
+  "w": 68,
+  "h": 40,
+  "frames": 1,
+  "bytes": 2037,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.1
+ },
+ "stick": {
+  "w": 6,
+  "h": 80,
+  "frames": 1,
+  "bytes": 863,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "scroll": {
+  "w": 208,
+  "h": 216,
+  "frames": 1,
+  "bytes": 36186,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "seal-shang": {
+  "w": 52,
+  "h": 40,
+  "frames": 1,
+  "bytes": 2262,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "seal-zhong": {
+  "w": 52,
+  "h": 40,
+  "frames": 1,
+  "bytes": 2262,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "seal-xia": {
+  "w": 52,
+  "h": 40,
+  "frames": 1,
+  "bytes": 2262,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "scale-beam": {
+  "w": 182,
+  "h": 6,
+  "frames": 1,
+  "bytes": 923,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "scale-pan": {
+  "w": 56,
+  "h": 16,
+  "frames": 1,
+  "bytes": 927,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "scale-weight": {
+  "w": 18,
+  "h": 16,
+  "frames": 1,
+  "bytes": 411,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "weight-nian": {
+  "w": 12,
+  "h": 12,
+  "frames": 1,
+  "bytes": 321,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "weight-yue": {
+  "w": 12,
+  "h": 12,
+  "frames": 1,
+  "bytes": 321,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "weight-ri": {
+  "w": 12,
+  "h": 12,
+  "frames": 1,
+  "bytes": 321,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "weight-shi": {
+  "w": 12,
+  "h": 12,
+  "frames": 1,
+  "bytes": 321,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "printer": {
+  "w": 212,
+  "h": 28,
+  "frames": 1,
+  "bytes": 5841,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "card-back-s": {
+  "w": 44,
+  "h": 72,
+  "frames": 1,
+  "bytes": 3527,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "card-back-l": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11611,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "title": {
+  "w": 200,
+  "h": 70,
+  "frames": 1,
+  "bytes": 7598,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-0": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 305,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-1": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 301,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-2": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 301,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-3": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 297,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-4": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 301,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-5": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 297,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-6": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 297,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "trigram-7": {
+  "w": 20,
+  "h": 14,
+  "frames": 1,
+  "bytes": 293,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-00-fool": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-01-magician": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-02-high-priestess": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-03-empress": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-04-emperor": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-05-hierophant": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-06-lovers": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-07-chariot": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-08-strength": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-09-hermit": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-10-wheel-of-fortune": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-11-justice": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-12-hanged-man": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-13-death": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-14-temperance": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-15-devil": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-16-tower": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-17-star": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-18-moon": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-19-sun": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-20-judgement": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "tarot-21-world": {
+  "w": 82,
+  "h": 135,
+  "frames": 1,
+  "bytes": 11618,
+  "roundtrip_ok": true,
+  "mean_color_err": 0.0
+ },
+ "_note": "FNBR v1：头(4s 魔数,H 版本,H 宽,H 高,H 帧数,B 循环)、RGB565 调色板(63)、帧偏移、每帧行偏移+RLE（第0帧关键帧，其余差分）"
+}

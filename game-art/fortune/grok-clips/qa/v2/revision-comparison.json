@@ -1,0 +1,32 @@
+[
+  {
+    "id": "N-TUBE",
+    "v1_sha256": "b25fbbbaee57e3283904b6b67dd43c01426ab4dcf759d03023972fd12d84159f",
+    "v2_sha256": "b76440508cd48f30fbcb3223e24376f8e879b77ecf0a312c90b894323c11ca5c",
+    "v1_cap_max_displacement_at_120": [
+      9.609,
+      7.5
+    ],
+    "v2_cap_max_displacement_at_120": [
+      0.0,
+      0.703
+    ],
+    "v1_endpoints_mae": 2.855,
+    "v2_endpoints_mae": 2.627
+  },
+  {
+    "id": "N-CALC",
+    "v1_sha256": "65c2cb8e3c966ca88b0d8abfbabe9a2021161ee681744f87f1c5c7e7cc3e5162",
+    "v2_sha256": "0c7d162cdbae703d34fa3a8136cf30c1b02aa748e39a29571f23a56270709f08",
+    "v1_cap_max_displacement_at_120": [
+      0.0,
+      0.0
+    ],
+    "v2_cap_max_displacement_at_120": [
+      0.234,
+      0.0
+    ],
+    "v1_endpoints_mae": 2.478,
+    "v2_endpoints_mae": 3.02
+  }
+]

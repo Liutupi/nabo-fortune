@@ -1,0 +1,993 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "root": "game-art/fortune",
+  "note": "Payload list excludes this manifest to avoid a self-referential hash.",
+  "files": [
+    {
+      "path": "costume/export-art.ps1",
+      "bytes": 6299,
+      "sha256": "7bba737f926d2673454c38d752ac81b1df1498065531ab018f2d978723bab34f"
+    },
+    {
+      "path": "costume/final-palette.json",
+      "bytes": 271,
+      "sha256": "4daa362a8332778c1a42ab9ba4c55982eb11ce487472be4257dc80e2f5e121c0"
+    },
+    {
+      "path": "costume/final-transparent.png",
+      "bytes": 115334,
+      "sha256": "8407b437e6e4bede1412ec44018fca49b147dd1a22ad15a509786b48f942a016"
+    },
+    {
+      "path": "costume/final.png",
+      "bytes": 110852,
+      "sha256": "5f6b89f38bd13ea6dae0ee470dac9772c3bfa47aa4916a6cfd6225d26bd00f43"
+    },
+    {
+      "path": "props/CLAUDE_HANDOFF.md",
+      "bytes": 3418,
+      "sha256": "fdd0c22857750ca73e10ff898f51cf7ad5e9bf8b10a219ddbb33a550fa1cbbb8"
+    },
+    {
+      "path": "props/DELIVERY.md",
+      "bytes": 3020,
+      "sha256": "276a3dc10ea9b6fdb84073a7e294361d30cec06710b9583f61280fef06e69bc7"
+    },
+    {
+      "path": "props/asset-manifest.json",
+      "bytes": 33161,
+      "sha256": "1be16843507a8c448067c431b5d3d6f881ee61f031edbb666f6d7ce750ac169b"
+    },
+    {
+      "path": "props/card-back-l-4x.png",
+      "bytes": 37845,
+      "sha256": "97920b7e35569a1df2151abbc56f636bbdebd473e21a22ba16310d6528a7840a"
+    },
+    {
+      "path": "props/card-back-l.png",
+      "bytes": 4270,
+      "sha256": "a08ddf6c262ae726703fd52da0f893b9ecce9dc5c11ffd57ea41e40b2ae2e9bf"
+    },
+    {
+      "path": "props/card-back-s-4x.png",
+      "bytes": 14757,
+      "sha256": "875039a4bbd04f2912759b055eaa16e4ec0e84cceb0f0da71a160f959bb5113a"
+    },
+    {
+      "path": "props/card-back-s.png",
+      "bytes": 1706,
+      "sha256": "2e94e1cb569399bb169ba7f1a95942eb673d479bd376326aeb769eec58165df1"
+    },
+    {
+      "path": "props/coin-back-4x.png",
+      "bytes": 2105,
+      "sha256": "98dd4b0c4f75cbb27d01f93820cba4c17b773c83cd31f730236a3e8769ad15ab"
+    },
+    {
+      "path": "props/coin-back.png",
+      "bytes": 332,
+      "sha256": "37174de0db0ce9fe4ede4f8a676e2370f6faafad51324b1d70caa6d2234d39ff"
+    },
+    {
+      "path": "props/coin-front-4x.png",
+      "bytes": 2743,
+      "sha256": "6fced1f2d25764967f071f6ecc272624a9ae5f9f420912b7402ab91a8b71298d"
+    },
+    {
+      "path": "props/coin-front.png",
+      "bytes": 397,
+      "sha256": "339b0a0a0608d0ab5c8fe9d9cf1c63072a7ed1008f2dae46abc4ae104082d019"
+    },
+    {
+      "path": "props/export-static-assets.ps1",
+      "bytes": 10724,
+      "sha256": "b5a55afd7a26513c482d2949689b23ab18ef5e1c8ec1dbada41052819239aa67"
+    },
+    {
+      "path": "props/originals/card-back.json",
+      "bytes": 1600,
+      "sha256": "6cba5d5ac23931a92b0b1aae0cb4efc1ea2803c2ada0f1d21f3da7c547c3fd62"
+    },
+    {
+      "path": "props/originals/card-back.png",
+      "bytes": 1672331,
+      "sha256": "e3de10f2e0f9d2458e5941f962e837ddb25a97fd5765df54ff2eb5cb6ecaba6c"
+    },
+    {
+      "path": "props/originals/coin-back.json",
+      "bytes": 1377,
+      "sha256": "8007babacb9b0a54b4626e2cc953eda934627d7eeaa03d37768f77c913dd3034"
+    },
+    {
+      "path": "props/originals/coin-back.png",
+      "bytes": 1144778,
+      "sha256": "ea0d19bb8fb821b4e179b35a6678f2d7b92781c272fd2c5fee9f3010c8e625c2"
+    },
+    {
+      "path": "props/originals/coin-front.json",
+      "bytes": 1387,
+      "sha256": "e7df8c0744452fa3adea3c3a934a96e94f33c50a63686f1215f73ac0c039cc34"
+    },
+    {
+      "path": "props/originals/coin-front.png",
+      "bytes": 1299117,
+      "sha256": "f7598dd0b613146f0cfe714d05f13228e27147ba7e20b4973a75ec170023a5be"
+    },
+    {
+      "path": "props/originals/printer.json",
+      "bytes": 1519,
+      "sha256": "92a796e9415fa00ffea8b2260b23608dd88e98c895fdbdb11ed8382cc2626d88"
+    },
+    {
+      "path": "props/originals/printer.png",
+      "bytes": 908872,
+      "sha256": "61af42804ea519f98589fdfa7df2dc5fed8077470d30e285e6e606d83caaecbb"
+    },
+    {
+      "path": "props/originals/scale-beam.json",
+      "bytes": 1529,
+      "sha256": "3758f92c174ebb7d989a59b0336144857a2a0a06723ca5bb49d106ee66d7148f"
+    },
+    {
+      "path": "props/originals/scale-beam.png",
+      "bytes": 209856,
+      "sha256": "3aa1a5e3261ad93594220dc92e4afb3a4d13c7e25a84aafbd7756b7911ddb624"
+    },
+    {
+      "path": "props/originals/scale-pan.json",
+      "bytes": 1338,
+      "sha256": "01d5b9523ca198e6d03e3009aac4e6526f1ecbbf21c493f58b84ef641d999d1a"
+    },
+    {
+      "path": "props/originals/scale-pan.png",
+      "bytes": 830101,
+      "sha256": "d78e2d5afd42e65fa888b201a79d8b61ec0c1079c1f128ec0342b26bc61bf662"
+    },
+    {
+      "path": "props/originals/scale-weight.json",
+      "bytes": 1347,
+      "sha256": "048d2b3bd0ee672f019a46d9fd988893b4ee0ca03d8b83028d277056e341c288"
+    },
+    {
+      "path": "props/originals/scale-weight.png",
+      "bytes": 869064,
+      "sha256": "6342cfd03a042f653f1ca93e82ee62c1cf8af7192edf35097872b2d74c09c58e"
+    },
+    {
+      "path": "props/originals/scroll.json",
+      "bytes": 1415,
+      "sha256": "75bc10f8c7801349bd5cad0994e7234774385483915e1c239ded8e4a873d248d"
+    },
+    {
+      "path": "props/originals/scroll.png",
+      "bytes": 1252130,
+      "sha256": "6bb7496f85fce645e95dd644ae481fbd7f5b6d3cf3e4b10d9ce2f3f0856dd4c4"
+    },
+    {
+      "path": "props/originals/seal-blank.json",
+      "bytes": 1441,
+      "sha256": "ab9fc95ce11a74d147fc923e679951d8fbc2aadcf06a7b04c98fae253be739b2"
+    },
+    {
+      "path": "props/originals/seal-blank.png",
+      "bytes": 988225,
+      "sha256": "6528c46c515b5a953ff20f3175124a2e19683e8a7bdf221a07991b97f543d02e"
+    },
+    {
+      "path": "props/originals/tube.json",
+      "bytes": 1479,
+      "sha256": "423f97cd21e3b1282e5a25ddcefab9667d540e6f759bb72f6dfca69bc7cffa78"
+    },
+    {
+      "path": "props/originals/tube.png",
+      "bytes": 908534,
+      "sha256": "103b41ad836818aaf279f958762fee238c0dfabdb7117600c44cde59a00c182a"
+    },
+    {
+      "path": "props/originals/weight-blank.json",
+      "bytes": 1438,
+      "sha256": "43602b047654c31d5ee7f209696969d15952c41466e13bfcf1d67234820dda25"
+    },
+    {
+      "path": "props/originals/weight-blank.png",
+      "bytes": 1038191,
+      "sha256": "461289fe81c2af4bc2467e3b2ce1044d178b199b39097a6daac6ce35f2c07448"
+    },
+    {
+      "path": "props/printer-4x.png",
+      "bytes": 6052,
+      "sha256": "54a139c38b6da26da93c4d16213032527f6bf9e6be4c6c87b0d59d0ffb5e972b"
+    },
+    {
+      "path": "props/printer.png",
+      "bytes": 982,
+      "sha256": "858ea8cb947daebedd3a8d0dfe192f330ba6c60795f6ba546e91020df4db4b99"
+    },
+    {
+      "path": "props/qa/build_delivery_package.py",
+      "bytes": 3492,
+      "sha256": "2fdd914cb71dc0dc139a35d3d8a4f8b0d7267cab93cdbf33ab2d6467c93acad8"
+    },
+    {
+      "path": "props/qa/props-detail-check.png",
+      "bytes": 32587,
+      "sha256": "7e1b6e66d4cc9771d4aed677fc904ce5cd4c22417edfdfbfca6d2cebdf44262f"
+    },
+    {
+      "path": "props/qa/props-native-overview.png",
+      "bytes": 73459,
+      "sha256": "1edca8ac101388a5712c85609d0ecce1be9c436430e7c756df659b7025117ee9"
+    },
+    {
+      "path": "props/qa/protected-input-hashes.json",
+      "bytes": 845,
+      "sha256": "a8ab20b89eadb5b5cc40a3b77adfa016f1a5ef81e8ec5662f2585eae03e5c6d2"
+    },
+    {
+      "path": "props/qa/verification.json",
+      "bytes": 850,
+      "sha256": "35ab16721b24fb690ac75a9f70ac0d74e15247930666316305bd4071700a5a3a"
+    },
+    {
+      "path": "props/qa/verify_static_delivery.py",
+      "bytes": 9276,
+      "sha256": "fdebac8bc319d23258613a80b4c282daf0941459f037858db37ddcc0d65826bb"
+    },
+    {
+      "path": "props/qa/visual-review.json",
+      "bytes": 698,
+      "sha256": "8833dca47dc5448369f8778c929fbbd01dfcf5f6bb4b033df46b057175aefd87"
+    },
+    {
+      "path": "props/round34-palette.json",
+      "bytes": 495,
+      "sha256": "4aa8411061dab2ad73661dfe3ca01582f35543c332ca7dfdc16d696ebeeec099"
+    },
+    {
+      "path": "props/round34-prop-plan.json",
+      "bytes": 15310,
+      "sha256": "e3182b340a80693cedf0a7786c002a8f8a809ae8861d175f217ab4f0979ce43a"
+    },
+    {
+      "path": "props/scale-beam-4x.png",
+      "bytes": 2173,
+      "sha256": "df916c9524b72dced038bd4e667f1b4f447a9764eb80a3cb16d7f5bf84d28046"
+    },
+    {
+      "path": "props/scale-beam.png",
+      "bytes": 353,
+      "sha256": "1681a45b0dcd8756602d3c8d3a51f44c1bb86231cf925336253d4ea0171a6e3f"
+    },
+    {
+      "path": "props/scale-pan-4x.png",
+      "bytes": 2064,
+      "sha256": "5aa95ab02a4320e2374f67c964ec943e434716a7a1fb8d17e9260eb66c933826"
+    },
+    {
+      "path": "props/scale-pan.png",
+      "bytes": 384,
+      "sha256": "978b763f5fe9f58c3fbf2a9bdea8bf7ae9e3fe6dc5cd32325941edb32b01f612"
+    },
+    {
+      "path": "props/scale-weight-4x.png",
+      "bytes": 1307,
+      "sha256": "e21b756f614909ee34c809936100f0cec0d714af98c17013a8b6c802a8e7ce78"
+    },
+    {
+      "path": "props/scale-weight.png",
+      "bytes": 272,
+      "sha256": "10438394c21f35fa804e562c77a74fce321332b361109eda8feaaa295c0216e3"
+    },
+    {
+      "path": "props/scroll-4x.png",
+      "bytes": 41385,
+      "sha256": "67945fc19ad4666997673861be3b5b9a00de5f05e4f9c8e779be31d245c26e25"
+    },
+    {
+      "path": "props/scroll.png",
+      "bytes": 5315,
+      "sha256": "7948ac7ddf89e767c1a0005dc2f0d27e1d1fecb86643d1b49382d835c3cd553f"
+    },
+    {
+      "path": "props/seal-shang-4x.png",
+      "bytes": 3999,
+      "sha256": "558eef03b79da30e45728f3ed51810383379efe7c8c01e6c1aa95f7637f1b5b5"
+    },
+    {
+      "path": "props/seal-shang.png",
+      "bytes": 599,
+      "sha256": "ed575ff0b9c8179b113956d57bdc18390881054c8fe4a4023bce3cf7f25d1e10"
+    },
+    {
+      "path": "props/seal-shangshang-4x.png",
+      "bytes": 3911,
+      "sha256": "5659990481e3289150cb7676e99df6ec224f92833c04b965474fa22bce649b14"
+    },
+    {
+      "path": "props/seal-shangshang.png",
+      "bytes": 621,
+      "sha256": "2e5797fab3e792cf151fbae7c1a1c5a569f3948367ee41616c94f9aa8c47b0ab"
+    },
+    {
+      "path": "props/seal-xia-4x.png",
+      "bytes": 3944,
+      "sha256": "0b598918a12d63d466a5e0be287f547556d02efe0f9ce3e1767dd75c6de87386"
+    },
+    {
+      "path": "props/seal-xia.png",
+      "bytes": 626,
+      "sha256": "adc083545110632dad43b94a2369e8dfb36c35d4a98ded9d366d33f241cc3f39"
+    },
+    {
+      "path": "props/seal-zhong-4x.png",
+      "bytes": 4111,
+      "sha256": "e5435672f0fd80a7fb5275b14e9e7ef4c9b640b1e9fc67058b79ee49f59eee09"
+    },
+    {
+      "path": "props/seal-zhong.png",
+      "bytes": 627,
+      "sha256": "5b31fd36e6612b2274580c4030089e1001f48e7cc6f5e1bc878ae270083db1f1"
+    },
+    {
+      "path": "props/shell-4x.png",
+      "bytes": 6237,
+      "sha256": "3e44e242de90e296b9386fdd52d418e91b825e02a8c5db5df85c11503e72ef99"
+    },
+    {
+      "path": "props/shell-flat-master.png",
+      "bytes": 64881,
+      "sha256": "258f74926ed7b42e5b8a280a4ae7f039ab20e96bff591bae3aac2e4f058ffc8c"
+    },
+    {
+      "path": "props/shell-original.png",
+      "bytes": 945009,
+      "sha256": "6a4e5b927832d12d6dda44380ace8465f64627f3854ac1fe9cb4424b4d63fe39"
+    },
+    {
+      "path": "props/shell-palette.json",
+      "bytes": 61,
+      "sha256": "50216327f39fd949c9f5a5bcf512c9c2009e304aa116d43487d0f4bea2cf2fd7"
+    },
+    {
+      "path": "props/shell.png",
+      "bytes": 1182,
+      "sha256": "a3eaf4d8b58e9b454909423fd9eb3dd5bc9de2df85bfa25f466125e9f8e8d66e"
+    },
+    {
+      "path": "props/stick-4x.png",
+      "bytes": 412,
+      "sha256": "72ee85e5763061989b4c26a2281f7684f5123ce9749fab95cd820a8c39338efa"
+    },
+    {
+      "path": "props/stick.png",
+      "bytes": 242,
+      "sha256": "3f1472badadfe0ab309f8618244304640cd43bc30a0e088cb5dafbd709f6ee57"
+    },
+    {
+      "path": "props/title-4x.png",
+      "bytes": 23889,
+      "sha256": "cfb2ec147bc5f7a8f35e8ba112a6f3c1cd7323c3dcdf768547c7358bb424c320"
+    },
+    {
+      "path": "props/title.png",
+      "bytes": 3771,
+      "sha256": "d59c216ff88a0f998e9ce6c434dea5d702baa9a73405565b4954083c4a6ccf58"
+    },
+    {
+      "path": "props/trigram-0-4x.png",
+      "bytes": 288,
+      "sha256": "73471cc9c8b820c2fc1ff3d543938adcf0b0910f891b4b3c44460ba32157fea6"
+    },
+    {
+      "path": "props/trigram-0.png",
+      "bytes": 148,
+      "sha256": "dd42091e5fd8e982b451dd3395badb45985597301280d1d43a337976f7b1281c"
+    },
+    {
+      "path": "props/trigram-1-4x.png",
+      "bytes": 337,
+      "sha256": "fd624d59395163627599fa2b582517309e9c859d55b15ae3bcd325ebfc008354"
+    },
+    {
+      "path": "props/trigram-1.png",
+      "bytes": 155,
+      "sha256": "89be47b8f499a4d8f4486e50660e3fc2cfb521ed3d705ad312176543a443178e"
+    },
+    {
+      "path": "props/trigram-2-4x.png",
+      "bytes": 337,
+      "sha256": "0f6d8f6b91d3ab522ac7dfa86821d7c3232127007c9239e8659c39d3f528e18c"
+    },
+    {
+      "path": "props/trigram-2.png",
+      "bytes": 157,
+      "sha256": "2f5efdeef48f639ee79efaaae4b284a5c9aefa41e2f6137558087ddd7d037613"
+    },
+    {
+      "path": "props/trigram-3-4x.png",
+      "bytes": 373,
+      "sha256": "750a1824b199d3d4d2695419ecbaca28d2cd216cf593b0a4d8ae877f02556e00"
+    },
+    {
+      "path": "props/trigram-3.png",
+      "bytes": 163,
+      "sha256": "9d40bcc59ab5cd05f61d2f3a827c1b9b30b0f78511d84ec50ac7b5744c98b0f5"
+    },
+    {
+      "path": "props/trigram-4-4x.png",
+      "bytes": 337,
+      "sha256": "719ea9ef00a86132a5d5931f990c69aea6c9abfa3bb920d3b123531668b0744e"
+    },
+    {
+      "path": "props/trigram-4.png",
+      "bytes": 157,
+      "sha256": "5d1f04b00249d60693bf0a57516bc624a93ae33b3f06fdcb03b6f309d7452d29"
+    },
+    {
+      "path": "props/trigram-5-4x.png",
+      "bytes": 373,
+      "sha256": "019295027ef0b7f2ee78e9a323ef7184db98440654b5090329de52f063024024"
+    },
+    {
+      "path": "props/trigram-5.png",
+      "bytes": 163,
+      "sha256": "822abae2f5d714156fa9450f5f1a348509a904efcb3ec8a86872fc10bcf651bc"
+    },
+    {
+      "path": "props/trigram-6-4x.png",
+      "bytes": 374,
+      "sha256": "12e57fb3d8ba3c3c32a8812230e69b9390c22376ec4b6279c1e7b7ca6a7c9029"
+    },
+    {
+      "path": "props/trigram-6.png",
+      "bytes": 166,
+      "sha256": "ba1d0fc1e43ceffa6270501c161020bbeba32ccd8237d5c03ead74efd24bea29"
+    },
+    {
+      "path": "props/trigram-7-4x.png",
+      "bytes": 399,
+      "sha256": "40aae356886e2ee3193747b6b650b76852c51de48b162440152a40c6e3d10e1c"
+    },
+    {
+      "path": "props/trigram-7.png",
+      "bytes": 171,
+      "sha256": "b78d2c34927918c069163861c87fb57b65f19d17ac29177580d52c5cf5850fc4"
+    },
+    {
+      "path": "props/tube-4x.png",
+      "bytes": 16972,
+      "sha256": "a1111d892ad1b5672cec3e53507bea76952bd076b8dea15334f00e302e716980"
+    },
+    {
+      "path": "props/tube.png",
+      "bytes": 2504,
+      "sha256": "e5c5315bb5f20599296ada6f316175b7afbebaf463473985e372e71989edae80"
+    },
+    {
+      "path": "props/weight-nian-4x.png",
+      "bytes": 535,
+      "sha256": "96f0675bb474b45c0ac313fe3a1409b608e5200bf05035a6cecc6e4af3f7c600"
+    },
+    {
+      "path": "props/weight-nian.png",
+      "bytes": 230,
+      "sha256": "6891787c1cfa1114dc91e4b4de079ff4c32a5e23140210e435f2794b5a1ace5b"
+    },
+    {
+      "path": "props/weight-ri-4x.png",
+      "bytes": 542,
+      "sha256": "4ffdbb0fd7800a27b0779b76eb905501799282486d71f2a37f779d557b123975"
+    },
+    {
+      "path": "props/weight-ri.png",
+      "bytes": 213,
+      "sha256": "bbdaa72eb73488bd9b5f16e53048966a2899f8d7b9e3dce3479c8a0a4b7c0d1c"
+    },
+    {
+      "path": "props/weight-shi-4x.png",
+      "bytes": 544,
+      "sha256": "7cc78da33ff611886c8dc333970f57819527198f31cf986c43f68383bae494a4"
+    },
+    {
+      "path": "props/weight-shi.png",
+      "bytes": 230,
+      "sha256": "5e15c8be420170c8ffaf2e2eff67242419ace22046bd6ba2b2ae99567a145ceb"
+    },
+    {
+      "path": "props/weight-yue-4x.png",
+      "bytes": 549,
+      "sha256": "d00ad2219df852083a3dd0de849e23ec301677e961da0a20bad9d184536a3488"
+    },
+    {
+      "path": "props/weight-yue.png",
+      "bytes": 217,
+      "sha256": "a320ae1ef36d2e26e9670732dbcf502d73bc27493b6074a8828a634f613bf093"
+    },
+    {
+      "path": "reference/nabo-idle.png",
+      "bytes": 32117,
+      "sha256": "c63575691d15220e8d6fafdab911a10767a5fc1c13925992dbd10e3a5e93d3fa"
+    },
+    {
+      "path": "tarot/00-fool.png",
+      "bytes": 3646,
+      "sha256": "cb907befa0d231f91e96e9e235ec675ffdd9c973c22adddafbd47535b373d0da"
+    },
+    {
+      "path": "tarot/01-magician.png",
+      "bytes": 4041,
+      "sha256": "54b96918a1c9623167b90fc5fd899c562d0dd32ebdd4e9ef212a251bd443347d"
+    },
+    {
+      "path": "tarot/02-high-priestess.png",
+      "bytes": 4073,
+      "sha256": "74efb9b22d97e285434faa8387cdb277aa2779ebc3145a8069c730520114e244"
+    },
+    {
+      "path": "tarot/03-empress.png",
+      "bytes": 3964,
+      "sha256": "4688ef69e221f074e622942e187399529732d4bf8ad98e99309b78d110888cec"
+    },
+    {
+      "path": "tarot/04-emperor.png",
+      "bytes": 3816,
+      "sha256": "8f2f7c388ab0c68045fe416994e4b0306b9ae57d5e42c5733d3fa426fb3f2677"
+    },
+    {
+      "path": "tarot/05-hierophant.png",
+      "bytes": 3809,
+      "sha256": "06618b71f7c89c58115f2e0b8022d27c48fc2105918826a8f9d8ae2b78a857b2"
+    },
+    {
+      "path": "tarot/06-lovers.png",
+      "bytes": 3876,
+      "sha256": "529bb68bf4b7004edccf34425d376d08f8c3d87e9ca5697547836f92b3c6db3a"
+    },
+    {
+      "path": "tarot/07-chariot.png",
+      "bytes": 4163,
+      "sha256": "b6b0c7213355a8c7073573bf3bf5bdc1fbc120c3150d0e29ac6c14a2b65597ee"
+    },
+    {
+      "path": "tarot/08-strength.png",
+      "bytes": 4303,
+      "sha256": "c98828b50b32e0f4d38d7af3e031c4d7d288901f78045d620909d5edd24b5a54"
+    },
+    {
+      "path": "tarot/09-hermit.png",
+      "bytes": 3591,
+      "sha256": "2dc1d813d24cbee4e91d9805b4b3fc1fdc4009c0e4f8937203fc7933472a8dd2"
+    },
+    {
+      "path": "tarot/10-wheel-of-fortune.png",
+      "bytes": 4355,
+      "sha256": "783a6900b9ceb2ee2b22619716067c6fceba5e574e5c434d4389e90b11b58cc8"
+    },
+    {
+      "path": "tarot/11-justice.png",
+      "bytes": 3942,
+      "sha256": "5a76dba96845cbd0cfbda539fb5876d823f952aea14457573c28eb9b371b4752"
+    },
+    {
+      "path": "tarot/12-hanged-man.png",
+      "bytes": 3829,
+      "sha256": "620b7f88a15cc4d7027520d23efcc23bd029d86cbca106ce340ba6cbd3d0ece5"
+    },
+    {
+      "path": "tarot/13-death.png",
+      "bytes": 3906,
+      "sha256": "590d6c77990dd8b26bdd1d5f23148dbbba148218c5f0e63295c4bf9ad9872228"
+    },
+    {
+      "path": "tarot/14-temperance.png",
+      "bytes": 4175,
+      "sha256": "41faf1c582e34c0803131099c8968869653cc757c898394bfb2f1081eedbc54b"
+    },
+    {
+      "path": "tarot/15-devil.png",
+      "bytes": 4008,
+      "sha256": "b1e6601631d0cbbbaf08544ff5aacb3fb7be4df81ba323e230d87d5bf10afc0a"
+    },
+    {
+      "path": "tarot/16-tower.png",
+      "bytes": 3650,
+      "sha256": "5e828e2e0f87c53c64b33576f786446f3faa1fdf01e88b1f420a643c78f62aa3"
+    },
+    {
+      "path": "tarot/17-star.png",
+      "bytes": 3820,
+      "sha256": "dc34005554ecaa6e93beac03e34d0b674b0bd36a37edfbf3f3a2bd4c797b1aa9"
+    },
+    {
+      "path": "tarot/18-moon.png",
+      "bytes": 3693,
+      "sha256": "ee06477b1360f90b2fed9dd11466f6cab0992439a0d8146f40617d4453c3e660"
+    },
+    {
+      "path": "tarot/19-sun.png",
+      "bytes": 4002,
+      "sha256": "d1effbefabbcabcad2e77d955a5ea95363d55ff37c878c8acc76a7d8340929d5"
+    },
+    {
+      "path": "tarot/20-judgement.png",
+      "bytes": 4068,
+      "sha256": "9aca0033d3579b0f687ff761df6bcc5f3c1ca7de7b848b05ffe76a0c9eddbfad"
+    },
+    {
+      "path": "tarot/21-world.png",
+      "bytes": 3752,
+      "sha256": "de36b9552a19de4df8a762c2f194f8f8e4293156353d2a9945bee51d753515fd"
+    },
+    {
+      "path": "tarot/DELIVERY.md",
+      "bytes": 2675,
+      "sha256": "af3651ba2961b0cf67138523dcd90d8a84f32ebda36ea3383fa61211d3b94398"
+    },
+    {
+      "path": "tarot/all-22-overview.png",
+      "bytes": 207015,
+      "sha256": "c4112a7542691cd60ad94ddef3d1c87f87e2b247b238d2ab6f4eb94d50b928cf"
+    },
+    {
+      "path": "tarot/asset-manifest.json",
+      "bytes": 24527,
+      "sha256": "d28ee6a35a661185173092b33226ce81ac8dba0114aa59065ca9365bd0ca4603"
+    },
+    {
+      "path": "tarot/batch-00-07.png",
+      "bytes": 131741,
+      "sha256": "967b34d79813d1275ceb87989180c5fdf361dd3f8ae86b1cd53315ffc959f12d"
+    },
+    {
+      "path": "tarot/batch-08-14.png",
+      "bytes": 120371,
+      "sha256": "c2787ca41479121bd5e77aee903bfb5b07fef5c0667f7bc466645e10837010a9"
+    },
+    {
+      "path": "tarot/batch-15-21.png",
+      "bytes": 116716,
+      "sha256": "c448c2d80a59a4cdcef7608d6115603f15e9dd577610c0eb0043e2b255d4608b"
+    },
+    {
+      "path": "tarot/generation-plan.json",
+      "bytes": 49360,
+      "sha256": "bf64eac920ed42122c1b4aeb4ce5188b304461ce84c778ee08138b25aec70767"
+    },
+    {
+      "path": "tarot/masters/00-fool-4x.png",
+      "bytes": 30419,
+      "sha256": "cbe254ab98f82b2527ed83d9c85f16cebb845cf050bac12e1ee317bb7639d588"
+    },
+    {
+      "path": "tarot/masters/01-magician-4x.png",
+      "bytes": 34506,
+      "sha256": "39d96e0b63e68edde0c4965f5414a5151f5b0c908ed2269e1aa6fa3d51d88fe2"
+    },
+    {
+      "path": "tarot/masters/02-high-priestess-4x.png",
+      "bytes": 33118,
+      "sha256": "b711d24b79bc008362f8437a1915d4011596da179637d7f99c87a7aa997d8ccb"
+    },
+    {
+      "path": "tarot/masters/03-empress-4x.png",
+      "bytes": 33742,
+      "sha256": "9964a401342c564b702f869e961da41bf8ed3e684bcc5a31e2dbef55a389daa2"
+    },
+    {
+      "path": "tarot/masters/04-emperor-4x.png",
+      "bytes": 32403,
+      "sha256": "712f97af29b867666be3318a0dc9ec75f0da4371a113f1cd052c45a58eb9f938"
+    },
+    {
+      "path": "tarot/masters/05-hierophant-4x.png",
+      "bytes": 31432,
+      "sha256": "8c1b86edbde9ef5084b0cc52c554e14e0c3559efb86d998d08741bfc5572288c"
+    },
+    {
+      "path": "tarot/masters/06-lovers-4x.png",
+      "bytes": 31658,
+      "sha256": "ac300a6a32322fd048c6e710e2a5f540cc5eb569df30a9c12b23357c749c6318"
+    },
+    {
+      "path": "tarot/masters/07-chariot-4x.png",
+      "bytes": 35789,
+      "sha256": "1d54c97c3aae9f829e29cf55bf446d64ea9680a587562c827efcc247b1415059"
+    },
+    {
+      "path": "tarot/masters/08-strength-4x.png",
+      "bytes": 39134,
+      "sha256": "89931d93c2c51030c65d182c0c7c22dc84b27b5f8d4ebd07f13f37bddfbec1a3"
+    },
+    {
+      "path": "tarot/masters/09-hermit-4x.png",
+      "bytes": 29857,
+      "sha256": "680c6d4b649aaa1d78a38f2a213571fd83a0cd8a3d0ab1153e6a6e3e629d6ca1"
+    },
+    {
+      "path": "tarot/masters/10-wheel-of-fortune-4x.png",
+      "bytes": 37714,
+      "sha256": "26fd969859748774393f944b7892fb83edcd34dc84ba1ff3a509c4353005f266"
+    },
+    {
+      "path": "tarot/masters/11-justice-4x.png",
+      "bytes": 35485,
+      "sha256": "3439f10665414c6a480cf2d7f1fbd589b96af4474d8e1634fab453f7eb039383"
+    },
+    {
+      "path": "tarot/masters/12-hanged-man-4x.png",
+      "bytes": 31629,
+      "sha256": "2c570ebd71745720faad765155fea1a256f388b14f87d37a19c2610d0180d46f"
+    },
+    {
+      "path": "tarot/masters/13-death-4x.png",
+      "bytes": 33118,
+      "sha256": "8dc1b8e139958211fd9f1fac310647a623660eb69c0f6743f67ebf1e8ab53d31"
+    },
+    {
+      "path": "tarot/masters/14-temperance-4x.png",
+      "bytes": 34258,
+      "sha256": "279d06e9f025063151b10384ac91d3702039461a0198193acdcab3eadd7be5ae"
+    },
+    {
+      "path": "tarot/masters/15-devil-4x.png",
+      "bytes": 32765,
+      "sha256": "e163f51fc85cd03b1a83dacf21588baf0a8781422353afc9a299c2ad63262161"
+    },
+    {
+      "path": "tarot/masters/16-tower-4x.png",
+      "bytes": 30722,
+      "sha256": "faad8ccdf74527d10c4f62019a34ec84a67fb5301f820f2a93e1ef80617acdb5"
+    },
+    {
+      "path": "tarot/masters/17-star-4x.png",
+      "bytes": 31163,
+      "sha256": "827f26007edfd057839e45507795b03e41a1e3ec193ae24e87817c7cfb5fac40"
+    },
+    {
+      "path": "tarot/masters/18-moon-4x.png",
+      "bytes": 30791,
+      "sha256": "5a7a6bbe16d6cafb6d13dc0d1be0f420d7c9ced751fde2da4383f773416f0082"
+    },
+    {
+      "path": "tarot/masters/19-sun-4x.png",
+      "bytes": 33140,
+      "sha256": "e58797b3d4d13099f4a398ba1af6d131e2bb4c62ec1ab661ed69fc362f301370"
+    },
+    {
+      "path": "tarot/masters/20-judgement-4x.png",
+      "bytes": 34825,
+      "sha256": "23fb7fa0dd250f70153583833130938d075cf2cc2816d2d2ffe412c945989339"
+    },
+    {
+      "path": "tarot/masters/21-world-4x.png",
+      "bytes": 29346,
+      "sha256": "7bd6a993d76b14f4250d3f35b50ebc367d39ef0b1fc290c1cffa518d8e5775ec"
+    },
+    {
+      "path": "tarot/originals/00-fool.json",
+      "bytes": 2301,
+      "sha256": "a101ce011b992eaa5b830d3b843d3b899c1445d7929200265df2665b8f15f5d1"
+    },
+    {
+      "path": "tarot/originals/00-fool.png",
+      "bytes": 1611043,
+      "sha256": "218e329caeff1f27fee548b296e06545b72df7414f22437a5322d8ec0541b8f3"
+    },
+    {
+      "path": "tarot/originals/01-magician.json",
+      "bytes": 2297,
+      "sha256": "4546eecdfd79f3ae5b481fbca95b4cde060a1ff24fadb03bce32c00a3957c284"
+    },
+    {
+      "path": "tarot/originals/01-magician.png",
+      "bytes": 1684417,
+      "sha256": "3bbc1435857cd225a4491905e075f52c52fe91818c93309e083671c33bd07f5f"
+    },
+    {
+      "path": "tarot/originals/02-high-priestess.json",
+      "bytes": 2286,
+      "sha256": "4f7cd4ef722aac22dd4498b0dee8394289ddf66f376a0307d01d5639501ddfea"
+    },
+    {
+      "path": "tarot/originals/02-high-priestess.png",
+      "bytes": 1654159,
+      "sha256": "55903eebff507fa5112a95ba3e13438d2e15e5e629c493de51db8cda4f4ef2e7"
+    },
+    {
+      "path": "tarot/originals/03-empress.json",
+      "bytes": 2281,
+      "sha256": "966a3edb58ffa9b7ea81b881a0d5fc601b0d63b8105dbcabf64b2e7da701e617"
+    },
+    {
+      "path": "tarot/originals/03-empress.png",
+      "bytes": 1722828,
+      "sha256": "45b9757e74cfc02a42aef280c354a0be14359952894f291c387008e57217e391"
+    },
+    {
+      "path": "tarot/originals/04-emperor.json",
+      "bytes": 2284,
+      "sha256": "a2fe88b6cc69e70e270f2cb29e25556a6218696335052327a02a89c347cfc0b8"
+    },
+    {
+      "path": "tarot/originals/04-emperor.png",
+      "bytes": 1647499,
+      "sha256": "d19a687665399c9d3fe51930a8f118fa6387f195a10094554f2236340bec8cea"
+    },
+    {
+      "path": "tarot/originals/05-hierophant.json",
+      "bytes": 2298,
+      "sha256": "5ba732c138e2b1e2e335fff88379e4fb9f0471d5a5671263cccb9c58e020ae87"
+    },
+    {
+      "path": "tarot/originals/05-hierophant.png",
+      "bytes": 1625771,
+      "sha256": "b4882afd55d5daa4c581fd8115cae53493dabed0f04f08c569024f86e2700e77"
+    },
+    {
+      "path": "tarot/originals/06-lovers.json",
+      "bytes": 2280,
+      "sha256": "8c49f741f5df84095c15dd2dc87677d828e5c96e4f176bdc0ffbee440de77747"
+    },
+    {
+      "path": "tarot/originals/06-lovers.png",
+      "bytes": 1666275,
+      "sha256": "7cf71060e89698ab66f395ba5c48a1a7eeda68cce4130a3374603171fc30bd1f"
+    },
+    {
+      "path": "tarot/originals/07-chariot.json",
+      "bytes": 2334,
+      "sha256": "dd977b4edc71989e3484b8641fe9e4f599739bf65987fd9adba6146d63d005c7"
+    },
+    {
+      "path": "tarot/originals/07-chariot.png",
+      "bytes": 1741195,
+      "sha256": "c1516a554af2b2c9f21a67990b062dc2cbbf7ebe723a010e4314bf9d277aca06"
+    },
+    {
+      "path": "tarot/originals/08-strength.json",
+      "bytes": 2313,
+      "sha256": "f1ba8e3427800b1b42174f80364dea30c7ecac2f2f8f4b9cb02d0d73047eeab3"
+    },
+    {
+      "path": "tarot/originals/08-strength.png",
+      "bytes": 1749511,
+      "sha256": "9daab7b5397be4ac5625b50954a44f7b127db9517a2e27e04dd8485e19cff779"
+    },
+    {
+      "path": "tarot/originals/09-hermit.json",
+      "bytes": 2312,
+      "sha256": "0f6a5506c2e8b9bf4bed6732ee215a5901648969f2848de388de9c6ed09b4326"
+    },
+    {
+      "path": "tarot/originals/09-hermit.png",
+      "bytes": 1620225,
+      "sha256": "f2ac0ce6671f0b0221f8d5d198fb811c097dd5dc57208ba8e1cd5d89c3c41449"
+    },
+    {
+      "path": "tarot/originals/10-wheel-of-fortune.json",
+      "bytes": 2367,
+      "sha256": "424a74f76e681512ef735269f41bd0ee8c749ff8c77a391b1afb909801a326f0"
+    },
+    {
+      "path": "tarot/originals/10-wheel-of-fortune.png",
+      "bytes": 1818174,
+      "sha256": "9a884222325bfb43721964c8288ae9db3b34271669a1122d62e5881d0e624341"
+    },
+    {
+      "path": "tarot/originals/11-justice.json",
+      "bytes": 2297,
+      "sha256": "40b403a54ab7d16e0a864ead299f6dd01b11c7a8a7cbf1e30ea51820ca95cffe"
+    },
+    {
+      "path": "tarot/originals/11-justice.png",
+      "bytes": 1659969,
+      "sha256": "b9802838bf64d208fe541bd0dfd61fec9db036b0a004c7c57df3a1ad7320427e"
+    },
+    {
+      "path": "tarot/originals/12-hanged-man.json",
+      "bytes": 2430,
+      "sha256": "288071f4bfaa24450fd55fa6de725288d7843878283e2d0e19a5aeddb54f22b1"
+    },
+    {
+      "path": "tarot/originals/12-hanged-man.png",
+      "bytes": 1630503,
+      "sha256": "425e870815322c5f266632306fc69200f6504e9d6210a9caf184dc21f14b7db8"
+    },
+    {
+      "path": "tarot/originals/13-death.json",
+      "bytes": 2309,
+      "sha256": "660b19c92a1dac21208440f7e2f218ebda9b625068ed6a1bbffce0d078860daa"
+    },
+    {
+      "path": "tarot/originals/13-death.png",
+      "bytes": 1619739,
+      "sha256": "8467f534bece2b8ce63ddda2942374b3a3a876169f553bac9a19d4d3b767d141"
+    },
+    {
+      "path": "tarot/originals/14-temperance.json",
+      "bytes": 2273,
+      "sha256": "9d6ab8567949f1652f70fdfd7bbadf19da01be30777508fc4d94179e5b10db8e"
+    },
+    {
+      "path": "tarot/originals/14-temperance.png",
+      "bytes": 1659889,
+      "sha256": "b308e65af5302c6949d78fd816c1807f2015b9a70f3b3aac1c8e6191f84c9d54"
+    },
+    {
+      "path": "tarot/originals/15-devil.json",
+      "bytes": 2313,
+      "sha256": "f212bc6b15db52613952c51228328efc1534643eb787e1ccdfb4f14ce588ebc4"
+    },
+    {
+      "path": "tarot/originals/15-devil.png",
+      "bytes": 1685527,
+      "sha256": "13649e100aea56b2a950b2c11d0bebe804e7f22d003de5bb51136367df8d253f"
+    },
+    {
+      "path": "tarot/originals/16-tower.json",
+      "bytes": 2320,
+      "sha256": "c174ea7a00cb4b65d51e20b5cd6f73b5ca548bc46f0310c4991b32700b0c9288"
+    },
+    {
+      "path": "tarot/originals/16-tower.png",
+      "bytes": 1628965,
+      "sha256": "d7e5bc3fd20e5e027ecb11caaba544fc2e9f98575f7b9cda997775a8135295c0"
+    },
+    {
+      "path": "tarot/originals/17-star.json",
+      "bytes": 2291,
+      "sha256": "6cfa513419582dc0d7bdbef799cd440971591e200f79e231767ef47a8db85b36"
+    },
+    {
+      "path": "tarot/originals/17-star.png",
+      "bytes": 1603897,
+      "sha256": "bdeda904398b6f7a2947c7d017565aa2586ccc35b7b8ee453385398ba0fa19ab"
+    },
+    {
+      "path": "tarot/originals/18-moon.json",
+      "bytes": 2303,
+      "sha256": "d2fdced9c5abefe3d09b752e315a0fc352207993f23f5f4fa48ba21ffbc736d8"
+    },
+    {
+      "path": "tarot/originals/18-moon.png",
+      "bytes": 1655162,
+      "sha256": "f78a8478489c5e3e5762eccbd2794017b727d244e709ce98bb2151d365c3363e"
+    },
+    {
+      "path": "tarot/originals/19-sun.json",
+      "bytes": 2399,
+      "sha256": "49322aaf8431f68b7714ebc386eb93e7b62171d8bb7a2f78d0a041d22cbd77e7"
+    },
+    {
+      "path": "tarot/originals/19-sun.png",
+      "bytes": 1714584,
+      "sha256": "4782e60a96e0db570fdc33cd1b9f065577e4c8a3bab568842605c719fe6fd3b5"
+    },
+    {
+      "path": "tarot/originals/20-judgement.json",
+      "bytes": 2299,
+      "sha256": "0697dfcde326eb6086cd6a4f3effabcf0685db3663f1c79bc00596fab97431ef"
+    },
+    {
+      "path": "tarot/originals/20-judgement.png",
+      "bytes": 1712377,
+      "sha256": "bbd52cd49b3db3ef124bd12d7fdb7b60a53ee3dc8c61f82a7a408a3908a31da6"
+    },
+    {
+      "path": "tarot/originals/21-world.json",
+      "bytes": 2307,
+      "sha256": "11df935febb166bbf51f2f8369d513ebb7aa21888b68a9462ff8d82db5325d70"
+    },
+    {
+      "path": "tarot/originals/21-world.png",
+      "bytes": 1645262,
+      "sha256": "2f1a0e24095e96b75a4a04c808bf4fe38f4c1e6af22cca94eaf5c05d352ee18b"
+    },
+    {
+      "path": "tarot/qa/12-identity-upright-check.png",
+      "bytes": 2072078,
+      "sha256": "dd275862b80ffbb3c4875b236aa8ca5c967e141a2c800cc40fff34bd854b8800"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-22",
+  "native_assets": 51,
+  "props": 29,
+  "tarot_cards": 22,
+  "master_4x_count": 51,
+  "expected_dimensions_ok": true,
+  "shared_tarot_frame_identical": true,
+  "tarot_label_reservations_blank": true,
+  "coins_have_transparent_square_holes": true,
+  "eight_trigram_topologies_ok": true,
+  "new_props_alpha_binary": true,
+  "reused_shell_and_costume_unchanged": true,
+  "protected_inputs_hash_match": true,
+  "max_native_opaque_colors": 33,
+  "max_master_opaque_colors": 34,
+  "generated_high_resolution_originals": 33,
+  "reuse_note": "Approved turtle shell has its original high-resolution source separately in props/shell-original.png.",
+  "not_verified": [
+    "engine integration",
+    "indexed sprite binary packing",
+    "animation playback with these props",
+    "RGB565 device rendering"
+  ]
+}

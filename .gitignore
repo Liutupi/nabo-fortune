@@ -1,0 +1,15 @@
+private/
+dist/
+node_modules/
+.venv/
+.env
+.env.*
+**/*.log
+game-art/fortune/grok-clips/qa/*-decode.txt
+game-art/fortune/grok-clips/qa/v2/*-decode.txt
+game-art/fortune/props/qa/static-art-delivery.zip
+game-art/fortune/props/qa/static-art-delivery.zip.sha256.txt
+tests/fortune_host/libfchost.so
+tests/fortune_host/__pycache__/
+tests/__pycache__/
+**/__pycache__/

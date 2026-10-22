@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-22",
+  "version": "0.1.2",
+  "accepted": true,
+  "user_reply": "可以了",
+  "requested_retest_scope": [
+    "visible enlarged tarot art and readable draw/flip timing",
+    "four bone weights and moving scale weight; stopped result and OK to read",
+    "new sound",
+    "font readability"
+  ],
+  "note": "Acceptance applies to this explicitly requested physical retest. Sleep/wake and power-off persistence are recorded separately."
+}

@@ -1,0 +1,327 @@
+{
+ "bytes": 3677860,
+ "sha256": "fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664",
+ "count": 80,
+ "items": {
+  "spr/N-CALC/100": {
+   "offset": 3208,
+   "size": 21795
+  },
+  "spr/N-CALC/56": {
+   "offset": 25004,
+   "size": 8908
+  },
+  "spr/N-IDLE/120": {
+   "offset": 33912,
+   "size": 78879
+  },
+  "spr/N-IDLE/76": {
+   "offset": 112792,
+   "size": 36141
+  },
+  "spr/N-NOD/56": {
+   "offset": 148936,
+   "size": 38066
+  },
+  "spr/N-NOD/76": {
+   "offset": 187004,
+   "size": 67534
+  },
+  "spr/N-PRINT/120": {
+   "offset": 254540,
+   "size": 159570
+  },
+  "spr/N-SHELL-TOSS/120": {
+   "offset": 414112,
+   "size": 67670
+  },
+  "spr/N-SHELL/120": {
+   "offset": 481784,
+   "size": 51882
+  },
+  "spr/N-SIGH/76": {
+   "offset": 533668,
+   "size": 55018
+  },
+  "spr/N-TUBE/76": {
+   "offset": 588688,
+   "size": 43141
+  },
+  "spr/N-WELCOME/120": {
+   "offset": 631832,
+   "size": 152424
+  },
+  "spr/N-WOW/76": {
+   "offset": 784256,
+   "size": 47384
+  },
+  "prop/card-back-l": {
+   "offset": 831640,
+   "size": 11611
+  },
+  "prop/card-back-s": {
+   "offset": 843252,
+   "size": 3527
+  },
+  "prop/coin-flip": {
+   "offset": 846780,
+   "size": 5087
+  },
+  "prop/printer": {
+   "offset": 851868,
+   "size": 5841
+  },
+  "prop/scale-beam": {
+   "offset": 857712,
+   "size": 923
+  },
+  "prop/scale-pan": {
+   "offset": 858636,
+   "size": 927
+  },
+  "prop/scale-weight": {
+   "offset": 859564,
+   "size": 411
+  },
+  "prop/scroll": {
+   "offset": 859976,
+   "size": 36186
+  },
+  "prop/seal-shang": {
+   "offset": 896164,
+   "size": 2262
+  },
+  "prop/seal-xia": {
+   "offset": 898428,
+   "size": 2262
+  },
+  "prop/seal-zhong": {
+   "offset": 900692,
+   "size": 2262
+  },
+  "prop/shell": {
+   "offset": 902956,
+   "size": 2037
+  },
+  "prop/stick": {
+   "offset": 904996,
+   "size": 863
+  },
+  "prop/tarot-00-fool": {
+   "offset": 905860,
+   "size": 11618
+  },
+  "prop/tarot-01-magician": {
+   "offset": 917480,
+   "size": 11618
+  },
+  "prop/tarot-02-high-priestess": {
+   "offset": 929100,
+   "size": 11618
+  },
+  "prop/tarot-03-empress": {
+   "offset": 940720,
+   "size": 11618
+  },
+  "prop/tarot-04-emperor": {
+   "offset": 952340,
+   "size": 11618
+  },
+  "prop/tarot-05-hierophant": {
+   "offset": 963960,
+   "size": 11618
+  },
+  "prop/tarot-06-lovers": {
+   "offset": 975580,
+   "size": 11618
+  },
+  "prop/tarot-07-chariot": {
+   "offset": 987200,
+   "size": 11618
+  },
+  "prop/tarot-08-strength": {
+   "offset": 998820,
+   "size": 11618
+  },
+  "prop/tarot-09-hermit": {
+   "offset": 1010440,
+   "size": 11618
+  },
+  "prop/tarot-10-wheel-of-fortune": {
+   "offset": 1022060,
+   "size": 11618
+  },
+  "prop/tarot-11-justice": {
+   "offset": 1033680,
+   "size": 11618
+  },
+  "prop/tarot-12-hanged-man": {
+   "offset": 1045300,
+   "size": 11618
+  },
+  "prop/tarot-13-death": {
+   "offset": 1056920,
+   "size": 11618
+  },
+  "prop/tarot-14-temperance": {
+   "offset": 1068540,
+   "size": 11618
+  },
+  "prop/tarot-15-devil": {
+   "offset": 1080160,
+   "size": 11618
+  },
+  "prop/tarot-16-tower": {
+   "offset": 1091780,
+   "size": 11618
+  },
+  "prop/tarot-17-star": {
+   "offset": 1103400,
+   "size": 11618
+  },
+  "prop/tarot-18-moon": {
+   "offset": 1115020,
+   "size": 11618
+  },
+  "prop/tarot-19-sun": {
+   "offset": 1126640,
+   "size": 11618
+  },
+  "prop/tarot-20-judgement": {
+   "offset": 1138260,
+   "size": 11618
+  },
+  "prop/tarot-21-world": {
+   "offset": 1149880,
+   "size": 11618
+  },
+  "prop/title": {
+   "offset": 1161500,
+   "size": 7598
+  },
+  "prop/trigram-0": {
+   "offset": 1169100,
+   "size": 305
+  },
+  "prop/trigram-1": {
+   "offset": 1169408,
+   "size": 301
+  },
+  "prop/trigram-2": {
+   "offset": 1169712,
+   "size": 301
+  },
+  "prop/trigram-3": {
+   "offset": 1170016,
+   "size": 297
+  },
+  "prop/trigram-4": {
+   "offset": 1170316,
+   "size": 301
+  },
+  "prop/trigram-5": {
+   "offset": 1170620,
+   "size": 297
+  },
+  "prop/trigram-6": {
+   "offset": 1170920,
+   "size": 297
+  },
+  "prop/trigram-7": {
+   "offset": 1171220,
+   "size": 293
+  },
+  "prop/tube-tilt": {
+   "offset": 1171516,
+   "size": 63747
+  },
+  "prop/weight-nian": {
+   "offset": 1235264,
+   "size": 321
+  },
+  "prop/weight-ri": {
+   "offset": 1235588,
+   "size": 321
+  },
+  "prop/weight-shi": {
+   "offset": 1235912,
+   "size": 321
+  },
+  "prop/weight-yue": {
+   "offset": 1236236,
+   "size": 321
+  },
+  "font/disp13": {
+   "offset": 1236560,
+   "size": 280941
+  },
+  "font/disp24": {
+   "offset": 1517504,
+   "size": 539717
+  },
+  "font/kai10": {
+   "offset": 2057224,
+   "size": 213780
+  },
+  "font/kai13": {
+   "offset": 2271004,
+   "size": 317737
+  },
+  "font/kai15": {
+   "offset": 2588744,
+   "size": 415787
+  },
+  "font/mono10": {
+   "offset": 3004532,
+   "size": 5714
+  },
+  "font/sans11": {
+   "offset": 3010248,
+   "size": 299776
+  },
+  "font/sans9": {
+   "offset": 3310024,
+   "size": 241986
+  },
+  "txt/lot_story": {
+   "offset": 3552012,
+   "size": 1832
+  },
+  "txt/lot_poem": {
+   "offset": 3553844,
+   "size": 9206
+  },
+  "txt/lot_jie": {
+   "offset": 3563052,
+   "size": 5606
+  },
+  "txt/lot_bh": {
+   "offset": 3568660,
+   "size": 6785
+  },
+  "txt/lot_xiang": {
+   "offset": 3575448,
+   "size": 4997
+  },
+  "txt/zy_gua": {
+   "offset": 3580448,
+   "size": 2895
+  },
+  "txt/zy_bh": {
+   "offset": 3583344,
+   "size": 3875
+  },
+  "txt/zy_line": {
+   "offset": 3587220,
+   "size": 18369
+  },
+  "txt/zy_special": {
+   "offset": 3605592,
+   "size": 376
+  },
+  "snd/boot-welcome": {
+   "offset": 3605968,
+   "size": 71890
+  }
+ }
+}

@@ -1,0 +1,1512 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "asset_root": "game-art/fortune",
+  "assets": [
+    {
+      "id": "coin-front",
+      "native": {
+        "path": "props/coin-front.png",
+        "width": 22,
+        "height": 22,
+        "sha256": "339b0a0a0608d0ab5c8fe9d9cf1c63072a7ed1008f2dae46abc4ae104082d019",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 5,
+        "ink_bbox": [
+          0,
+          0,
+          22,
+          22
+        ],
+        "visible_pixels": 364
+      },
+      "master_4x": {
+        "path": "props/coin-front-4x.png",
+        "width": 88,
+        "height": 88,
+        "sha256": "6fced1f2d25764967f071f6ecc272624a9ae5f9f420912b7402ab91a8b71298d",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 12,
+        "ink_bbox": [
+          0,
+          0,
+          88,
+          88
+        ],
+        "visible_pixels": 5801
+      },
+      "source": "props/originals/coin-front.png"
+    },
+    {
+      "id": "coin-back",
+      "native": {
+        "path": "props/coin-back.png",
+        "width": 22,
+        "height": 22,
+        "sha256": "37174de0db0ce9fe4ede4f8a676e2370f6faafad51324b1d70caa6d2234d39ff",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 5,
+        "ink_bbox": [
+          0,
+          0,
+          22,
+          22
+        ],
+        "visible_pixels": 361
+      },
+      "master_4x": {
+        "path": "props/coin-back-4x.png",
+        "width": 88,
+        "height": 88,
+        "sha256": "98dd4b0c4f75cbb27d01f93820cba4c17b773c83cd31f730236a3e8769ad15ab",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 10,
+        "ink_bbox": [
+          0,
+          0,
+          88,
+          88
+        ],
+        "visible_pixels": 5729
+      },
+      "source": "props/originals/coin-back.png"
+    },
+    {
+      "id": "shell",
+      "native": {
+        "path": "props/shell.png",
+        "width": 68,
+        "height": 40,
+        "sha256": "a3eaf4d8b58e9b454909423fd9eb3dd5bc9de2df85bfa25f466125e9f8e8d66e",
+        "alpha_values": [
+          0,
+          16,
+          17,
+          19,
+          22,
+          23,
+          25,
+          28,
+          29,
+          30,
+          31,
+          33,
+          34,
+          35,
+          39,
+          45,
+          48,
+          51,
+          54,
+          66,
+          67,
+          74,
+          77,
+          78,
+          79,
+          82,
+          85,
+          86,
+          88,
+          94,
+          95,
+          96,
+          97,
+          98,
+          102,
+          103,
+          106,
+          107,
+          109,
+          118,
+          122,
+          124,
+          125,
+          128,
+          129,
+          132,
+          136,
+          137,
+          139,
+          140,
+          141,
+          143,
+          145,
+          146,
+          148,
+          150,
+          152,
+          154,
+          155,
+          156,
+          157,
+          160,
+          162,
+          163,
+          164,
+          167,
+          174,
+          176,
+          177,
+          178,
+          179,
+          183,
+          184,
+          185,
+          187,
+          189,
+          190,
+          193,
+          196,
+          197,
+          198,
+          201,
+          202,
+          203,
+          207,
+          208,
+          209,
+          213,
+          216,
+          217,
+          218,
+          220,
+          221,
+          222,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          255
+        ],
+        "opaque_rgb_colors": 4,
+        "ink_bbox": [
+          0,
+          3,
+          68,
+          36
+        ],
+        "visible_pixels": 1760
+      },
+      "master_4x": {
+        "path": "props/shell-4x.png",
+        "width": 272,
+        "height": 160,
+        "sha256": "3e44e242de90e296b9386fdd52d418e91b825e02a8c5db5df85c11503e72ef99",
+        "alpha_values": [
+          0,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          82,
+          83,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          108,
+          109,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          142,
+          143,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          255
+        ],
+        "opaque_rgb_colors": 4,
+        "ink_bbox": [
+          0,
+          15,
+          272,
+          145
+        ],
+        "visible_pixels": 26942
+      },
+      "source": "props/shell-original.png"
+    },
+    {
+      "id": "tube",
+      "native": {
+        "path": "props/tube.png",
+        "width": 64,
+        "height": 110,
+        "sha256": "e5c5315bb5f20599296ada6f316175b7afbebaf463473985e372e71989edae80",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 21,
+        "ink_bbox": [
+          0,
+          0,
+          64,
+          110
+        ],
+        "visible_pixels": 6505
+      },
+      "master_4x": {
+        "path": "props/tube-4x.png",
+        "width": 256,
+        "height": 440,
+        "sha256": "a1111d892ad1b5672cec3e53507bea76952bd076b8dea15334f00e302e716980",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 17,
+        "ink_bbox": [
+          0,
+          0,
+          256,
+          440
+        ],
+        "visible_pixels": 103593
+      },
+      "source": "props/originals/tube.png"
+    },
+    {
+      "id": "stick",
+      "native": {
+        "path": "props/stick.png",
+        "width": 6,
+        "height": 80,
+        "sha256": "3f1472badadfe0ab309f8618244304640cd43bc30a0e088cb5dafbd709f6ee57",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 14,
+        "ink_bbox": [
+          0,
+          0,
+          6,
+          80
+        ],
+        "visible_pixels": 400
+      },
+      "master_4x": {
+        "path": "props/stick-4x.png",
+        "width": 24,
+        "height": 320,
+        "sha256": "72ee85e5763061989b4c26a2281f7684f5123ce9749fab95cd820a8c39338efa",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 5,
+        "ink_bbox": [
+          2,
+          0,
+          22,
+          320
+        ],
+        "visible_pixels": 6400
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "scroll",
+      "native": {
+        "path": "props/scroll.png",
+        "width": 208,
+        "height": 216,
+        "sha256": "7948ac7ddf89e767c1a0005dc2f0d27e1d1fecb86643d1b49382d835c3cd553f",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 23,
+        "ink_bbox": [
+          0,
+          0,
+          208,
+          216
+        ],
+        "visible_pixels": 34723
+      },
+      "master_4x": {
+        "path": "props/scroll-4x.png",
+        "width": 832,
+        "height": 864,
+        "sha256": "67945fc19ad4666997673861be3b5b9a00de5f05e4f9c8e779be31d245c26e25",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 23,
+        "ink_bbox": [
+          0,
+          0,
+          832,
+          864
+        ],
+        "visible_pixels": 556930
+      },
+      "source": "props/originals/scroll.png"
+    },
+    {
+      "id": "seal-shangshang",
+      "native": {
+        "path": "props/seal-shangshang.png",
+        "width": 52,
+        "height": 40,
+        "sha256": "2e5797fab3e792cf151fbae7c1a1c5a569f3948367ee41616c94f9aa8c47b0ab",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          52,
+          40
+        ],
+        "visible_pixels": 1689
+      },
+      "master_4x": {
+        "path": "props/seal-shangshang-4x.png",
+        "width": 208,
+        "height": 160,
+        "sha256": "5659990481e3289150cb7676e99df6ec224f92833c04b965474fa22bce649b14",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          208,
+          160
+        ],
+        "visible_pixels": 26970
+      },
+      "source": "props/originals/seal-blank.png"
+    },
+    {
+      "id": "seal-shang",
+      "native": {
+        "path": "props/seal-shang.png",
+        "width": 52,
+        "height": 40,
+        "sha256": "ed575ff0b9c8179b113956d57bdc18390881054c8fe4a4023bce3cf7f25d1e10",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          52,
+          40
+        ],
+        "visible_pixels": 1689
+      },
+      "master_4x": {
+        "path": "props/seal-shang-4x.png",
+        "width": 208,
+        "height": 160,
+        "sha256": "558eef03b79da30e45728f3ed51810383379efe7c8c01e6c1aa95f7637f1b5b5",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          208,
+          160
+        ],
+        "visible_pixels": 26970
+      },
+      "source": "props/originals/seal-blank.png"
+    },
+    {
+      "id": "seal-zhong",
+      "native": {
+        "path": "props/seal-zhong.png",
+        "width": 52,
+        "height": 40,
+        "sha256": "5b31fd36e6612b2274580c4030089e1001f48e7cc6f5e1bc878ae270083db1f1",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          52,
+          40
+        ],
+        "visible_pixels": 1689
+      },
+      "master_4x": {
+        "path": "props/seal-zhong-4x.png",
+        "width": 208,
+        "height": 160,
+        "sha256": "e5435672f0fd80a7fb5275b14e9e7ef4c9b640b1e9fc67058b79ee49f59eee09",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          208,
+          160
+        ],
+        "visible_pixels": 26970
+      },
+      "source": "props/originals/seal-blank.png"
+    },
+    {
+      "id": "seal-xia",
+      "native": {
+        "path": "props/seal-xia.png",
+        "width": 52,
+        "height": 40,
+        "sha256": "adc083545110632dad43b94a2369e8dfb36c35d4a98ded9d366d33f241cc3f39",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          52,
+          40
+        ],
+        "visible_pixels": 1689
+      },
+      "master_4x": {
+        "path": "props/seal-xia-4x.png",
+        "width": 208,
+        "height": 160,
+        "sha256": "0b598918a12d63d466a5e0be287f547556d02efe0f9ce3e1767dd75c6de87386",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          208,
+          160
+        ],
+        "visible_pixels": 26970
+      },
+      "source": "props/originals/seal-blank.png"
+    },
+    {
+      "id": "scale-beam",
+      "native": {
+        "path": "props/scale-beam.png",
+        "width": 182,
+        "height": 6,
+        "sha256": "1681a45b0dcd8756602d3c8d3a51f44c1bb86231cf925336253d4ea0171a6e3f",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          182,
+          6
+        ],
+        "visible_pixels": 748
+      },
+      "master_4x": {
+        "path": "props/scale-beam-4x.png",
+        "width": 728,
+        "height": 24,
+        "sha256": "df916c9524b72dced038bd4e667f1b4f447a9764eb80a3cb16d7f5bf84d28046",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 11,
+        "ink_bbox": [
+          0,
+          0,
+          728,
+          24
+        ],
+        "visible_pixels": 13301
+      },
+      "source": "props/originals/scale-beam.png"
+    },
+    {
+      "id": "scale-pan",
+      "native": {
+        "path": "props/scale-pan.png",
+        "width": 56,
+        "height": 16,
+        "sha256": "978b763f5fe9f58c3fbf2a9bdea8bf7ae9e3fe6dc5cd32325941edb32b01f612",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          56,
+          16
+        ],
+        "visible_pixels": 710
+      },
+      "master_4x": {
+        "path": "props/scale-pan-4x.png",
+        "width": 224,
+        "height": 64,
+        "sha256": "5aa95ab02a4320e2374f67c964ec943e434716a7a1fb8d17e9260eb66c933826",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 9,
+        "ink_bbox": [
+          0,
+          0,
+          224,
+          64
+        ],
+        "visible_pixels": 11315
+      },
+      "source": "props/originals/scale-pan.png"
+    },
+    {
+      "id": "scale-weight",
+      "native": {
+        "path": "props/scale-weight.png",
+        "width": 18,
+        "height": 16,
+        "sha256": "10438394c21f35fa804e562c77a74fce321332b361109eda8feaaa295c0216e3",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 5,
+        "ink_bbox": [
+          0,
+          0,
+          18,
+          16
+        ],
+        "visible_pixels": 188
+      },
+      "master_4x": {
+        "path": "props/scale-weight-4x.png",
+        "width": 72,
+        "height": 64,
+        "sha256": "e21b756f614909ee34c809936100f0cec0d714af98c17013a8b6c802a8e7ce78",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 9,
+        "ink_bbox": [
+          0,
+          0,
+          72,
+          64
+        ],
+        "visible_pixels": 2981
+      },
+      "source": "props/originals/scale-weight.png"
+    },
+    {
+      "id": "weight-nian",
+      "native": {
+        "path": "props/weight-nian.png",
+        "width": 12,
+        "height": 12,
+        "sha256": "6891787c1cfa1114dc91e4b4de079ff4c32a5e23140210e435f2794b5a1ace5b",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 6,
+        "ink_bbox": [
+          0,
+          0,
+          12,
+          12
+        ],
+        "visible_pixels": 136
+      },
+      "master_4x": {
+        "path": "props/weight-nian-4x.png",
+        "width": 48,
+        "height": 48,
+        "sha256": "96f0675bb474b45c0ac313fe3a1409b608e5200bf05035a6cecc6e4af3f7c600",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          48,
+          48
+        ],
+        "visible_pixels": 2206
+      },
+      "source": "props/originals/weight-blank.png"
+    },
+    {
+      "id": "weight-yue",
+      "native": {
+        "path": "props/weight-yue.png",
+        "width": 12,
+        "height": 12,
+        "sha256": "a320ae1ef36d2e26e9670732dbcf502d73bc27493b6074a8828a634f613bf093",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 6,
+        "ink_bbox": [
+          0,
+          0,
+          12,
+          12
+        ],
+        "visible_pixels": 136
+      },
+      "master_4x": {
+        "path": "props/weight-yue-4x.png",
+        "width": 48,
+        "height": 48,
+        "sha256": "d00ad2219df852083a3dd0de849e23ec301677e961da0a20bad9d184536a3488",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          48,
+          48
+        ],
+        "visible_pixels": 2206
+      },
+      "source": "props/originals/weight-blank.png"
+    },
+    {
+      "id": "weight-ri",
+      "native": {
+        "path": "props/weight-ri.png",
+        "width": 12,
+        "height": 12,
+        "sha256": "bbdaa72eb73488bd9b5f16e53048966a2899f8d7b9e3dce3479c8a0a4b7c0d1c",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 6,
+        "ink_bbox": [
+          0,
+          0,
+          12,
+          12
+        ],
+        "visible_pixels": 136
+      },
+      "master_4x": {
+        "path": "props/weight-ri-4x.png",
+        "width": 48,
+        "height": 48,
+        "sha256": "4ffdbb0fd7800a27b0779b76eb905501799282486d71f2a37f779d557b123975",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          48,
+          48
+        ],
+        "visible_pixels": 2206
+      },
+      "source": "props/originals/weight-blank.png"
+    },
+    {
+      "id": "weight-shi",
+      "native": {
+        "path": "props/weight-shi.png",
+        "width": 12,
+        "height": 12,
+        "sha256": "5e15c8be420170c8ffaf2e2eff67242419ace22046bd6ba2b2ae99567a145ceb",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 6,
+        "ink_bbox": [
+          0,
+          0,
+          12,
+          12
+        ],
+        "visible_pixels": 136
+      },
+      "master_4x": {
+        "path": "props/weight-shi-4x.png",
+        "width": 48,
+        "height": 48,
+        "sha256": "7cc78da33ff611886c8dc333970f57819527198f31cf986c43f68383bae494a4",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 7,
+        "ink_bbox": [
+          0,
+          0,
+          48,
+          48
+        ],
+        "visible_pixels": 2206
+      },
+      "source": "props/originals/weight-blank.png"
+    },
+    {
+      "id": "printer",
+      "native": {
+        "path": "props/printer.png",
+        "width": 212,
+        "height": 28,
+        "sha256": "858ea8cb947daebedd3a8d0dfe192f330ba6c60795f6ba546e91020df4db4b99",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 17,
+        "ink_bbox": [
+          0,
+          0,
+          212,
+          28
+        ],
+        "visible_pixels": 5546
+      },
+      "master_4x": {
+        "path": "props/printer-4x.png",
+        "width": 848,
+        "height": 112,
+        "sha256": "54a139c38b6da26da93c4d16213032527f6bf9e6be4c6c87b0d59d0ffb5e972b",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 17,
+        "ink_bbox": [
+          0,
+          0,
+          848,
+          112
+        ],
+        "visible_pixels": 88733
+      },
+      "source": "props/originals/printer.png"
+    },
+    {
+      "id": "card-back-s",
+      "native": {
+        "path": "props/card-back-s.png",
+        "width": 44,
+        "height": 72,
+        "sha256": "2e94e1cb569399bb169ba7f1a95942eb673d479bd376326aeb769eec58165df1",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 20,
+        "ink_bbox": [
+          0,
+          0,
+          44,
+          72
+        ],
+        "visible_pixels": 3164
+      },
+      "master_4x": {
+        "path": "props/card-back-s-4x.png",
+        "width": 176,
+        "height": 288,
+        "sha256": "875039a4bbd04f2912759b055eaa16e4ec0e84cceb0f0da71a160f959bb5113a",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 21,
+        "ink_bbox": [
+          0,
+          0,
+          176,
+          288
+        ],
+        "visible_pixels": 50604
+      },
+      "source": "props/originals/card-back.png"
+    },
+    {
+      "id": "card-back-l",
+      "native": {
+        "path": "props/card-back-l.png",
+        "width": 82,
+        "height": 135,
+        "sha256": "a08ddf6c262ae726703fd52da0f893b9ecce9dc5c11ffd57ea41e40b2ae2e9bf",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 22,
+        "ink_bbox": [
+          0,
+          0,
+          82,
+          135
+        ],
+        "visible_pixels": 11051
+      },
+      "master_4x": {
+        "path": "props/card-back-l-4x.png",
+        "width": 328,
+        "height": 540,
+        "sha256": "97920b7e35569a1df2151abbc56f636bbdebd473e21a22ba16310d6528a7840a",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 23,
+        "ink_bbox": [
+          0,
+          0,
+          328,
+          540
+        ],
+        "visible_pixels": 176835
+      },
+      "source": "props/originals/card-back.png"
+    },
+    {
+      "id": "title",
+      "native": {
+        "path": "props/title.png",
+        "width": 200,
+        "height": 70,
+        "sha256": "d59c216ff88a0f998e9ce6c434dea5d702baa9a73405565b4954083c4a6ccf58",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 22,
+        "ink_bbox": [
+          26,
+          0,
+          174,
+          68
+        ],
+        "visible_pixels": 6549
+      },
+      "master_4x": {
+        "path": "props/title-4x.png",
+        "width": 800,
+        "height": 280,
+        "sha256": "cfb2ec147bc5f7a8f35e8ba112a6f3c1cd7323c3dcdf768547c7358bb424c320",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 18,
+        "ink_bbox": [
+          101,
+          0,
+          697,
+          272
+        ],
+        "visible_pixels": 104730
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-0",
+      "native": {
+        "path": "props/trigram-0.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "dd42091e5fd8e982b451dd3395badb45985597301280d1d43a337976f7b1281c",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 108
+      },
+      "master_4x": {
+        "path": "props/trigram-0-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "73471cc9c8b820c2fc1ff3d543938adcf0b0910f891b4b3c44460ba32157fea6",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1728
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-1",
+      "native": {
+        "path": "props/trigram-1.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "89be47b8f499a4d8f4486e50660e3fc2cfb521ed3d705ad312176543a443178e",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 100
+      },
+      "master_4x": {
+        "path": "props/trigram-1-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "fd624d59395163627599fa2b582517309e9c859d55b15ae3bcd325ebfc008354",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1600
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-2",
+      "native": {
+        "path": "props/trigram-2.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "2f5efdeef48f639ee79efaaae4b284a5c9aefa41e2f6137558087ddd7d037613",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 100
+      },
+      "master_4x": {
+        "path": "props/trigram-2-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "0f6d8f6b91d3ab522ac7dfa86821d7c3232127007c9239e8659c39d3f528e18c",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1600
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-3",
+      "native": {
+        "path": "props/trigram-3.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "9d40bcc59ab5cd05f61d2f3a827c1b9b30b0f78511d84ec50ac7b5744c98b0f5",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 92
+      },
+      "master_4x": {
+        "path": "props/trigram-3-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "750a1824b199d3d4d2695419ecbaca28d2cd216cf593b0a4d8ae877f02556e00",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1472
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-4",
+      "native": {
+        "path": "props/trigram-4.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "5d1f04b00249d60693bf0a57516bc624a93ae33b3f06fdcb03b6f309d7452d29",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 100
+      },
+      "master_4x": {
+        "path": "props/trigram-4-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "719ea9ef00a86132a5d5931f990c69aea6c9abfa3bb920d3b123531668b0744e",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1600
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-5",
+      "native": {
+        "path": "props/trigram-5.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "822abae2f5d714156fa9450f5f1a348509a904efcb3ec8a86872fc10bcf651bc",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 92
+      },
+      "master_4x": {
+        "path": "props/trigram-5-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "019295027ef0b7f2ee78e9a323ef7184db98440654b5090329de52f063024024",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1472
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-6",
+      "native": {
+        "path": "props/trigram-6.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "ba1d0fc1e43ceffa6270501c161020bbeba32ccd8237d5c03ead74efd24bea29",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 92
+      },
+      "master_4x": {
+        "path": "props/trigram-6-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "12e57fb3d8ba3c3c32a8812230e69b9390c22376ec4b6279c1e7b7ca6a7c9029",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1472
+      },
+      "source": "props/export-static-assets.ps1"
+    },
+    {
+      "id": "trigram-7",
+      "native": {
+        "path": "props/trigram-7.png",
+        "width": 20,
+        "height": 14,
+        "sha256": "b78d2c34927918c069163861c87fb57b65f19d17ac29177580d52c5cf5850fc4",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 1,
+        "ink_bbox": [
+          1,
+          2,
+          19,
+          12
+        ],
+        "visible_pixels": 84
+      },
+      "master_4x": {
+        "path": "props/trigram-7-4x.png",
+        "width": 80,
+        "height": 56,
+        "sha256": "40aae356886e2ee3193747b6b650b76852c51de48b162440152a40c6e3d10e1c",
+        "alpha_values": [
+          0,
+          255
+        ],
+        "opaque_rgb_colors": 2,
+        "ink_bbox": [
+          4,
+          8,
+          76,
+          48
+        ],
+        "visible_pixels": 1344
+      },
+      "source": "props/export-static-assets.ps1"
+    }
+  ],
+  "trigram_order": [
+    "乾",
+    "兑",
+    "离",
+    "震",
+    "巽",
+    "坎",
+    "艮",
+    "坤"
+  ],
+  "trigram_bits_bottom_to_top": [
+    7,
+    3,
+    5,
+    1,
+    6,
+    2,
+    4,
+    0
+  ],
+  "text_safe_rects": {
+    "scroll": [
+      30,
+      36,
+      148,
+      144
+    ]
+  },
+  "generated_source_designs": 11,
+  "note": "Geometry, exact Chinese glyphs and output sizing are in export-static-assets.ps1. Approved shell is reused unchanged. Use explicit asset paths, not wildcard source PNGs."
+}

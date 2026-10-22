@@ -1,0 +1,745 @@
+<meta charset="utf-8">
+<title>NABO 赛博算命机</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@600&family=ZCOOL+QingKe+HuangYou&display=swap">
+<style>
+/* 布局：左边是一块实物比例的 AI Passport 工牌（屏幕 + 右侧三键），右边是当前场景的分镜与分工说明 */
+@font-face{font-family:"NaboDisp";src:url("../tools/fonts/ZCOOLQingKeHuangYou-Regular.ttf")}
+@font-face{font-family:"NaboKai";src:url("fonts/LXGWWenKai-subset.woff2") format("woff2")}
+@font-face{font-family:"NaboSans";src:url("../tools/fonts/SourceHanSansCN-Medium.otf")}
+@font-face{font-family:"NaboMono";src:url("../tools/fonts/SpaceMono-Bold.ttf")}
+:root{
+  --bg:#0a0716; --panel:#130e27; --line:#2b2350; --fg:#ece8ff; --mute:#9d93c8;
+  --mag:#ff3da6; --cyan:#35f0dc; --gold:#ffc94a;
+  --disp:"NaboDisp","ZCOOL QingKe HuangYou","Noto Sans SC",system-ui,sans-serif;
+  --body:"NaboSans","Noto Sans SC",system-ui,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:"NaboMono","IBM Plex Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:14px;line-height:1.6;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:auto minmax(0,1fr);gap:36px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:minmax(0,1fr)}}
+header.top{max-width:1080px;margin:0 auto 22px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px}
+header.top h1{font-family:var(--disp);font-weight:400;font-size:34px;margin:0;letter-spacing:.04em;color:var(--fg);text-wrap:balance}
+header.top h1 b{color:var(--mag);font-weight:400}
+header.top p{margin:0;color:var(--mute);font-size:13px}
+.badge{position:relative;display:flex;gap:14px;align-items:center;justify-content:center;background:#17112f;border:1px solid var(--line);border-radius:30px;padding:40px 16px 26px 20px;max-width:100%}
+.badge::before{content:"";position:absolute;top:14px;left:50%;width:46px;height:9px;margin-left:-23px;border-radius:5px;background:var(--bg);border:1px solid var(--line)}
+canvas{display:block;width:min(480px,calc(100vw - 32px - 36px - 74px));max-width:100%;aspect-ratio:3/4;image-rendering:pixelated;border-radius:4px;background:#000;outline:2px solid #05030c}
+.keys{display:flex;flex-direction:column;gap:12px}
+.keys button{width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:#221a44;color:var(--fg);font-family:var(--mono);font-size:15px;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}
+.keys button.ok{background:#3a1638;border-color:var(--mag);color:var(--mag)}
+.keys button.on{background:var(--cyan);color:#071815}
+.keys button.ok.on{background:var(--mag);color:#1a0612}
+.keys button:focus-visible,.opts button:focus-visible,.chips button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.devcol{display:flex;flex-direction:column;gap:14px;align-items:center;min-width:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.opts button{font-family:var(--body);font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mute);cursor:pointer}
+.opts button[aria-pressed="true"]{color:#071815;background:var(--cyan);border-color:var(--cyan)}
+.hint{color:var(--mute);font-size:12px;text-align:center;margin:0}
+.hint kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:4px;padding:0 5px;color:var(--fg)}
+.notes{min-width:0;display:flex;flex-direction:column;gap:22px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font-family:var(--body);font-size:13px;padding:5px 11px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--fg);cursor:pointer}
+.chips button[aria-current="true"]{border-color:var(--mag);color:var(--mag)}
+.scene h2{font-family:var(--disp);font-weight:400;font-size:28px;margin:0 0 4px;color:var(--gold);letter-spacing:.03em}
+.scene .sub{color:var(--mute);margin:0 0 14px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.steps .tm{font-family:var(--mono);font-size:12px;color:var(--cyan);padding-top:2px}
+.split{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:620px){.split{grid-template-columns:minmax(0,1fr)}}
+.who{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.who h3{margin:0 0 6px;font-size:12px;letter-spacing:.12em;font-weight:700}
+.who.g h3{color:var(--mag)} .who.x h3{color:var(--cyan)} .who.e h3{color:var(--gold)}
+.who ul{margin:0;padding-left:1.1em;font-size:13px;color:var(--fg)}
+.who li{margin:2px 0}
+.who code{font-family:var(--mono);font-size:12px;color:var(--mute)}
+.foot{color:var(--mute);font-size:12px;max-width:65ch}
+</style>
+
+<header class="top">
+  <h1>NABO <b>赛博</b>算命机</h1>
+  <p>动画原型 v0.1 · 屏幕 240×320 实际像素放大两倍 · 按键和工牌一致：上键、下键、OK</p>
+</header>
+
+<div class="wrap" id="app">
+  <section class="devcol" aria-label="工牌模拟">
+    <div class="badge">
+      <canvas id="scr" width="240" height="320" aria-label="工牌屏幕"></canvas>
+      <div class="keys">
+        <button id="kUp" aria-label="上键">▲</button>
+        <button id="kDown" aria-label="下键">▼</button>
+        <button id="kOk" class="ok" aria-label="OK 键">OK</button>
+      </div>
+    </div>
+    <div class="opts">
+      <button id="oSlow" aria-pressed="false">慢放 ¼</button>
+      <button id="oBox" aria-pressed="false">素材框</button>
+      <button id="oScan" aria-pressed="true">扫描线</button>
+      <button id="oSnd" aria-pressed="false">声音</button>
+      <button id="oBack">返回主转盘</button>
+    </div>
+    <p class="hint">键盘：<kbd>↑</kbd> <kbd>↓</kbd> <kbd>Enter</kbd>（可长按），<kbd>Esc</kbd> 返回；双击上键也是返回</p>
+  </section>
+
+  <section class="notes">
+    <div class="chips" id="chips" aria-label="场景"></div>
+    <div class="scene">
+      <h2 id="sName">开机</h2>
+      <p class="sub" id="sSub"></p>
+      <ol class="steps" id="sSteps"></ol>
+    </div>
+    <div class="split">
+      <div class="who g"><h3>GROK · NABO 表演</h3><ul id="wG"></ul></div>
+      <div class="who x"><h3>CODEX · 静态素材</h3><ul id="wX"></ul></div>
+      <div class="who e"><h3>引擎 · 程序动画</h3><ul id="wE"></ul></div>
+    </div>
+    <p class="foot">NABO 是 Grok 视频处理出的 12 fps 精灵帧（64 色）；道具、标题、卦符、22 张塔罗牌面都是 Codex 交付的目标尺寸原图，引擎只负责移动、翻转、旋转和缩放。签文是观音灵签全部 100 支；称骨、紫微、奇门按你输入的生辰和当前时刻真实计算。打开“素材框”可以看到 Grok 片段（品红框）和 Codex 素材（青框）在屏幕上的位置和尺寸。</p>
+  </section>
+</div>
+
+<script src="vendor/lunar.js"></script>
+<script src="vendor/iztro.min.js"></script>
+<script>/* 本地 vendor 缺失时才走 CDN */
+if(typeof Solar==='undefined')document.write('<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.7.7/lunar.js"><\/script>');
+if(typeof iztro==='undefined')document.write('<script src="https://cdn.jsdelivr.net/npm/iztro@2.6.1/dist/iztro.min.js"><\/script>');</script>
+<script>
+/* NABO 赛博算命机 · 规则核心（原型 = 标准答案；固件 C 版逐项对拍）
+   依赖：lunar-javascript（Solar/Lunar）提供农历、节气、干支。 */
+(function(root){
+const Solar=root.Solar||(typeof require!=='undefined'?require('lunar-javascript').Solar:undefined);
+const GAN='甲乙丙丁戊己庚辛壬癸',ZHI='子丑寅卯辰巳午未申酉戌亥';
+const gzIdx=s=>{for(let i=0;i<60;i++)if(GAN[i%10]===s[0]&&ZHI[i%12]===s[1])return i;return -1};
+
+/* ---------- 称骨 ---------- */
+// 年：按六十甲子顺序（甲子起）。三源校对：两源一致；udn 版己丑 0.8、癸亥 0.7 为异文，取多数（0.7 / 0.6）
+// 日、时：三源一致
+const BONE_Y=[1.2,0.9,0.6,0.7,1.2,0.5,0.9,0.8,0.7,0.8,1.5,0.9,1.6,0.8,0.8,1.9,1.2,0.6,0.8,0.7,0.5,1.5,0.6,1.6,1.5,0.7,0.9,1.2,1.0,0.7,1.5,0.6,0.5,1.4,1.4,0.9,0.7,0.7,0.9,1.2,0.8,0.7,1.3,0.5,1.4,0.5,0.9,1.7,0.5,0.7,1.2,0.8,0.8,0.6,1.9,0.6,0.8,1.6,1.0,0.6];
+// 月：正月…腊月（2026-10-22 校对：ba-zi chinese-astrology-skill、udn giveman、CMoney 三源一致）
+const BONE_M=[0.6,0.7,1.8,0.9,0.5,1.6,0.9,1.5,1.8,0.8,0.9,0.5];
+const BONE_D=[0.5,1.0,0.8,1.5,1.6,1.5,0.8,1.6,0.8,1.6,0.9,1.7,0.8,1.7,1.0,0.8,0.9,1.8,0.5,1.5,1.0,0.9,0.8,0.9,1.5,1.8,0.7,0.8,1.6,0.6];
+const BONE_H=[1.6,0.6,0.7,1.0,0.9,1.6,1.0,0.8,0.8,0.9,0.6,0.6];
+const BONE_BAND=[
+ [2.1,2.9,'先苦后甜型','早年要多靠自己打拼，正因为起点低，每一步都走得扎实。贵在坚持，中年以后路越走越宽。'],
+ [3.0,3.5,'踏实耕耘型','做事认真、肯下功夫，适合在一个领域里慢慢深耕。身边会遇到愿意拉你一把的人。'],
+ [3.6,3.9,'稳中求进型','性格稳重，不爱冒险，但关键时刻判断准。财来得不快却守得住，晚运比早运好。'],
+ [4.0,4.5,'独立担当型','能扛事，常常是团队里拿主意的那个人。只要不把所有事都揽在自己身上，福气自然来。'],
+ [4.6,4.9,'贵人相助型','人缘好，做事容易得到前辈和朋友的支持。多和人合作，机会比单打独斗多。'],
+ [5.0,5.5,'聪明进取型','头脑灵活、学东西快，有开拓新局面的能力。注意别分心太多，专注一件事成就更大。'],
+ [5.6,5.9,'福禄双全型','一生衣食不愁，家庭和事业都有不错的根基。懂得分享，福气会越分越多。'],
+ [6.0,6.5,'大展宏图型','格局大、有领导力，适合做需要担当的事业。保持谦逊，就能走得长远。'],
+ [6.6,7.2,'富贵天成型','骨重在传统说法里属于上格。天赋和机遇都不缺，最大的功课是珍惜和回馈。']];
+// 称骨歌 52 首（2.1–7.2 两），古本公版原文；来源 chinese-astrology-skill (MIT) 整理本，异文待通读
+const BONE_POEM={"2.1": "短命非业谓大空，平生灾难事重重，凶祸频临陷逆境，终世困苦事不成。", "2.2": "身寒骨冷苦伶仃，此命推来行乞人，劳劳碌碌无度日，终年打拱过平生。", "2.3": "此命推来骨格轻，求谋作事事难成，妻儿兄弟应难许，别处他乡作散人。", "2.4": "此命推来福禄无，门庭困苦总难荣，六亲骨肉皆无靠，流浪他乡作老翁。", "2.5": "此命推来祖业微，门庭营度似稀奇，六亲骨肉如冰炭，一世勤劳自把持。", "2.6": "平生衣禄苦中求，独自营谋事不休，离祖出门宜早计，晚来衣禄自无忧。", "2.7": "一生作事少商量，难靠祖宗作主张，独马单枪空做去，早年晚岁总无长。", "2.8": "一生行事似飘蓬，祖宗产业在梦中，若不过房改名姓，也当移徒二三通。", "2.9": "初年运限未曾亨，纵有功名在后成，须过四旬方可立，移居改姓始为良。", "3.0": "劳劳碌碌苦中求，东奔西走何日休，若使终身勤与俭，老来稍可免忧愁。", "3.1": "忙忙碌碌苦中求，何日云开见日头，难得祖基家可立，中年衣食渐无忧。", "3.2": "初年运蹇事难谋，渐有财源如水流，到得中年衣食旺，那时名利一齐收。", "3.3": "早年做事事难成，百计徒劳枉费心，半世自如流水去，后来运到得黄金。", "3.4": "此命福气果如何，僧道门中衣禄多，离祖出家方为妙，朝晚拜佛念弥陀。", "3.5": "生平福量不周全，祖业根基觉少传，营事生涯宜守旧，时来衣食胜从前。", "3.6": "不须劳碌过平生，独自成家福不轻，早有福星常照命，任君行去百般成。", "3.7": "此命般般事不成，弟兄少力自孤成，虽然祖业须微有，来得明时去不明。", "3.8": "一身骨肉最清高，早入簧门姓氏标，待到年将三十六，蓝衣脱去换红袍。", "3.9": "此命终身运不通，劳劳做事尽皆空，苦心竭力成家计，到得那时在梦中。", "4.0": "平生衣禄是绵长，件件心中自主张，前面风霜多受过，后来必定享安康。", "4.1": "此命推来自不同，为人能干异凡庸，中年还有逍遥福，不比前时运未通。", "4.2": "得宽怀处且宽怀，何用双眉总不开，若使中年命运济，那时名利一齐来。", "4.3": "为人心性最聪明，做事轩昂近贵人，衣禄一生天数定，不须劳碌过平生。", "4.4": "万事由天莫苦求，须知福碌赖人修，当年财帛难如意，晚景欣然便不忧。", "4.5": "名利推来竟若何，前番辛苦后奔波，命中难养男和女，骨肉扶持也不多。", "4.6": "东西南北尽皆通，出姓移居更觉隆，衣禄无亏天数定，中年晚景一般同。", "4.7": "此命推来旺末年，妻荣子贵自怡然，平生原有滔滔福，可卜财源若水泉。", "4.8": "初年运道未曾亨，若是蹉跎再不兴，兄弟六亲皆无靠，一身事业晚来整。", "4.9": "此命推来福不轻，自成自立显门庭，从来富贵人亲近，使婢差奴过一生。", "5.0": "为利为名终日劳，中年福禄也多遭，老来是有财星照，不比前番目下高。", "5.1": "一世荣华事事通，不须劳碌自亨通，弟兄叔侄皆如意，家业成时福禄宏。", "5.2": "一世亨通事事能，不须劳思自然宁，宗族欣然心皆好，家业丰亨自称心。", "5.3": "此格推来气象真，兴家发达在其中，一生福禄安排定，却是人间一富翁。", "5.4": "此命推来厚且清，诗书满腹看功成，丰衣足食自然稳，正是人间有福人。", "5.5": "走马扬鞭争利名，少年做事废功成，一朝福禄源源至，富贵荣华显六亲。", "5.6": "此格推来礼义通，一生福禄用无穷，甜酸苦辣皆尝过，财源滚滚稳且丰。", "5.7": "福禄盈盈万事全，一生荣耀显双亲，名扬威震人钦敬，处世逢凶化为吉。", "5.8": "平生福禄自然来，名利兼全福寿偕，雁塔题名为贵客，紫袍金带走金阶。", "5.9": "细推此格妙且清，必定才高礼义通，甲第之中应有分，扬鞭走马显威荣。", "6.0": "一朝金榜快题名，显祖荣宗立大功，衣食定然原裕足，田园财帛更丰盈。", "6.1": "不做朝中金榜客，定为世上大财翁，聪明天赋经书熟，名显高科自是荣。", "6.2": "此命生来福不穷，读书必定显亲宗，紫衣金带为卿相，富贵荣华皆可同。", "6.3": "命主为官福禄长，得来富贵定非常，名题金塔传金榜，定中高科天下扬。", "6.4": "此格权威不可当，紫袍金带坐高堂，荣华富贵谁能及，积玉堆金满储仓。", "6.5": "细推此命福非轻，富贵荣华孰与争，定国安邦人极品，威声显赫震寰瀛。", "6.6": "此格人间一福人，堆金积玉满堂春，从来富贵由天定，正笏垂绅谒圣君。", "6.7": "此命生来福自宏，田园家业最高隆，平生衣禄盈丰足，一世荣华万事通。", "6.8": "富贵由天莫苦求，万金家计不须谋，十年不比前番事，一但遂心百事谋。", "6.9": "君是人间衣禄星，一生富贵众人钦，纵然福禄由天定，安享荣华过一生。", "7.0": "此命推来福禄宏，不须劳碌自亨通，田园产业家昌盛，大富大贵不受穷。", "7.1": "此命生成大不同，公侯卿相在其中，一生自有逍遥福，富贵荣华极品隆。", "7.2": "此格世界罕有生，十代积善产此人，天上紫微来照命，统治万民乐太平。"};
+function bone(lunar){
+ const y=BONE_Y[gzIdx(lunar.getYearInGanZhi())],m=BONE_M[Math.abs(lunar.getMonth())-1],d=BONE_D[lunar.getDay()-1],h=BONE_H[ZHI.indexOf(lunar.getTimeZhi())];
+ const total=Math.round((y+m+d+h)*10)/10;const band=BONE_BAND.find(b=>total>=b[0]-1e-9&&total<=b[1]+1e-9)||BONE_BAND[0];
+ return{poem:BONE_POEM[total.toFixed(1)]||'',parts:[['年',lunar.getYearInGanZhi()+'年',y],['月',lunar.getMonthInChinese()+'月',m],['日',lunar.getDayInChinese(),d],['时',lunar.getTimeZhi()+'时',h]],total,type:band[2],text:band[3]};
+}
+
+/* ---------- 奇门遁甲 · 时家转盘 · 拆补法 ---------- */
+const JU={冬至:[1,7,4],小寒:[2,8,5],大寒:[3,9,6],立春:[8,5,2],雨水:[9,6,3],惊蛰:[1,7,4],春分:[3,9,6],清明:[4,1,7],谷雨:[5,2,8],立夏:[4,1,7],小满:[5,2,8],芒种:[6,3,9],
+ 夏至:[9,3,6],小暑:[8,2,5],大暑:[7,1,4],立秋:[2,5,8],处暑:[1,4,7],白露:[9,3,6],秋分:[7,1,4],寒露:[6,9,3],霜降:[5,8,2],立冬:[6,9,3],小雪:[5,8,2],大雪:[4,7,1]};
+const YANG='冬至小寒大寒立春雨水惊蛰春分清明谷雨立夏小满芒种';
+const QIYI='戊己庚辛壬癸丁丙乙';
+const RING=[1,8,3,4,9,2,7,6];// 外圈顺时针（坎艮震巽离坤兑乾）
+const STAR0={1:'天蓬',8:'天任',3:'天冲',4:'天辅',9:'天英',2:'天芮',7:'天柱',6:'天心',5:'天禽'};
+const DOOR0={1:'休门',8:'生门',3:'伤门',4:'杜门',9:'景门',2:'死门',7:'惊门',6:'开门'};
+const GODS=['值符','螣蛇','太阴','六合','白虎','玄武','九地','九天'];
+const GUA={1:'坎',2:'坤',3:'震',4:'巽',5:'中',6:'乾',7:'兑',8:'艮',9:'离'};
+const DIR={1:'正北',2:'西南',3:'正东',4:'东南',5:'中央',6:'西北',7:'正西',8:'东北',9:'正南'};
+const XUN_YI='戊己庚辛壬癸';// 甲子戊 甲戌己 甲申庚 甲午辛 甲辰壬 甲寅癸
+const g5=p=>p===5?2:p;
+function qimen(lunar){
+ const jq=lunar.getPrevJieQi(false).getName();
+ if(lunar.getHour()===23){const nx=lunar.getSolar().next(1);lunar=Solar.fromYmdHms(nx.getYear(),nx.getMonth(),nx.getDay(),0,lunar.getMinute(),0).getLunar()}
+ const yang=YANG.includes(jq);
+ const di=gzIdx(lunar.getDayInGanZhi()),fh=di-(di%10)%5,fz=fh%12;
+ const yuan=[0,6,3,9].includes(fz)?0:[2,8,5,11].includes(fz)?1:2;
+ const ju=JU[jq][yuan];
+ const earth={},where={};
+ for(let i=0;i<9;i++){const p=yang?((ju-1+i)%9)+1:((ju-1-i+18)%9)+1;earth[p]=QIYI[i];where[QIYI[i]]=p}
+ const ti=gzIdx(lunar.getTimeInGanZhi()),xun=Math.floor(ti/10),xunYi=XUN_YI[xun],steps=ti%10;
+ const srcReal=where[xunYi],src=g5(srcReal);
+ const tg=GAN[ti%10]==='甲'?xunYi:GAN[ti%10];
+ const dst=g5(where[tg]);
+ const shift=(RING.indexOf(dst)-RING.indexOf(src)+8)%8;
+ const star={},heaven={};
+ RING.forEach((p,i)=>{const from=RING[(i-shift+8)%8];star[p]=STAR0[from];heaven[p]=earth[from]+(from===2?earth[5]:'')});
+ const doorDst=g5(yang?((srcReal-1+steps)%9)+1:((srcReal-1-steps+90)%9)+1);
+ const dshift=(RING.indexOf(doorDst)-RING.indexOf(src)+8)%8,door={};
+ RING.forEach((p,i)=>door[p]=DOOR0[RING[(i-dshift+8)%8]]);
+ const god={},gi=RING.indexOf(dst);
+ GODS.forEach((g,k)=>god[RING[((yang?gi+k:gi-k)%8+8)%8]]=g);
+ return{jq,yang,yuan:'上中下'[yuan]+'元',ju,earth,heaven,star,door,god,zhifu:STAR0[src],zhishi:DOOR0[src],zhifuAt:dst,zhishiAt:doorDst,shiGZ:lunar.getTimeInGanZhi(),dayGZ:lunar.getDayInGanZhi(),
+  ringShift:shift,doorShift:dshift};
+}
+const QM_DOOR={休门:[2,'休养生息，宜求人、谈和、休整'],生门:[2,'生机之门，宜求财、开业、置业'],伤门:[0,'冲劲大但易起摩擦，宜运动、追讨，不宜谈判'],杜门:[1,'闭塞之象，宜保密、躲避、潜心做事'],景门:[1,'光明显扬，宜考试、宣传、展示'],死门:[0,'沉寂之门，宜收尾、整理，不宜开新事'],惊门:[0,'易有口舌惊扰，宜谨言慎行'],开门:[2,'开阔通达，宜求职、开工、见贵人']};
+const QM_STAR={天蓬:[0,'胆大敢为，也易冒进'],天任:[2,'稳重可靠，得人扶持'],天冲:[1,'行动快，宜速战速决'],天辅:[2,'文昌之星，利学习与考试'],天英:[1,'热情显眼，注意急躁'],天芮:[0,'宜调整步伐，先解决积压问题'],天柱:[0,'言语多变，宜守不宜攻'],天心:[2,'思路清楚，利谋划与决策'],天禽:[2,'居中调和，诸事平稳']};
+const QM_GOD={值符:[2,'有权威和贵人庇护'],螣蛇:[0,'事情容易反复，别轻信'],太阴:[2,'暗中有助力，适合低调筹划'],六合:[2,'利合作、感情和撮合'],白虎:[0,'阻力较大，宜稳妥'],玄武:[0,'信息不透明，防小失'],九地:[1,'宜守成、积累、慢慢来'],九天:[2,'利远行、扩张、大胆出手']};
+const QM_ASK=[['求财','生门','door'],['事业','开门','door'],['感情','六合','god'],['考试','景门','door'],['出行','值使','zhishi']];
+function qimenRead(q,askIdx){
+ const[ask,key,type]=QM_ASK[askIdx];let p;
+ if(type==='door')p=+Object.keys(q.door).find(k=>q.door[k]===key);else if(type==='god')p=+Object.keys(q.god).find(k=>q.god[k]===key);else p=q.zhishiAt;
+ const d=q.door[p],s=q.star[p],g=q.god[p];const sc=QM_DOOR[d][0]+QM_STAR[s][0]+QM_GOD[g][0];
+ const vc=sc>=5?0:sc>=3?1:sc>=2?2:3,verdict=['大顺','顺','平','宜缓'][vc];
+ return{vc,score:sc,ask,key:type==='zhishi'?'值使（'+q.zhishi+'）':key,palace:p,gua:GUA[p],dir:DIR[p],door:d,star:s,god:g,verdict,lines:[d+'：'+QM_DOOR[d][1],s+'：'+QM_STAR[s][1],g+'：'+QM_GOD[g][1]]};
+}
+
+
+/* ---------- 随机（mulberry32，固件逐位一致） ---------- */
+function rng(seed){let a=seed>>>0;return{u32(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return (t^t>>>14)>>>0},int(n){return Math.floor(this.u32()/4294967296*n)}}}
+function dailySeed(y,m,d,py,pm,pd,ph,pg){let a=Math.imul(y*10000+m*100+d,0x9E3779B1)^Math.imul(py*10000+pm*100+pd,0x85EBCA77)^Math.imul(ph*2+pg+1,0xC2B2AE3D);a^=a>>>16;a=Math.imul(a,0x7FEB352D);a^=a>>>15;return a>>>0}
+const YI=['早起','喝咖啡','整理桌面','给朋友发消息','散步','读十页书'],JI=['熬夜','冲动下单','空腹喝咖啡','和人争论','拖延'];
+function pickN(r,n,k){const a=[...Array(n).keys()],o=[];while(o.length<k)o.push(a.splice(r.int(a.length),1)[0]);return o}
+function dailyTicket(seed,sign){const r=rng(seed);const t={sign,signStars:2+r.int(4),tarot:r.int(22),tarotRev:r.int(10)<3,lotNo:1+r.int(100),hexUp:r.int(8),hexLo:r.int(8),yi:pickN(r,YI.length,3),ji:pickN(r,JI.length,2),serial:1+r.int(9999)};t.lotLevel=lotLevel(t.lotNo);return t}
+/* 观音灵签签级（1..100）：0 上签 1 中签 2 下签。来源 game-art/fortune/text/guanyin/guanyin_lots.json */
+const LOT_LEVEL='上下下上中中下上中中上上中中中中中上中中上中中下中中中中中中中中中中中中中下下中中上上中上中上中中中上中中下中中中中中下中中中下下下上中中下中中上下中中中上中上上中中下中上中中上上中上中下中上中下下下';
+function lotLevel(no){return '上中下'.indexOf(LOT_LEVEL[no-1])}
+function tarotHand(r){return{hand:pickN(r,22,7),rev:r.int(10)<3}}
+/* ---------- 六爻 ---------- */
+const TRIKEY={'111':0,'110':1,'101':2,'100':3,'011':4,'010':5,'001':6,'000':7};
+function coinLine(backs){return backs.reduce((a,b)=>a+(b?3:2),0)}
+function liuyao(vals){const yy=vals.map(v=>v===7||v===9?1:0),ch=vals.map(v=>v===6?1:v===9?0:(v===7?1:0));
+ const idx=b=>TRIKEY[b.slice(3).join('')]*8+TRIKEY[b.slice(0,3).join('')];return{ben:idx(yy),bian:idx(ch),moving:vals.some(v=>v===6||v===9)}}
+
+
+/* 六爻断法（朱熹《易学启蒙》）：动爻数决定读哪几条卦辞/爻辞；items 第一条为主
+   kind: gua=卦辞 line=爻辞(pos 0=初爻) special=用九/用六；卦编号 = 上卦*8+下卦 */
+function liuyaoRead(vals){const r=liuyao(vals),mv=[];vals.forEach((v,i)=>{if(v===6||v===9)mv.push(i)});
+ const k=mv.length,still=[0,1,2,3,4,5].filter(i=>!mv.includes(i));let items;
+ if(k===0)items=[['gua',r.ben]];else if(k===1)items=[['line',r.ben,mv[0]]];else if(k===2)items=[['line',r.ben,mv[1]],['line',r.ben,mv[0]]];
+ else if(k===3)items=[['gua',r.ben],['gua',r.bian]];else if(k===4)items=[['line',r.bian,still[0]],['line',r.bian,still[1]]];
+ else if(k===5)items=[['line',r.bian,still[0]]];else items=(r.ben===0||r.ben===63)?[['special',r.ben]]:[['gua',r.bian]];
+ return{ben:r.ben,bian:r.bian,moving:k,items,main:items[0][1]}}
+
+/* ---------- 紫微解读（原创短句） ---------- */
+const ZW={紫微:['稳重有主见，天生的组织者','善于统筹大笔资源','适合管理、带团队','对伴侣要求高，也很护家'],
+天机:['聪明灵活，点子多','靠头脑和策划赚钱','适合技术、策划、研究','感情细腻，想得多'],
+太阳:['热情大方，乐于助人','财来自名声和口碑','适合公众面前的工作','付出型，照顾对方'],
+武曲:['果断务实，执行力强','理财能力突出','适合金融、实业','外冷内热，慢热专一'],
+天同:['温和随缘，懂得享受','财运平顺，不必强求','适合服务、艺术、轻松环境','重感情，相处舒服'],
+廉贞:['个性鲜明，有原则','进财有起伏，宜稳','适合制度、法务、需要坚持的事','感情浓烈，需多沟通'],
+天府:['包容稳当，有安全感','善于守财积累','适合管理、财务、守成','顾家可靠'],
+太阴:['温柔细腻，审美好','财来得稳，适合积蓄','适合文艺、设计、幕后','感情含蓄而深'],
+贪狼:['多才多艺，人缘好','机会多，进财快','适合社交、娱乐、销售','魅力强，桃花旺'],
+巨门:['口才好，善分析','靠专业和表达赚钱','适合教学、咨询、讲解','先磨合后长久'],
+天相:['正直守信，善协调','财务清楚有条理','适合辅佐、行政、协调','重承诺'],
+天梁:['有长者风范，爱照顾人','财运来自稳定积累','适合医疗、教育、公益','成熟稳重型'],
+七杀:['敢闯敢拼，有魄力','财来得猛，也要防大起大落','适合开拓、创业','爱憎分明'],
+破军:['勇于变革，不怕从头来','先破后立，财运多变','适合改革、新领域','需要新鲜感']};
+const ZW_FIELD={命宫:[0,'性格'],身宫:[0,'性格'],福德:[0,'心态'],迁移:[0,'在外表现'],财帛:[1,'财运'],田宅:[1,'家业'],官禄:[2,'事业'],仆役:[0,'交友'],兄弟:[0,'手足'],父母:[0,'长辈缘'],夫妻:[3,'感情'],子女:[3,'晚辈缘']};
+const ZW_BRIGHT={庙:'星曜庙旺，力量最足。',旺:'星曜旺，表现积极。',得:'星曜得地，发挥正常。',利:'星曜得利，小有助力。',平:'星曜平和，需要自己用力。',不:'星曜力量偏弱，多积累更好。',陷:'星曜落陷，先打基础再发力。'};
+const ZW_MUT={禄:'化禄：有福缘和资源。',权:'化权：掌控力强。',科:'化科：有名声、得贵人。',忌:'化忌：容易执着，多留意心态。'};
+function ziweiRead(a,idx){
+ const p=a.palaces[idx];let stars=p.majorStars,borrow=false;
+ if(!stars.length){stars=a.palaces[(idx+6)%12].majorStars;borrow=true}
+ if(p.name==='疾厄')return{p,stars,borrow,lines:['疾厄宫只看星曜分布，','这里不做健康方面的判断。']};
+ const f=ZW_FIELD[p.name]||[0,'整体'];const lines=[];
+ if(borrow)lines.push('空宫，借对宫星曜来看。');
+ stars.forEach(s=>{const t=ZW[s.name];if(t)lines.push(f[1]+'：'+t[f[0]]+'。');if(s.brightness&&ZW_BRIGHT[s.brightness]&&!borrow)lines.push(ZW_BRIGHT[s.brightness]);if(s.mutagen)lines.push(ZW_MUT[s.mutagen])});
+ p.minorStars.forEach(s=>{if(s.mutagen)lines.push(s.name+ZW_MUT[s.mutagen])});
+ return{p,stars,borrow,lines};
+}
+
+root.FortuneCore={liuyaoRead,lotLevel,LOT_LEVEL,rng,dailySeed,dailyTicket,tarotHand,coinLine,liuyao,YI,JI,BONE_BAND,GAN,ZHI,gzIdx,bone,qimen,qimenRead,QM_ASK,GUA,DIR,RING,ziweiRead,ZW_FIELD};
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script>
+(()=>{
+const cv=document.getElementById('scr'),c=cv.getContext('2d');
+const W=240,H=320;
+const C={bg:'#0d0820',bg2:'#1a1035',grid:'#231a46',mag:'#ff3da6',cyan:'#35f0dc',gold:'#ffc94a',red:'#e0402c',paper:'#f2e4c0',ink:'#2b1a0e',white:'#f4f0ff',dim:'#7b6aa8',purple:'#4b2a9a',wood:'#7a4a28'};
+const F={disp:'"NaboDisp","ZCOOL QingKe HuangYou","Noto Sans SC",sans-serif',serif:'"NaboKai","LXGW WenKai","Kaiti SC","KaiTi",serif',sans:'"NaboSans","Noto Sans SC",sans-serif',mono:'"NaboMono","IBM Plex Mono",monospace'};
+let VT=0,speed=1,showBox=false,scan=true,shake=0;
+const boxes=[];
+const clamp=(v,a,b)=>v<a?a:v>b?b:v, lerp=(a,b,t)=>a+(b-a)*t;
+const E={out:t=>1-Math.pow(1-t,3),in:t=>t*t*t,io:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,back:t=>{const s=1.9;t-=1;return t*t*((s+1)*t+s)+1}};
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let R=mulberry32(Date.now()&0xffffffff);
+const ri=n=>Math.floor(R()*n);
+
+/* ---------- 绘图工具 ---------- */
+function readableSize(sz){return sz<=10.5?14:sz<=12.5?16:sz<=14?17:sz<=17?20:sz<=25?26:sz}
+function T(s,x,y,sz,col,al='center',f=F.sans,bl='middle'){c.font=`${readableSize(sz)}px ${f}`;c.fillStyle=col;c.textAlign=al;c.textBaseline=bl;const width=al==='left'?W-12-x:al==='right'?x-12:W-24;if(sz<=12.5&&width>0&&c.measureText(s).width>width){const ls=wrapWidth(String(s),width,sz,f),step=sz>10.5?21:18,top=y>=280?y-(ls.length-1)*step:y;ls.forEach((l,i)=>c.fillText(l,x,top+i*step))}else c.fillText(s,x,y)}
+function G(s,x,y,sz,col,glow,al='center',f=F.disp){for(const[dx,dy]of[[-1,0],[1,0],[0,-1],[0,1]])T(s,x+dx,y+dy,sz,glow,al,f);T(s,x,y,sz,col,al,f)}
+function glitch(s,x,y,sz,col,k){const o=k>0?(R()*4-2)*k:0;T(s,x-2*k+o,y,sz,C.cyan,'center',F.disp);T(s,x+2*k-o,y,sz,C.mag,'center',F.disp);T(s,x,y,sz,col,'center',F.disp)}
+function rr(x,y,w,h,r){c.beginPath();c.roundRect(x,y,w,h,r)}
+function circ(x,y,r,col){c.fillStyle=col;c.beginPath();c.arc(x,y,r,0,Math.PI*2);c.fill()}
+function box(x,y,w,h,label,type){boxes.push({x,y,w,h,label,type})}
+function star5(x,y,r,col){c.fillStyle=col;c.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr2=i%2?r*.45:r;c.lineTo(x+Math.cos(a)*rr2,y+Math.sin(a)*rr2)}c.closePath();c.fill()}
+function tri(x,y,bits,w,col,gap=5,th=3){for(let j=0;j<3;j++){const ly=y+(1-j)*gap-th/2;c.fillStyle=col;if(bits[j])c.fillRect(x-w/2,ly,w,th);else{c.fillRect(x-w/2,ly,w*.42,th);c.fillRect(x+w*.08,ly,w*.42,th)}}}
+function taiji(x,y,r,rot,a='#e9e2ff',b='#2a1a5a'){c.save();c.translate(x,y);c.rotate(rot);circ(0,0,r,b);c.fillStyle=a;c.beginPath();c.arc(0,0,r,-Math.PI/2,Math.PI/2);c.fill();circ(0,-r/2,r/2,a);circ(0,r/2,r/2,b);circ(0,-r/2,r/7,b);circ(0,r/2,r/7,a);c.restore()}
+const CN=['零','一','二','三','四','五','六','七','八','九'];
+function cnNum(n){if(n<=10)return n===10?'十':CN[n];if(n<20)return'十'+(n%10?CN[n%10]:'');if(n===100)return'一百';const t=Math.floor(n/10),u=n%10;return CN[t]+'十'+(u?CN[u]:'')}
+
+/* NABO 占位：半身 */
+function drawNabo(x,y,s,mood='idle',lbl){
+  const b=Math.sin(VT/380)*1.2;
+  c.save();c.translate(x,y+b);c.scale(s,s);
+  c.fillStyle=C.purple;c.beginPath();c.moveTo(-24,42);c.lineTo(-15,15);c.lineTo(15,15);c.lineTo(24,42);c.closePath();c.fill();
+  c.strokeStyle=C.cyan;c.lineWidth=1.6;c.beginPath();c.moveTo(-7,15);c.lineTo(0,30);c.lineTo(7,15);c.stroke();
+  c.beginPath();c.moveTo(-24,42);c.lineTo(-15,15);c.moveTo(24,42);c.lineTo(15,15);c.stroke();
+  circ(0,0,16.5,'#2b1d1a');circ(0,2,14,'#f3c79c');
+  c.fillStyle='#2b1d1a';c.beginPath();c.arc(0,-3,15,Math.PI*1.05,Math.PI*1.95);c.fill();
+  c.fillStyle='#f6f4ee';rr(-15,-21,30,12,5);c.fill();c.fillRect(-18,-11,36,4);
+  T('NABO',0,-15,6,'#d8322a','center',F.sans);
+  c.strokeStyle='#1b1230';c.lineWidth=1.5;c.strokeRect(-12,-2,10,7);c.strokeRect(2,-2,10,7);c.beginPath();c.moveTo(-2,1);c.lineTo(2,1);c.stroke();
+  const blink=(VT%3600)<120;c.fillStyle='#1b1230';
+  if(blink){c.fillRect(-9,1.5,4,1);c.fillRect(5,1.5,4,1)}else{c.fillRect(-8,0,2.5,3);c.fillRect(5.5,0,2.5,3)}
+  c.strokeStyle='#8a3b2a';c.lineWidth=1.3;c.beginPath();
+  if(mood==='happy')c.arc(0,8,4,.1*Math.PI,.9*Math.PI);else if(mood==='wow'){c.arc(0,10,2.4,0,Math.PI*2)}else if(mood==='sigh'){c.moveTo(-3,11);c.lineTo(3,10)}else{c.arc(0,8,2.6,.2*Math.PI,.8*Math.PI)}
+  c.stroke();
+  if(mood==='calc'){c.fillStyle='#f3c79c';rr(10,16,9,12,4);c.fill();c.fillRect(12,8,2.5,9);c.fillRect(15.5,10,2.5,7);const k=Math.floor(VT/180)%4;circ(13+k%2*3.5,8+(k>1?2:0),1.6,C.gold)}
+  c.restore();
+  if(lbl)box(x-36*s,y-26*s,72*s,72*s,lbl,'g');
+}
+
+
+/* NABO 精灵动画（由 tools/clip_to_sprites_fortune.py 从 Grok 视频生成，12 fps） */
+const SPR_META={"N-SHELL-TOSS":{"frames":17,"loop":false,"ms":1417,"sizes":{"120":{"cols":12}},"release":8,"anchor":[64.8,71.5]},"N-WOW":{"frames":19,"loop":false,"ms":1583,"sizes":{"76":{"cols":12}}},"N-WELCOME":{"frames":30,"loop":false,"ms":2500,"sizes":{"120":{"cols":12}}},"N-NOD":{"frames":41,"loop":false,"ms":3417,"sizes":{"76":{"cols":12},"56":{"cols":12}}},"N-SIGH":{"frames":29,"loop":false,"ms":2417,"sizes":{"76":{"cols":12}}},"N-PRINT":{"frames":42,"loop":false,"ms":3500,"sizes":{"120":{"cols":12}}},"N-IDLE":{"frames":34,"loop":true,"ms":2833,"sizes":{"120":{"cols":12},"76":{"cols":12}}},"N-SHELL":{"frames":14,"loop":true,"ms":1167,"sizes":{"120":{"cols":12}}},"N-TUBE":{"frames":26,"loop":true,"ms":2167,"sizes":{"76":{"cols":12}}},"N-CALC":{"frames":20,"loop":true,"ms":1667,"sizes":{"100":{"cols":12},"56":{"cols":12}}}};
+const SPR={};for(const id in SPR_META)for(const sz in SPR_META[id].sizes){const im=new Image();im.src=`sprites/${id}/${sz}/sheet.png`;(SPR[id]=SPR[id]||{})[sz]=im}
+const sprMs=id=>SPR_META[id].frames*1000/12;
+function sprFrame(id,t){const m=SPR_META[id],n=m.frames,f=Math.floor(t*12/1000);return m.loop?((f%n)+n)%n:Math.min(n-1,Math.max(0,f))}
+/* 以 (cx,cy) 为中心画一帧；精灵没加载时退回占位剪影 */
+function nabo(id,size,cx,cy,t,mood,frame){const m=SPR_META[id],im=SPR[id]&&SPR[id][size],x=Math.round(cx-size/2),y=Math.round(cy-size/2);
+ box(x,y,size,size,`${id} · ${size}px · ${m.frames} 帧`,'g');
+ if(!im||!im.complete||!im.naturalWidth){drawNabo(cx,cy,size/80,mood||'idle');return}
+ const f=frame!=null?frame:sprFrame(id,t),cols=m.sizes[size].cols;c.drawImage(im,(f%cols)*size,Math.floor(f/cols)*size,size,size,x,y,size,size)}
+/* 一次性动作播完后接待机循环 */
+function naboThen(id,size,cx,cy,t,idle){if(t<sprMs(id))nabo(id,size,cx,cy,t);else nabo(idle||'N-IDLE',size,cx,cy,t-sprMs(id))}
+
+
+/* Codex 静态道具与塔罗牌面（目标尺寸原图，引擎只做位移、翻转、旋转、缩放） */
+const IMG=n=>{const im=new Image();im.src=n;return im},okI=im=>im&&im.complete&&im.naturalWidth>0;
+const PROPS={};['coin-front','coin-back','tube','stick','scroll','seal-shang','seal-zhong','seal-xia','scale-beam','scale-pan','scale-weight','weight-nian','weight-yue','weight-ri','weight-shi','printer','card-back-s','card-back-l','title','trigram-0','trigram-1','trigram-2','trigram-3','trigram-4','trigram-5','trigram-6','trigram-7'].forEach(n=>PROPS[n]=IMG('props/'+n+'.png'));
+const PI_=n=>okI(PROPS[n])?PROPS[n]:null;
+const TIMG=["00-fool.png", "01-magician.png", "02-high-priestess.png", "03-empress.png", "04-emperor.png", "05-hierophant.png", "06-lovers.png", "07-chariot.png", "08-strength.png", "09-hermit.png", "10-wheel-of-fortune.png", "11-justice.png", "12-hanged-man.png", "13-death.png", "14-temperance.png", "15-devil.png", "16-tower.png", "17-star.png", "18-moon.png", "19-sun.png", "20-judgement.png", "21-world.png"].map(f=>IMG('tarot/'+f));
+
+/* ---------- 声音 ---------- */
+let AC=null,snd=false;
+function au(){if(!snd)return null;if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(AC.state==='suspended')AC.resume();return AC}
+function tone(f,d,type='sine',v=.12,f2){const a=au();if(!a)return;const o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,a.currentTime);if(f2)o.frequency.exponentialRampToValueAtTime(f2,a.currentTime+d);g.gain.setValueAtTime(0,a.currentTime);g.gain.linearRampToValueAtTime(v,a.currentTime+.006);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+d);o.connect(g).connect(a.destination);o.start();o.stop(a.currentTime+d)}
+function noise(d,fq,v=.1,type='bandpass'){const a=au();if(!a)return;const n=a.createBuffer(1,Math.max(1,a.sampleRate*d|0),a.sampleRate),ch=n.getChannelData(0);for(let i=0;i<ch.length;i++)ch[i]=(Math.random()*2-1)*(1-i/ch.length);const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=n;f.type=type;f.frequency.value=fq;g.gain.value=v;s.connect(f).connect(g).connect(a.destination);s.start()}
+const sfx={tick:()=>tone(1100,.045,'triangle',.15),enter:()=>{tone(523,.09,'triangle',.2);setTimeout(()=>tone(784,.12,'triangle',.2),70)},
+clink:()=>{tone(1600,.14,'sine',.18);tone(2400,.08,'sine',.08)},rattle:()=>tone(1800,.045,'sine',.16),
+thump:()=>tone(110,.18,'sine',.25,45),stamp:()=>{tone(90,.25,'sine',.22,40);tone(600,.09,'sine',.1)},
+line:()=>{tone(660,.08,'triangle',.18);setTimeout(()=>tone(990,.12,'triangle',.18),60)},
+reveal:()=>[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.25,'triangle',.18),i*90)),
+print:()=>tone(1100,.02,'triangle',.1),whoosh:()=>tone(1200,.18,'sine',.18,300),lock:()=>{tone(1200,.045,'triangle',.17);tone(1800,.05,'sine',.1)}};
+const bootVoice=new Audio('../game-art/fortune/audio/boot-welcome.wav');
+function welcomeVoice(){if(!snd)return;sfx.enter();setTimeout(()=>{if(snd){bootVoice.currentTime=0;bootVoice.play().catch(()=>{})}},1400)}
+
+/* ---------- 粒子 ---------- */
+const P=[];
+function burst(x,y,n,col){for(let i=0;i<n;i++){const a=R()*Math.PI*2,v=40+R()*110;P.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-60,l:600+R()*500,c:col||(R()<.5?C.gold:'#fff3b0')})}}
+function stepP(dt){for(let i=P.length-1;i>=0;i--){const p=P[i];p.vy+=220*dt/1000;p.x+=p.vx*dt/1000;p.y+=p.vy*dt/1000;p.l-=dt;if(p.l<=0)P.splice(i,1)}}
+function drawP(){for(const p of P){c.fillStyle=p.c;c.fillRect(p.x|0,p.y|0,2,2)}}
+
+/* ---------- 背景 ---------- */
+const bgc=document.createElement('canvas');bgc.width=W;bgc.height=H;{const b=bgc.getContext('2d');b.fillStyle=C.bg;b.fillRect(0,0,W,H);b.fillStyle=C.grid;for(let y=30;y<H;y+=16)for(let x=8;x<W;x+=16)b.fillRect(x,y,1,1)}
+const scc=document.createElement('canvas');scc.width=W;scc.height=H;{const b=scc.getContext('2d');b.fillStyle='rgba(0,0,0,.18)';for(let y=0;y<H;y+=2)b.fillRect(0,y,W,1)}
+
+/* ---------- 数据 ---------- */
+const MENU=[
+{id:'daily',n:'今日一卦',d:'星座·塔罗·灵签合成小票',b:[1,1,1]},
+{id:'shake',n:'摇卦问事',d:'三枚铜钱，六次成卦',b:[1,1,0]},
+{id:'lot',n:'灵签筒',d:'长按摇签，掉出一支',b:[1,0,1]},
+{id:'tarot',n:'塔罗',d:'洗牌、扇形选牌、翻牌',b:[1,0,0]},
+{id:'bone',n:'称骨论命',d:'杆秤称出你的骨重',b:[0,1,1]},
+{id:'star',n:'星座',d:'连星成座，今日星级',b:[0,1,0]},
+{id:'ziwei',n:'紫微斗数',d:'十二宫排盘，星曜入宫',b:[0,0,1]},
+{id:'qimen',n:'奇门遁甲',d:'洛书飞宫，三层转盘',b:[0,0,0]}];
+const TRI=['乾','兑','离','震','巽','坎','艮','坤'];
+const TRIKEY={'111':0,'110':1,'101':2,'100':3,'011':4,'010':5,'001':6,'000':7};
+const HEX=[['乾为天','天泽履','天火同人','天雷无妄','天风姤','天水讼','天山遁','天地否'],['泽天夬','兑为泽','泽火革','泽雷随','泽风大过','泽水困','泽山咸','泽地萃'],['火天大有','火泽睽','离为火','火雷噬嗑','火风鼎','火水未济','火山旅','火地晋'],['雷天大壮','雷泽归妹','雷火丰','震为雷','雷风恒','雷水解','雷山小过','雷地豫'],['风天小畜','风泽中孚','风火家人','风雷益','巽为风','风水涣','风山渐','风地观'],['水天需','水泽节','水火既济','水雷屯','水风井','坎为水','水山蹇','水地比'],['山天大畜','山泽损','山火贲','山雷颐','山风蛊','山水蒙','艮为山','山地剥'],['地天泰','地泽临','地火明夷','地雷复','地风升','地水师','地山谦','坤为地']];
+function hexName(yy){const lo=TRIKEY[yy.slice(0,3).join('')],up=TRIKEY[yy.slice(3).join('')];return HEX[up][lo]}
+/* 周易卦爻辞（武英殿本爻辞校定，见 game-art/fortune/text/zhouyi/），按 上卦*8+下卦 编号 */
+const ZY=[{"kw":1,"g":"元亨利贞。","l":[["初九","潜龙勿用。"],["九二","见龙在田，利见大人。"],["九三","君子终日乾乾，夕惕若；厉，无咎。"],["九四","或跃在渊，无咎。"],["九五","飞龙在天，利见大人。"],["上九","亢龙有悔。"]],"s":["用九","见群龙无首，吉。"],"b":"自强不息，时机正好，大胆去做，但别骄傲。"},{"kw":10,"g":"履虎尾，不咥人，亨。","l":[["初九","素履，往无咎。"],["九二","履道坦坦，幽人贞吉。"],["六三","眇能视，跛能履。履虎尾，咥人，凶。武人为于大君。"],["九四","履虎尾，愬愬，终吉。"],["九五","夬履，贞厉。"],["上九","视履考祥，其旋元吉。"]],"s":null,"b":"如履薄冰，按规矩办事，小心谨慎就能平安。"},{"kw":13,"g":"同人于野，亨。利涉大川，利君子贞。","l":[["初九","同人于门，无咎。"],["六二","同人于宗，吝。"],["九三","伏戎于莽，升其高陵，三岁不兴。"],["九四","乘其墉，弗克攻，吉。"],["九五","同人，先号啕而后笑，大师克相遇。"],["上九","同人于郊，无悔。"]],"s":null,"b":"和志同道合的人一起干，公开透明最有利。"},{"kw":25,"g":"元亨利贞。其匪正有眚，不利有攸往。","l":[["初九","无妄，往吉。"],["六二","不耕获，不菑畬，则利有攸往。"],["六三","无妄之灾。或系之牛，行人之得，邑人之灾。"],["九四","可贞，无咎。"],["九五","无妄之疾，勿药有喜。"],["上九","无妄，行有眚，无攸利。"]],"s":null,"b":"真诚做事、不贪妄，顺其自然反而少麻烦。"},{"kw":44,"g":"女壮，勿用取女。","l":[["初六","系于金柅，贞吉。有攸往，见凶。羸豕孚蹢躅。"],["九二","包有鱼，无咎，不利宾。"],["九三","臀无肤，其行次且。厉，无大咎。"],["九四","包无鱼，起凶。"],["九五","以杞包瓜，含章，有陨自天。"],["上九","姤其角，吝，无咎。"]],"s":null,"b":"不期而遇的人和事，保持清醒，别轻易被牵着走。"},{"kw":6,"g":"有孚，窒惕，中吉，终凶。利见大人，不利涉大川。","l":[["初六","不永所事，小有言，终吉。"],["九二","不克讼，归而逋，其邑人三百户无眚。"],["六三","食旧德，贞厉，终吉。或从王事，无成。"],["九四","不克讼，复即命，渝安贞，吉。"],["九五","讼，元吉。"],["上九","或锡之鞶带，终朝三褫之。"]],"s":null,"b":"容易起争执，退一步海阔天空，别把事闹大。"},{"kw":33,"g":"亨。小利贞。","l":[["初六","遁尾，厉。勿用有攸往。"],["六二","执之用黄牛之革，莫之胜说。"],["九三","系遁，有疾厉。畜臣妾，吉。"],["九四","好遁，君子吉，小人否。"],["九五","嘉遁，贞吉。"],["上九","肥遁，无不利。"]],"s":null,"b":"形势不利时适当退一步，保存实力。"},{"kw":12,"g":"否之匪人。不利君子贞。大往小来。","l":[["初六","拔茅，茹以其汇，贞吉，亨。"],["六二","包承，小人吉；大人否，亨。"],["六三","包羞。"],["九四","有命无咎，畴离祉。"],["九五","休否，大人吉；其亡其亡，系于苞桑。"],["上九","倾否，先否后喜。"]],"s":null,"b":"上下不通，暂时闭塞，守住本心，等待转机。"},{"kw":43,"g":"扬于王庭，孚号有厉。告自邑，不利即戎，利有攸往。","l":[["初九","壮于前趾，往不胜为咎。"],["九二","惕号，莫夜有戎，勿恤。"],["九三","壮于頄，有凶。君子夬夬独行，遇雨若濡，有愠，无咎。"],["九四","臀无肤，其行次且。牵羊悔亡，闻言不信。"],["九五","苋陆夬夬，中行无咎。"],["上六","无号，终有凶。"]],"s":null,"b":"当断则断，决策果断，方式要和缓。"},{"kw":58,"g":"亨，利，贞。","l":[["初九","和兑，吉。"],["九二","孚兑，吉，悔亡。"],["六三","来兑，凶。"],["九四","商兑未宁，介疾有喜。"],["九五","孚于剥，有厉。"],["上六","引兑。"]],"s":null,"b":"心情喜悦，多交流、多分享，人缘好事就顺。"},{"kw":49,"g":"己日乃孚。元亨利贞。悔亡。","l":[["初九","巩用黄牛之革。"],["六二","己日乃革之。征吉，无咎。"],["九三","征凶贞厉。革言三就，有孚。"],["九四","悔亡，有孚，改命，吉。"],["九五","大人虎变，未占有孚。"],["上六","君子豹变，小人革面。征凶，居贞吉。"]],"s":null,"b":"改变的时机已到，想清楚后大胆革新。"},{"kw":17,"g":"元亨，利贞，无咎。","l":[["初九","官有渝，贞吉。 出门交有功。"],["六二","系小子，失丈夫。"],["六三","系丈夫，失小子。随有求，得，利居贞。"],["九四","随有获，贞凶。有孚，在道以明，何咎?"],["九五","孚于嘉，吉。"],["上六","拘系之，乃从维之；王用亨于西山。"]],"s":null,"b":"顺应形势、跟随正道，灵活调整就会顺利。"},{"kw":28,"g":"栋桡。利有攸往，亨。","l":[["初六","藉用白茅，无咎。"],["九二","枯杨生稊，老夫得其女妻，无不利。"],["九三","栋桡，凶。"],["九四","栋隆，吉。有它吝。"],["九五","枯杨生华，老妇得其士夫，无咎无誉。"],["上六","过涉灭顶，凶，无咎。"]],"s":null,"b":"压力超出常规，要有非常之举，但得稳住重心。"},{"kw":47,"g":"亨，贞，大人吉，无咎。有言不信。","l":[["初六","臀困于株木，入于幽谷，三岁不觌。"],["九二","困于酒食，朱绂方来，利用亨祀。征凶，无咎。"],["六三","困于石，据于蒺藜。入于其宫，不见其妻，凶。"],["九四","来徐徐，困于金车，吝，有终。"],["九五","劓刖，困于赤绂。乃徐，有说，利用祭祀。"],["上六","困于葛藟，于臲卼，曰动悔。有悔，征吉。"]],"s":null,"b":"一时困顿，少说多做，坚持本心终会脱困。"},{"kw":31,"g":"亨，利贞。取女吉。","l":[["初六","咸其拇。"],["六二","咸其腓，凶，居吉。"],["九三","咸其股，执其随，往吝。"],["九四","贞吉悔亡，憧憧往来，朋从尔思。"],["九五","咸其脢，无悔。"],["上六","咸其辅、颊、舌。"]],"s":null,"b":"彼此感应，真心相待，关系自然升温。"},{"kw":45,"g":"亨，王假有庙。利见大人，亨，利贞。用大牲吉。利有攸往。","l":[["初六","有孚不终，乃乱乃萃。若号，一握为笑。勿恤，往无咎"],["六二","引吉，无咎。孚乃利用禴。"],["六三","萃如，嗟如，无攸利。往无咎，小吝。"],["九四","大吉，无咎。"],["九五","萃有位，无咎。匪孚，元永贞，悔亡。"],["上六","赍咨涕洟，无咎。"]],"s":null,"b":"人心汇聚，适合聚会和合作，也要防备意外。"},{"kw":14,"g":"元亨。","l":[["初九","无交害，匪咎；艰则无咎。"],["九二","大车以载，有攸往，无咎。"],["九三","公用，亨于天子，小人弗克。"],["九四","匪其彭，无咎。"],["六五","厥孚交如，威如，吉。"],["上九","自天祐之，吉无不利。"]],"s":null,"b":"收获丰盛，保持谦虚，福气才能长久。"},{"kw":38,"g":"小事吉。","l":[["初九","悔亡，丧马勿逐，自复。见恶人，无咎。"],["九二","遇主于巷，无咎。"],["六三","见舆曳，其牛掣。其人天且劓，无初有终。"],["九四","睽孤，遇元夫。交孚，厉无咎。"],["六五","悔亡，厥宗噬肤，往何咎?"],["上九","睽孤，见豕负涂，载鬼一车。先张之弧，后说之弧，匪寇婚媾。往遇雨则吉。"]],"s":null,"b":"意见不合时求同存异，小事上合作仍可成。"},{"kw":30,"g":"利贞，亨。畜牝牛，吉。","l":[["初九","履错然，敬之，无咎。"],["六二","黄离，元吉。"],["九三","日昃之离。不鼓缶而歌，则大耋之嗟，凶。"],["九四","突如其来如，焚如，死如，弃如。"],["六五","出涕沱若，戚嗟若，吉。"],["上九","王用出征，有嘉。折首，获匪其丑，无咎。"]],"s":null,"b":"跟对方向、借助好平台，就能发光发热。"},{"kw":21,"g":"亨。利用狱。","l":[["初九","屦校灭趾，无咎。"],["六二","噬肤灭鼻，无咎。"],["六三","噬腊肉，遇毒。小吝，无咎。"],["九四","噬乾胏，得金矢。利艰贞，吉。"],["六五","噬乾肉，得黄金。贞厉，无咎。"],["上九","何校灭耳，凶。"]],"s":null,"b":"有阻碍就果断清除，讲规矩、明是非。"},{"kw":50,"g":"元吉，亨。","l":[["初六","鼎颠趾，利出否。得妾以其子，无咎。"],["九二","鼎有实，我仇有疾，不我能即，吉。"],["九三","鼎耳革，其行塞，雉膏不食。方雨，亏悔，终吉。"],["九四","鼎折足，覆公𫗧，其形渥，凶。"],["六五","鼎黄耳金铉，利贞。"],["上九","鼎玉铉，大吉，无不利。"]],"s":null,"b":"推陈出新，稳重可靠，适合确立新的格局。"},{"kw":64,"g":"亨。小狐汔济，濡其尾，无攸利。","l":[["初六","濡其尾，吝。"],["九二","曳其轮，贞吉。"],["六三","未济，征凶，利涉大川。"],["九四","贞吉，悔亡，震用伐鬼方。三年有赏于大国。"],["六五","贞吉，无悔，君子之光。有孚，吉。"],["上九","有孚于饮酒，无咎。濡其首，有孚失是。"]],"s":null,"b":"事情还没完成，前途有希望，谨慎走好最后一步。"},{"kw":56,"g":"小亨，旅贞吉。","l":[["初六","旅琐琐，斯其所取灾。"],["六二","旅即次，怀其资，得童仆，贞。"],["九三","旅焚其次，丧其童仆，贞厉。"],["九四","旅于处，得其资斧，我心不快。"],["六五","射雉，一矢亡，终以誉命。"],["上九","鸟焚其巢，旅人先笑后号啕。丧牛于易，凶。"]],"s":null,"b":"在外奔波，谦和谨慎，处处小心。"},{"kw":35,"g":"康侯用锡马蕃庶，昼日三接。","l":[["初六","晋如，摧如，贞吉。罔孚，裕，无咎。"],["六二","晋如，愁如，贞吉。受兹介福，于其王母。"],["六三","众允，悔亡。"],["九四","晋如鼫鼠，贞厉。"],["六五","悔亡，失得勿恤，往吉，无不利。"],["上九","晋其角，维用伐邑，厉吉无咎，贞吝。"]],"s":null,"b":"步步高升，积极表现会被看见。"},{"kw":34,"g":"利贞。","l":[["初九","壮于趾，征凶，有孚。"],["九二","贞吉。"],["九三","小人用壮，君子用罔；贞厉，羝羊触藩，羸其角。"],["九四","贞吉，悔亡；藩决不羸，壮于大舆之輹。"],["六五","丧羊于易，无悔。"],["上六","羝羊触藩，不能退，不能遂，无攸利。艰则吉。"]],"s":null,"b":"势头强劲，但要守正，别用力过猛。"},{"kw":54,"g":"征凶，无攸利。","l":[["初九","归妹以娣，跛能履，征吉。"],["九二","眇能视，利幽人之贞。"],["六三","归妹以须，反归以娣。"],["九四","归妹愆期，迟归有时。"],["六五","帝乙归妹，其君之袂不如其娣之袂良。月几望，吉。"],["上六","女承筐无实，士刲羊无血，无攸利。"]],"s":null,"b":"名分和时机要对，别急着定下来，看清再走。"},{"kw":55,"g":"亨。王假之，勿忧，宜日中。","l":[["初九","遇其配主，虽旬无咎；往有尚。"],["六二","丰其蔀，日中见斗。往得疑疾。有孚发若，吉。"],["九三","丰其沛，日中见沬。折其右肱，无咎。"],["九四","丰其蔀，日中见斗。遇其夷主，吉。"],["六五","来章，有庆誉，吉。"],["上六","丰其屋，蔀其家，窥其户，阒其无人，三岁不觌，凶。"]],"s":null,"b":"盛大丰满，好好把握当下，也要想到长远。"},{"kw":51,"g":"亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。","l":[["初九","震来虩虩，后笑言哑哑，吉。"],["六二","震来厉，亿丧贝。跻于九陵，勿逐，七日得。"],["六三","震苏苏，震行无眚。"],["九四","震遂泥。"],["六五","震往来厉，亿无丧，有事。"],["上六","震索索，视矍矍，征凶。震不于其躬，于其邻，无咎。婚媾有言。"]],"s":null,"b":"突来的震动，镇定应对，惊后反而有福。"},{"kw":32,"g":"亨，无咎，利贞。利有攸往。","l":[["初六","浚恒，贞凶，无攸利。"],["九二","悔亡。"],["九三","不恒其德，或承之羞，贞吝。"],["九四","田无禽。"],["六五","恒其德，贞。妇人吉，夫子凶。"],["上六","振恒，凶。"]],"s":null,"b":"贵在坚持，守住正道，长久经营必有回报。"},{"kw":40,"g":"利西南。无所往，其来复吉。有攸往，夙吉。","l":[["初六","无咎。"],["九二","田获三狐，得黄矢，贞吉。"],["六三","负且乘，致寇至，贞吝。"],["九四","解而拇，朋至斯孚。"],["六五","君子维有解，吉，有孚于小人。"],["上六","公用射隼于高墉之上，获之无不利。"]],"s":null,"b":"困境解开，放下包袱，抓紧时间行动。"},{"kw":62,"g":"亨，利贞。可小事，不可大事。飞鸟遗之音。不宜上，宜下，大吉。","l":[["初六","飞鸟以凶。"],["六二","过其祖，遇其妣。不及其君，遇其臣，无咎。"],["九三","弗过防之，从或戕之，凶。"],["九四","无咎，弗过遇之，往厉必戒。勿用，永贞。"],["六五","密云不雨，自我西郊。公弋取彼在穴。"],["上六","弗遇过之，飞鸟离之，凶。是谓灾眚。"]],"s":null,"b":"小事可行，大事宜缓，低调稳妥为上。"},{"kw":16,"g":"利建侯行师。","l":[["初六","鸣豫，凶。"],["六二","介于石，不终日，贞吉。"],["六三","盱豫，悔。 迟有悔。"],["九四","由豫，大有得，勿疑，朋盍簪。"],["六五","贞疾，恒不死。"],["上六","冥豫，成有渝，无咎。"]],"s":null,"b":"心情愉快，适合筹备和行动，但别乐过头。"},{"kw":9,"g":"亨。密云不雨，自我西郊。","l":[["初九","复自道，何其咎?吉。"],["九二","牵复，吉。"],["九三","舆说辐，夫妻反目。"],["六四","有孚，血去惕出，无咎。"],["九五","有孚挛如，富以其邻。"],["上九","既雨既处，尚德载。妇贞厉。月几望，君子征凶。"]],"s":null,"b":"力量还在积蓄，小有收获，大事再等等。"},{"kw":61,"g":"豚鱼，吉。利涉大川，利贞。","l":[["初九","虞吉，有他不燕。"],["九二","鸣鹤在阴，其子和之。我有好爵，吾与尔靡之。"],["六三","得敌，或鼓或罢，或泣或歌。"],["六四","月几望，马匹亡，无咎。"],["九五","有孚挛如，无咎。"],["上九","翰音登于天，贞凶。"]],"s":null,"b":"诚信为本，真心能打动人。"},{"kw":37,"g":"利女贞。","l":[["初九","闲有家，悔亡。"],["六二","无攸遂，在中馈，贞吉。"],["九三","家人嗃嗃，悔厉，吉；妇子嘻嘻，终吝。"],["六四","富家，大吉。"],["九五","王假有家，勿恤，吉。"],["上九","有孚威如，终吉。"]],"s":null,"b":"家和万事兴，各尽其责，从身边做起。"},{"kw":42,"g":"利有攸往，利涉大川。","l":[["初九","利用为大作，元吉，无咎。"],["六二","或益之十朋之龟，弗克违，永贞吉。王用享于帝，吉。"],["六三","益之用凶事，无咎。有孚中行，告公用圭。"],["六四","中行，告公从。利用为依迁国。"],["九五","有孚惠心，勿问元吉。有孚惠我德。"],["上九","莫益之，或击之，立心勿恒，凶。"]],"s":null,"b":"局面有利，多做有益的事，帮人也是帮己。"},{"kw":57,"g":"小亨。利有攸往，利见大人。","l":[["初六","进退，利武人之贞。"],["九二","巽在床下，用史巫纷若，吉，无咎。"],["九三","频巽，吝。"],["六四","悔亡，田获三品。"],["九五","贞吉，悔亡，无不利。无初有终。先庚三日，后庚三日，吉。"],["上九","巽在床下，丧其资斧，贞凶。"]],"s":null,"b":"像风一样柔顺渗透，耐心沟通最有效。"},{"kw":59,"g":"亨，王假有庙。利涉大川，利贞。","l":[["初六","用拯马壮，吉。"],["九二","涣奔其机，悔亡。"],["六三","涣其躬，无悔。"],["六四","涣其群，元吉。涣有丘，匪夷所思。"],["九五","涣汗，其大号涣，王居，无咎。"],["上九","涣其血，去逖出，无咎。"]],"s":null,"b":"涣散之时要凝聚人心，化解隔阂。"},{"kw":53,"g":"女归吉，利贞。","l":[["初六","鸿渐于干，小子厉。有言，无咎。"],["六二","鸿渐于磐，饮食衎衎，吉。"],["九三","鸿渐于陆，夫征不复，妇孕不育，凶。利御寇。"],["六四","鸿渐于木，或得其桷，无咎。"],["九五","鸿渐于陵，妇三岁不孕，终莫之胜，吉。"],["上九","鸿渐于陆，其羽可用为仪，吉。"]],"s":null,"b":"循序渐进，慢慢来反而比较快。"},{"kw":20,"g":"盥而不荐，有孚颙若。","l":[["初六","童观，小人无咎，君子吝。"],["六二","窥观，利女贞。"],["六三","观我生，进退。"],["六四","观国之光，利用宾于王。"],["九五","观我生，君子无咎。"],["上九","观其生，君子无咎。"]],"s":null,"b":"先观察、再行动，看清局面比急着出手重要。"},{"kw":5,"g":"有孚，光亨，贞吉。利涉大川。","l":[["初九","需于郊，利用恒，无咎。"],["九二","需于沙，小有言，终吉。"],["九三","需于泥，致寇至。"],["六四","需于血，出自穴。"],["九五","需于酒食，贞吉。"],["上六","入于穴，有不速之客三人来，敬之终吉。"]],"s":null,"b":"时机未到，耐心等待，养精蓄锐。"},{"kw":60,"g":"亨，苦节不可贞。","l":[["初九","不出户庭，无咎。"],["九二","不出门庭，凶。"],["六三","不节若，则嗟若。无咎。"],["六四","安节，亨。"],["九五","甘节，吉，往有尚。"],["上六","苦节，贞凶。悔亡。"]],"s":null,"b":"有节制才长久，量力而行，不过度。"},{"kw":63,"g":"亨小，利贞。初吉，终乱。","l":[["初九","曳其轮，濡其尾，无咎。"],["六二","妇丧其茀，勿逐，七日得。"],["九三","高宗伐鬼方，三年克之。小人勿用。"],["六四","𦈡有衣袽，终日戒。"],["九五","东邻杀牛，不如西邻之禴祭，实受其福。"],["上六","濡其首，厉。"]],"s":null,"b":"事情已成，守成比开创更难，防止松懈。"},{"kw":3,"g":"元亨利贞。勿用有攸往，利建侯。","l":[["初九","磐桓，利居贞，利建侯。"],["六二","屯如邅如，乘马班如。匪寇婚媾，女子贞不字，十年乃字。"],["六三","即鹿无虞，惟入于林中。君子几，不如舍。往吝。"],["六四","乘马班如，求婚媾，往吉，无不利。"],["九五","屯其膏，小贞吉，大贞凶。"],["上六","乘马班如，泣血涟如。"]],"s":null,"b":"万事开头难，先打好基础，别急着冒进。"},{"kw":48,"g":"改邑不改井，无丧无得。往来井井。汔至亦未繘井，羸其瓶，凶。","l":[["初六","井泥不食，旧井无禽。"],["九二","井谷射鲋，瓮敝漏。"],["九三","井渫不食，为我心恻。可用汲，王明，并受其福。"],["六四","井甃，无咎。"],["九五","井洌寒泉，食。"],["上六","井收勿幕，有孚元吉。"]],"s":null,"b":"像井水一样持续付出，修好根基，人人受益。"},{"kw":29,"g":"有孚，维心亨，行有尚。","l":[["初六","习坎，入于坎窞。凶。"],["九二","坎有险，求小得。"],["六三","来之坎坎，险且枕，入于坎窞，勿用。"],["六四","樽酒簋贰，用缶，纳约自牖，终无咎。"],["九五","坎不盈，祗既平，无咎。"],["上六","系用徽𬙊，寘于丛棘，三岁不得，凶。"]],"s":null,"b":"重重险阻，保持信心和诚意，一步步走出去。"},{"kw":39,"g":"利西南，不利东北。利见大人，贞吉。","l":[["初六","往蹇来誉。"],["六二","王臣蹇蹇，匪躬之故。"],["九三","往蹇来反。"],["六四","往蹇来连。"],["九五","大蹇，朋来。"],["上六","往蹇来硕，吉。利见大人。"]],"s":null,"b":"前路艰难，先停下来反省，寻求帮助。"},{"kw":8,"g":"吉。原筮，元永贞，无咎。不宁方来，后夫凶。","l":[["初六","有孚，比之，无咎。有孚盈缶，终来有它吉。"],["六二","比之自内，贞吉。"],["六三","比之匪人。"],["六四","外比之，贞吉。"],["九五","显比，王用三驱，失前禽。邑人不诫，吉。"],["上六","比之无首，凶。"]],"s":null,"b":"亲近值得信任的人，抱团合作，越早越好。"},{"kw":26,"g":"利贞，不家食，吉。利涉大川。","l":[["初九","有厉，利已。"],["九二","舆说輹。"],["九三","良马逐，利艰贞。曰闲舆卫，利有攸往。"],["六四","童牛之牿，元吉。"],["六五","豮豕之牙，吉。"],["上九","何天之衢，亨。"]],"s":null,"b":"积累深厚，适合学习和储备，时机到了大有可为。"},{"kw":41,"g":"有孚，元吉，无咎，可贞。利有攸往。曷之用?二簋可用享。","l":[["初九","已事遄往，无咎，酌损之。"],["九二","利贞，征凶。弗损，益之。"],["六三","三人行则损一人；一人行则得其友。"],["六四","损其疾，使遄有喜，无咎。"],["六五","或益之十朋之龟，弗克违。元吉。"],["上九","弗损，益之，无咎。贞吉。 利有攸往，得臣无家。"]],"s":null,"b":"先付出、再收获，减掉不必要的，反而得益。"},{"kw":22,"g":"亨。小利有攸往。","l":[["初九","贲其趾，舍车而徒。"],["六二","贲其须。"],["九三","贲如，濡如，永贞吉。"],["六四","贲如，皤如，白马翰如，匪寇婚媾。"],["六五","贲于丘园，束帛戋戋。吝，终吉。"],["上九","白贲，无咎。"]],"s":null,"b":"注重修饰和礼节，但别只顾外表，内容更重要。"},{"kw":27,"g":"贞吉。观颐，自求口实。","l":[["初九","舍尔灵龟，观我朵颐，凶。"],["六二","颠颐，拂经；于丘颐，征凶。"],["六三","拂颐，贞凶。十年勿用，无攸利。"],["六四","颠颐，吉。虎视眈眈，其欲逐逐，无咎。"],["六五","拂经，居贞吉。不可涉大川。"],["上九","由颐，厉吉。利涉大川。"]],"s":null,"b":"照顾好自己的生活节奏，说话留心，自给自足最踏实。"},{"kw":18,"g":"元亨，利涉大川。先甲三日，后甲三日。","l":[["初六","干父之蛊，有子，考无咎。厉，终吉。"],["九二","干母之蛊，不可贞。"],["九三","干父之蛊，小有悔，无大咎。"],["六四","裕父之蛊，往见吝。"],["六五","干父之蛊，用誉。"],["上九","不事王侯，高尚其事。"]],"s":null,"b":"积弊需要整顿，下决心改掉旧问题，就有新局面。"},{"kw":4,"g":"亨。匪我求童蒙，童蒙求我。初筮告，再三渎，渎则不告。利贞。","l":[["初六","发蒙，利用刑人，用说桎梏。以往，吝。"],["九二","包蒙，吉。纳妇吉。子克家。"],["六三","勿用取女，见金夫，不有躬。无攸利。"],["六四","困蒙，吝。"],["六五","童蒙，吉。"],["上九","击蒙。不利为寇，利御寇。"]],"s":null,"b":"还在摸索阶段，虚心求教，找对老师最重要。"},{"kw":52,"g":"艮其背，不获其身。行其庭，不见其人。无咎。","l":[["初六","艮其趾，无咎。利永贞。"],["六二","艮其腓，不拯其随，其心不快。"],["九三","艮其限，列其夤，厉薰心。"],["六四","艮其身，无咎。"],["六五","艮其辅，言有序，悔亡。"],["上九","敦艮，吉。"]],"s":null,"b":"该停就停，静下来想清楚，不越本分。"},{"kw":23,"g":"不利有攸往。","l":[["初六","剥床以足，蔑贞，凶。"],["六二","剥床以辨，蔑贞，凶。"],["六三","剥之，无咎。"],["六四","剥床以肤，凶。"],["六五","贯鱼，以宫人宠，无不利。"],["上九","硕果不食，君子得舆，小人剥庐。"]],"s":null,"b":"形势在走弱，宜守不宜攻，保住根本。"},{"kw":11,"g":"小往大来，吉亨。","l":[["初九","拔茅，茹以其汇，征吉。"],["九二","包荒，用冯河，不遐遗，朋亡，得尚于中行。"],["九三","无平不陂，无往不复。艰贞无咎。勿恤其孚，于食有福。"],["六四","翩翩不富以其邻，不戒以孚。"],["六五","帝乙归妹，以祉元吉。"],["上六","城复于隍，勿用师。自邑告命，贞吝。"]],"s":null,"b":"天地交泰，上下通顺，正是好时候。"},{"kw":19,"g":"元亨利贞。至于八月有凶。","l":[["初九","咸临，贞吉。"],["九二","咸临，吉，无不利。"],["六三","甘临，无攸利。既忧之，无咎。"],["六四","至临，无咎。"],["六五","知临，大君之宜，吉。"],["上六","敦临，吉，无咎。"]],"s":null,"b":"好运逐渐靠近，主动关心身边的人，事情会推进。"},{"kw":36,"g":"利艰贞。","l":[["初九","明夷于飞，垂其翼。君子于行，三日不食。有攸往，主人有言。"],["六二","明夷，夷于左股，用拯马壮，吉。"],["九三","明夷于南狩，得其大首，不可疾，贞。"],["六四","入于左腹，获明夷之心，于出门庭。"],["六五","箕子之明夷，利贞。"],["上六","不明，晦。初登于天，后入于地。"]],"s":null,"b":"光明暂时被遮，低调守住本心，等待天亮。"},{"kw":24,"g":"亨。出入无疾，朋来无咎。反复其道，七日来复，利有攸往。","l":[["初九","不远复，无祗悔，元吉。"],["六二","休复，吉。"],["六三","频复，厉，无咎。"],["六四","中行独复。"],["六五","敦复，无悔。"],["上六","迷复，凶，有灾眚。用行师，终有大败，以其国君凶，至于十年不克征。"]],"s":null,"b":"一阳来复，转机出现，从小处重新开始。"},{"kw":46,"g":"元亨。用见大人，勿恤，南征吉。","l":[["初六","允升，大吉。"],["九二","孚乃利用禴，无咎。"],["九三","升虚邑。"],["六四","王用亨于岐山，吉，无咎。"],["六五","贞吉，升阶。"],["上六","冥升，利于不息之贞。"]],"s":null,"b":"稳步上升，像树苗长高，顺势而进。"},{"kw":7,"g":"贞，丈人吉，无咎。","l":[["初六","师出以律，否臧，凶。"],["九二","在师中，吉无咎，王三锡命。"],["六三","师或舆尸，凶。"],["六四","师左次，无咎。"],["六五","田有禽，利执言，无咎。长子帅师，弟子舆尸，贞凶。"],["上六","大君有命，开国承家，小人勿用。"]],"s":null,"b":"需要组织和纪律，找对带头的人，齐心可成事。"},{"kw":15,"g":"亨，君子有终。","l":[["初六","谦谦君子，用涉大川，吉。"],["六二","鸣谦，贞吉。"],["九三","劳谦，君子有终，吉。"],["六四","无不利，㧑谦。"],["六五","不富以其邻，利用侵伐，无不利。"],["上六","鸣谦，利用行师，征邑国。"]],"s":null,"b":"谦虚的人走到哪里都受欢迎，低调做事反而顺利。"},{"kw":2,"g":"元亨，利牝马之贞。君子有攸往，先迷后得主。利西南得朋，东北丧朋。安贞吉。","l":[["初六","履霜，坚冰至。"],["六二","直方大，不习，无不利。"],["六三","含章可贞。或从王事，无成有终。"],["六四","括囊，无咎无誉。"],["六五","黄裳，元吉。"],["上六","龙战于野，其血玄黄。"]],"s":["用六","利永贞。"],"b":"厚德载物，顺势而为，做好配合就会有收获。"}];
+const LOTS=[{"no":1,"lv":"上签","st":"钟离成道","v":["开天辟地作良缘","吉日良时万物全","若得此签非小可","人行忠正帝王宣"],"jie":["急速兆速","年未值时","观音降笔","先报君知"],"bh":"时机正好，诸事顺遂。行得端正，好运自然长久。"},{"no":2,"lv":"下签","st":"苏秦不第","v":["鲸鱼未变守江河","不可升腾更望高","异日峥嵘身变化","许君一跃跳龙门"],"jie":["得忍且忍","得耐且耐","须待时至","功名还在"],"bh":"时候未到，先忍一忍、攒本事。时机来了，一跃就过。"},{"no":3,"lv":"下签","st":"董永遇仙","v":["临风冒雨去还乡","正是其身似燕儿","衔得坭来欲作垒","到头垒坏复须坭"],"jie":["千般用计","晨昏不停","谁知此事","到底劳心"],"bh":"事情费力，先别贪多。一砖一瓦慢慢垒，别急着求成。"},{"no":4,"lv":"上签","st":"玉莲会十朋","v":["千年古镜复重圆","女再求夫男再婚","自此门庭重改换","更添福禄在儿孙"],"jie":["淘沙成金","骑龙踏虎","虽是劳心","于中有补"],"bh":"失而复得，旧事重圆。肯花心思，福气会落到家人身上。"},{"no":5,"lv":"中签","st":"刘晨遇仙","v":["一锥草地要求泉","努力求之得最难","无意俄然遇知己","相逢携手上青天"],"jie":["欲望心事","西方可求","不如莫动","立地可谋"],"bh":"刻意强求反而难，放松一点，转机常在不经意间。"},{"no":6,"lv":"中签","st":"仁贵遇主","v":["投身岩下饲于菟","须是还他大丈夫","拾得营谋谁可得","通行天地此人无"],"jie":["食用无余","身清岂贫","待时利乐","改旧从新"],"bh":"先舍得，后得到。做个有担当的人，路会自己打开。"},{"no":7,"lv":"下签","st":"苏娘走难","v":["奔波阻隔重重险","带水拖泥去度山","更望他乡求用事","千乡万里未回还"],"jie":["退身可得","进步为难","只宜守旧","莫望高扳"],"bh":"眼下多阻隔，宜守不宜进。把手头的事做稳最要紧。"},{"no":8,"lv":"上签","st":"裴度还带","v":["茂林松柏正兴旺","雨雪风霜总莫为","异日忽然成大用","功名成就栋梁材"],"jie":["路上亨通","终身有功","田蚕丰熟","家道兴隆"],"bh":"根基扎实，不怕风霜。耐心积累，终会派上大用场。"},{"no":9,"lv":"中签","st":"孔明点将","v":["烦君勿作私心事","此意偏宜说问公","一片明心光皎洁","宛如皎月正天中"],"jie":["心中正直","理顺法宽","圣无私语","终有分明"],"bh":"心正理顺，有话摊开说。光明磊落，自有公道。"},{"no":10,"lv":"中签","st":"庞涓观阵","v":["石藏无价玉和珍","只管他乡外客寻","宛如持灯更觅火","不如收拾枉劳心"],"jie":["姻缘会遇","何事不成","须无限意","眼前是真"],"bh":"宝贝就在身边，别舍近求远。看清眼前，便是答案。"},{"no":11,"lv":"上签","st":"书荐姜维","v":["欲求胜事可非常","争奈亲姻日暂忙","到头竟必成鹿箭","贵人指引贵人乡"],"jie":["有意兴变","到底安然","若问用事","只近贵人"],"bh":"好事多磨，先忙一阵。会有贵人引路，终得安然。"},{"no":12,"lv":"上签","st":"武吉遇师","v":["否去泰来咫尺间","暂交君子出于山","若逢虎兔佳音信","立志忙中事即闲"],"jie":["换麻得丝","击人双足","要见分明","因灾得福"],"bh":"否极泰来，坏事里藏着好事。把握机会，转眼轻松。"},{"no":13,"lv":"中签","st":"罗通拜师","v":["自小生在富贵家","眼前万物总奢华","蒙君赐紫金角带","四海声名定可夸"],"jie":["囚人逢赦","病即安然","龙门得遇","名遍皇都"],"bh":"积累的名声开始见效，困境松动，好消息在路上。"},{"no":14,"lv":"中签","st":"子牙弃官","v":["宛如仙鹤出凡笼","脱得凡笼路路通","南北东西无阻隔","任君直上九霄宫"],"jie":["任意无虞","路有亨通","随心自在","逍遥自在"],"bh":"束缚解开，路路畅通。想做的事，现在可以放手去做。"},{"no":15,"lv":"中签","st":"苏秦得志","v":["行人怨日气难吞","忽有灾事勿近前","鸟破林巢无所宿","可寻深处稳安身"],"jie":["若人得怨","何时可伸","好言不信","守旧待时"],"bh":"心里憋着气先别冲。找个安稳处歇一歇，守住再说。"},{"no":16,"lv":"中签","st":"叶梦熊朝帝","v":["愁眉思虑暂时开","咫尺云开见日来","宛如粪土中藏玉","良工一举出尘埃"],"jie":["得处无失","损中有益","小人逢凶","君子顺吉"],"bh":"愁云渐散，被埋没的才华会被人看见。"},{"no":17,"lv":"中签","st":"曹操话梅止渴","v":["莫听闲言说是非","晨昏只好念阿弥","若将狂话为真实","画饼如何止得饥"],"jie":["心中不定","枉看经文","恰似画饼","食也难吞"],"bh":"别听闲话、别信空话。画饼不能充饥，踏实最可靠。"},{"no":18,"lv":"上签","st":"曹国舅为仙","v":["金乌西坠兔东升","日夜循环至古今","僧道得知无不利","士农工商各从心"],"jie":["心中无事","所作有功","如弓上箭","一发当空"],"bh":"日月轮转，各行各业都顺。照着节奏做事，就有收获。"},{"no":19,"lv":"中签","st":"子仪封王","v":["急水滩头放船归","风波作浪欲何为","若要安然求稳静","等待浪静过此危"],"jie":["急水下船","险处待时","若问营谋","尽可施为"],"bh":"风浪正大，先别抢着出发。等水平浪静，再动不迟。"},{"no":20,"lv":"中签","st":"姜太公遇文王","v":["当春久雨喜开晴","玉兔金乌渐渐明","旧事消散新事遂","看看一跳过龙门"],"jie":["神佛护持","有灾无危","途生平安","到底荣归"],"bh":"久雨初晴，旧事翻篇，新事顺顺利利起步。"},{"no":21,"lv":"上签","st":"李旦龙凤配合","v":["阴阳道合总由天","女嫁男婚喜偎然","但见龙蛇相会合","熊罴入梦乐团圆"],"jie":["谋望从心","婚姻孕男","资财进益","更利田蚕"],"bh":"缘分到了，喜事临门。和人合作，事半功倍。"},{"no":22,"lv":"中签","st":"六郎逢救","v":["旱时田里皆枯槁","谢天甘雨落淋淋","花果草木皆润泽","始知一雨值千金"],"jie":["田蚕倍熟","命运渐来","病遇良药","行人不便"],"bh":"难中有救，及时雨就要来，先把心放宽。"},{"no":23,"lv":"中签","st":"怀德招亲","v":["欲攀仙桂入蟾宫","岂虑天门不任君","忽遇一般音信好","人人皆笑喜欣欣"],"jie":["商贾利益","行藏无危","病安讼遂","尽可施为"],"bh":"机会就在眼前，好消息和贵人都会来，大胆去争取。"},{"no":24,"lv":"下签","st":"殷郊遇师","v":["不成理论不成家","水性痴人似落花","若问君恩须得力","到头方见事如麻"],"jie":["是非莫说","必须仔细","心正理直","方免灾危"],"bh":"最近是非多，少说多看，守住本分，心正自然平安。"},{"no":25,"lv":"中签","st":"姚能受职","v":["过了忧危第几重","从今再历永无凶","宽心自有宽心计","得遇高人护圣功"],"jie":["讼终有理","病得安全","出入求谋","古井逢泉"],"bh":"难关已过，往后渐入佳境。心宽一点，会遇到帮你的人。"},{"no":26,"lv":"中签","st":"钟馗得道","v":["上下传来事转虚","天边接得一封书","书中许我功名遂","直到终时亦是虚"],"jie":["上下心烦","求闲不闲","欲望功名","守旧身安"],"bh":"传来的消息虚多实少，别太当真，守住手头更稳。"},{"no":27,"lv":"中签","st":"刘基谏主","v":["一谋一用一番书","虑后思前不敢为","时到贵人相助力","银墙铁壁好安居"],"jie":["改旧成新","寒花遇春","从前阻滞","今得称心"],"bh":"前思后想不敢动？时机一到自有人帮，根基会很稳。"},{"no":28,"lv":"中签","st":"李后寻包公","v":["东边月上正婵娟","顷刻云遮亦暗存","或有圆时还有缺","更言非者亦闲言"],"jie":["浮云遮月","不须疑惑","等待云收","便见明白"],"bh":"月有阴晴，事情一时看不清。等云散了，自然明白。"},{"no":29,"lv":"中签","st":"赵子龙救阿斗","v":["宝剑出匣耀光明","在匣全然不惹尘","今得贵人携出现","有威有势众人钦"],"jie":["宝剑出匣","光辉万里","贵人指引","无不观美"],"bh":"宝剑出匣，本事终于被看见。抓住机会，好好亮相。"},{"no":30,"lv":"中签","st":"棋盘大会","v":["劝君切莫向他求","似鹤飞来暗箭投","若去采薪蛇在草","恐遭毒口也忧愁"],"jie":["闭口含齿","他事莫理","若有亏心","到头害己"],"bh":"防人之心不可无。少管闲事，说话留心，别惹麻烦。"},{"no":31,"lv":"中签","st":"佛印会东坡","v":["清闲无事静处坐","饥时吃饭困时卧","放下身心不用忙","必定不遭殃与祸"],"jie":["守旧安然","叩问神仙","直待时来","事亦偶然"],"bh":"放下身心，不必瞎忙。吃好睡好，安稳就是福。"},{"no":32,"lv":"中签","st":"刘备求贤","v":["前程杳杳定无疑","石中藏玉有谁知","一朝良匠分明剖","始觉安然碧玉期"],"jie":["宝在石中","异人少知","直待分明","尽可施为"],"bh":"你是块璞玉，只差被人看见。用心打磨，必有成果。"},{"no":33,"lv":"中签","st":"咬金聘仁贵","v":["内藏无价宝和珍","得玉何须外界寻","不如等待高人识","宽心犹且更宽心"],"jie":["内藏金玉","不识外寻","遇贵指引","不须劳心"],"bh":"好东西就在自己身上，不必外求，耐心等识货的人。"},{"no":34,"lv":"中签","st":"桃园结义","v":["行藏出入礼义恭","言必忠良信必聪","心不了然且静澈","光明红日正当中"],"jie":["心中无事","秋水澄清","不须疑惑","事自然成"],"bh":"行事端正，心里清明，事情自然水到渠成。"},{"no":35,"lv":"中签","st":"唐僧取经","v":["衣冠重整旧家风","道是无穷却有功","扫却当途荆棘刺","三人约议再和同"],"jie":["不用忧疑","自有佳期","若问前程","前路可宜"],"bh":"重整旗鼓，先难后易。和身边人商量着来，路会越走越顺。"},{"no":36,"lv":"中签","st":"湘子遇宾","v":["眼前病讼不须忧","实地资财尽可求","恰似猿猴金锁脱","自归山洞去来游"],"jie":["脱除了事","且自宽心","待得时来","堪寻正路"],"bh":"麻烦正在解开，放宽心，等时机来了再走正路。"},{"no":37,"lv":"中签","st":"李靖归山","v":["欲待身安运泰时","风中灯烛不相宜","不如收拾深堂坐","庶免光摇静处期"],"jie":["静处安身","待命守时","支惹非福","守旧相宜"],"bh":"风大别点灯，现在适合静下来，养精蓄锐。"},{"no":38,"lv":"下签","st":"何文秀遇难","v":["月照天书静处期","忽遭云雾又昏迷","宽心祈待云霞散","此时更改好施为"],"jie":["家道忧凶","人口有灾","祈福保庆","犹恐破财"],"bh":"一时云遮雾罩，先顾好家里，等云开再行动。"},{"no":39,"lv":"下签","st":"姜女寻夫","v":["天边消息实难思","切莫多心望强求","若把石头磨作镜","精神枉费一时休"],"jie":["千般用计","枉费功夫","不如守旧","着甚来由"],"bh":"别把石头磨成镜子，用错力气不如守住本分。"},{"no":40,"lv":"中签","st":"武则天登位","v":["红轮西坠兔东升","阴长阳消百事亨","若是女人宜望用","增添财禄福其心"],"jie":["阴利女人","不宜男子","若是求谋","先凶后吉"],"bh":"阴长阳消，以柔克刚，用温和的办法更容易成事。"},{"no":41,"lv":"中签","st":"董卓收吕布","v":["无限好言君记取","却为认贼将作子","莫贪眼下有些甜","更虑他年前样看"],"jie":["只这一着","君子莫错","牢记在心","不生寂寞"],"bh":"甜头背后多想一步，看清人再交心。"},{"no":42,"lv":"上签","st":"目莲救母","v":["君皇圣后总为恩","复待祈禳无损增","一切有情皆受用","人间天上得期亨"],"jie":["天皇降恩","始终莫忘","晨昏礼念","可宜烧香"],"bh":"心怀感恩，事事有回应。多做善事，福气自来。"},{"no":43,"lv":"上签","st":"行者得道","v":["天地变通万物全","自荣自养自安然","生罗万象皆精彩","事事如心谢圣贤"],"jie":["天生万物","谋望皆通","福德相助","瑞气匆匆"],"bh":"天地交泰，万事如意。心存感谢，好运长久。"},{"no":44,"lv":"中签","st":"姜维邓艾斗阵","v":["棋逢敌手着相宜","黑白盘中未决时","皆因一着知胜败","须教自有好推宜"],"jie":["欲求心事","恰如围棋","到底胜利","宜用心机"],"bh":"棋逢对手，胜负在一着之间，多用心思就能赢。"},{"no":45,"lv":"上签","st":"仁宗认母","v":["温柔自古胜刚强","积善之门大吉昌","若是有人占此卦","宛如正渴遇琼浆"],"jie":["天地有感","应验非常","佛神护佑","得之莫忘"],"bh":"温柔胜过刚强，多行善事，好运如及时雨。"},{"no":46,"lv":"中签","st":"渭水钓鱼","v":["劝君耐守旧生涯","把定心肠勿起歹","直待有人轻着力","枯枝老树再生花"],"jie":["守旧守旧","事自成就","动则多殃","静则无咎"],"bh":"守住本业，别起歪心。等到时机，老树也能开花。"},{"no":47,"lv":"上签","st":"梁灏登科","v":["锦上添花色愈鲜","运来禄马喜双全","时人莫恨功名晚","一举登科四海传"],"jie":["守旧变新","运至材成","遂平生志","尽皆是命"],"bh":"锦上添花，好事成双。别嫌来得晚，一举成名。"},{"no":48,"lv":"中签","st":"韩信挂帅","v":["昆鸟秋来化作鹏","好游快乐喜飞腾","翱翔万里云霄去","余外诸禽总不能"],"jie":["昆化为鹏","万禽不能","桂香一折","福禄自增"],"bh":"大鹏展翅，眼界打开，可以去更大的舞台。"},{"no":49,"lv":"中签","st":"王祥求鲤","v":["天寒地冻水成冰","何须贫吝取功名","只好守己静处坐","待时兴变自然明"],"jie":["水结成冰","冰消成水","若是营谋","到底如是"],"bh":"天寒地冻先别硬闯，守着等冰化，自然明朗。"},{"no":50,"lv":"中签","st":"陶朱归五湖","v":["五湖四海任君行","高挂帆蓬自在撑","若得顺风随即至","满船宝贝喜层层"],"jie":["自在休悠","不须着力","财禄重重","无不欣美"],"bh":"顺风顺水，放手前行，收获满满。"},{"no":51,"lv":"上签","st":"孔明入川","v":["夏日炎天日最长","人人愁热闷非常","天地也解和人意","薰风拂拂自然凉"],"jie":["进退莫疑","自有佳期","营谋用事","不须妄为"],"bh":"闷热之后自有凉风，烦恼会自己散去。"},{"no":52,"lv":"中签","st":"太白醉捞明月","v":["水中捉月费功夫","费尽功夫却又无","莫说闲言并乱语","枉劳心力强身孤"],"jie":["言诺难思","费力劳心","宅中忧虑","等遇贵人"],"bh":"水中捞月白费力，别追虚的，把心放回实处。"},{"no":53,"lv":"中签","st":"刘备招亲","v":["失意番成得意时","龙吟虎啸两相宜","青天自有通霄路","许我功名再有期"],"jie":["教去即去","自有亨通","到头必制","立地可谋"],"bh":"失意即将转为得意，功名还有机会，别灰心。"},{"no":54,"lv":"下签","st":"马超追曹","v":["梦中得宝醒来无","自拟南柯只是虚","若问婚姻并问病","别寻好路为支吾"],"jie":["物在水中","形影长短","皆有分定","不用商量"],"bh":"好梦醒来一场空，别执着于虚的，换条路走走。"},{"no":55,"lv":"中签","st":"周武王登位","v":["父贤传子子传孙","衣食丰隆只靠天","堂上椿萱人快乐","饥餐渴饮困时眠"],"jie":["接竹引泉","流传不绝","君子谋望","无不欣悦"],"bh":"家里和睦，衣食安稳，平平淡淡就是福。"},{"no":56,"lv":"中签","st":"禄山谋反","v":["滩小石溪流水响","清风明月贵人忙","路须借问何方去","休取林中花草香"],"jie":["营谋用事","劳心费力","守旧待时","凡事大吉"],"bh":"小滩虽响却不险，有贵人相帮，别被路边花草迷了眼。"},{"no":57,"lv":"中签","st":"董仲寻亲","v":["说是说非风过耳","好衣好禄自然丰","君莫记取当年事","汝意还如我意同"],"jie":["所用谋望","皆大欢喜","从公用力","如子逢娘"],"bh":"是非如风过耳，别记旧账，彼此心意相通。"},{"no":58,"lv":"中签","st":"文王问卜","v":["直言说话君须记","莫在他乡求别艺","切须守己旧生涯","除是其余都不利"],"jie":["得住且住","可取且踞","莫宜别事","只宜守旧"],"bh":"守住老本行，别四处折腾，稳中自有收获。"},{"no":59,"lv":"中签","st":"张良隐山","v":["直上重楼去藏身","四围荆棘绕为林","天高君命长和短","得一番成失二人"],"jie":["如醉饮酒","只宜守旧","直待时来","无灾无咎"],"bh":"先站高一点看清局面，守住本分，静待时机。"},{"no":60,"lv":"下签","st":"赤壁鏖兵","v":["抱薪救火大皆燃","烧遍三千亦复然","若问荣华并出入","不如收拾枉劳心"],"jie":["有千般计","一旦相惹","不如莫动","恐惹祸身"],"bh":"抱薪救火越烧越旺，别冲动，先停下来想清楚。"},{"no":61,"lv":"中签","st":"苏小妹难夫","v":["日上吟诗月下歌","逢场作戏笑呵呵","相逢会遇难藏避","喝彩齐唱莲花落"],"jie":["佳人在屋","吟唱诗曲","一片欢心","命中祸福"],"bh":"轻松愉快的一段日子，有人一起说笑，烦恼自散。"},{"no":62,"lv":"中签","st":"唐僧得道","v":["晨昏全赖佛扶持","须是逢危却不危","若得贵人相引处","那时财帛亦相随"],"jie":["平平稳稳","四方名显","改旧从新","却待天命"],"bh":"一路有人护着，危中有安，遇到贵人更添财运。"},{"no":63,"lv":"中签","st":"女娲氏炼石","v":["昔日行船失了针","今朝依旧海中寻","若然寻得原针在","也费工夫也费心"],"jie":["福是禄基","禄是福种","说得分明","切宜守谨"],"bh":"海里捞针费心费力，坚持找下去，也会有结果。"},{"no":64,"lv":"下签","st":"马前覆水","v":["游鱼却在碧波池","撞遭罗网四边围","思量无计翻身出","事到头来惹是非"],"jie":["屋下安身","祸从天降","早觉先防","免遭灾殃"],"bh":"小心身边的圈套，凡事多留个心眼，及早防范。"},{"no":65,"lv":"下签","st":"孙膑困庞涓","v":["眼前欢喜未为欢","亦不危时亦不安","割肉成疮为甚事","不如守旧待时光"],"jie":["知止则止","知宽自宽","割自身肉","疾痛一般"],"bh":"眼前的欢喜先别当真，别做得不偿失的事，守着等更好的时机。"},{"no":66,"lv":"下签","st":"霸王被困","v":["路险马羸人行急","失群军卒困相当","滩高风浪船棹破","日暮花残天降霜"],"jie":["守旧守旧","安静无咎","不用求谋","自在优游"],"bh":"路险船破，先停一停，休整好再出发。"},{"no":67,"lv":"上签","st":"金星试窦儿","v":["一条金线秤君心","无减无增无重轻","为人平生心正直","文章全具艺光明"],"jie":["心平正直","到底清平","只依本份","天下太平"],"bh":"心秤持平，为人正直，凭本事吃饭，到哪都踏实。"},{"no":68,"lv":"中签","st":"郭汾阳祝寿","v":["门庭吉庆喜非常","积善之门大吉昌","婚姻田蚕诸事遂","病逢妙药即安康"],"jie":["春深日暖","百花自开","事莫迟疑","从人显达"],"bh":"家里喜事多，诸事顺遂，好消息接连而来。"},{"no":69,"lv":"中签","st":"梅开二度","v":["冬来岭上一枝梅","叶落枝枯总不摧","但得阳春消息至","依然还我作花魁"],"jie":["一箭射空","当空不空","待等春来","彩在其中"],"bh":"寒冬里的梅花，熬过去就是春天，你仍是花魁。"},{"no":70,"lv":"下签","st":"李密反唐","v":["朝朝恰似采花蜂","飞出西南又走东","春尽花残无觅处","此心不变旧行踪"],"jie":["无觅春色","久雨不晴","求谋动用","不如安静"],"bh":"四处奔忙像采蜜，别一直追，先停下看看方向。"},{"no":71,"lv":"中签","st":"文君访相如","v":["谁知苍龙下九衢","女子当年嫁二夫","自是一弓架两箭","切恐龙马上安居"],"jie":["不出重重","事由天命","振六中开","切宜谨守"],"bh":"事情可能要再来一次，第二次会更顺，但要谨慎。"},{"no":72,"lv":"中签","st":"王莽求贤","v":["养蜂须用求他蜜","只怕遭触尾上针","须是眼前有异路","暗里深藏荆棘林"],"jie":["事须仔细","不用强求","结蜂采蜜","有甚来由"],"bh":"想吃蜜就别怕蜂刺，做事细心，提防暗处的麻烦。"},{"no":73,"lv":"上签","st":"陈桥兵变","v":["春来雷震百虫鸣","翻身一转离泥中","始知出入还来往","一朝变化便成龙"],"jie":["雷发时转","出入两存","一朝变化","直到天门"],"bh":"春雷一响，蛰伏结束，翻身的机会到了。"},{"no":74,"lv":"下签","st":"秦败擒三帅","v":["似鹄飞来自入笼","欲得翻身却不通","南北东西都难出","此卦诚恐恨无穷"],"jie":["进身可得","前程有阻","低头直去","悉在其中"],"bh":"像鸟困在笼里，先别乱撞，低头稳住，慢慢会有出路。"},{"no":75,"lv":"中签","st":"伍员夜出昭关","v":["恰如抱虎过高山","战战兢兢胆碎寒","不觉忽然从好事","切须保守一身安"],"jie":["危危险险","前程有阻","若问求谋","到底辛苦"],"bh":"如抱虎过山，小心谨慎，护好自己就能平安过关。"},{"no":76,"lv":"中签","st":"洪武看牛","v":["鱼龙混杂意相同","耐守深潭待运通","不觉一朝头耸出","禹门一跳过龙宫"],"jie":["虽是滋基","也要待时","营谋自本","切莫妄为"],"bh":"鱼龙混杂时耐住性子，等运势一到，一跃过龙门。"},{"no":77,"lv":"中签","st":"捧璧归赵","v":["梦中说得是多财","声名云外总虚来","水远山遥难信实","贵人指点笑颜开"],"jie":["如梦说梦","声名莫望","只待好时","贵人指示"],"bh":"好消息先别全当真，踏实做事，等贵人点拨。"},{"no":78,"lv":"上签","st":"临潼救驾","v":["冷水未烧白沸汤","不寒不热有温凉","要行天下无他事","为有身中百艺强"],"jie":["囚人逢赦","病遇良医","求财谋望","贵人指示"],"bh":"不冷不热刚刚好，身怀本事，走到哪里都吃得开。"},{"no":79,"lv":"中签","st":"暗扶倒铜旗","v":["虚空结愿保平安","保得身安愿不还","莫忘神圣宜还了","神恩显赫莫轻慢"],"jie":["人有我见","心不用忙","观音指示","切莫轻慢"],"bh":"答应过的事要记得兑现，说到做到，心才安。"},{"no":80,"lv":"上签","st":"智远投军","v":["直上仙岩要学仙","岂知一旦帝王宣","青天日月常明照","心正声名四海传"],"jie":["有始有终","莫向西东","心中用事","贵人重重"],"bh":"心正自有好名声，贵人接引，事事和合。"},{"no":81,"lv":"上签","st":"风送滕王阁","v":["梧桐叶落秋将暮","行客归程去似云","谢得天公高着力","顺风船载宝珍归"],"jie":["心中取事","天心从之","营谋用事","尽可施为"],"bh":"收获的季节到了，顺风顺水，满载而归。"},{"no":82,"lv":"中签","st":"火烧葫芦谷","v":["炎炎烈火焰连天","焰里还生一朵莲","到底得成终不害","依然生叶长根枝"],"jie":["虽然逢险","不损其身","营谋用事","皆遇贵人"],"bh":"看似危险，其实化险为夷，火里也能开出莲花。"},{"no":83,"lv":"中签","st":"李渊登位","v":["譬若初三四五缺","半无半有未圆全","等待十五良宵夜","到处光明到处圆"],"jie":["守旧待时","如月初出","待等圆时","无有不吉"],"bh":"月亮还没圆，耐心等到十五，自然处处光明。"},{"no":84,"lv":"下签","st":"庄子试妻","v":["因名丧德如何事","切恐吉中变化凶","酒醉不知何处去","青松影里梦朦胧"],"jie":["寒鱼离水","美中不足","若问营谋","不如莫起"],"bh":"美中不足，先别轻举妄动，脚踏实地最稳。"},{"no":85,"lv":"中签","st":"韩文公遇雪","v":["云开雾罩山前路","万物圆中月再圆","若得诗书沉梦醒","贵人指引步天台"],"jie":["老者用求","春残再开","欲求名利","晚遇横财"],"bh":"云开雾散，好时光在后头，晚些也会有惊喜。"},{"no":86,"lv":"上签","st":"商辂中三元","v":["春来花发映阳台","万里车来进宝财","若得禹门三级浪","恰如平地一声雷"],"jie":["朝帝受职","如贫得宝","谋望从心","卦中第一"],"bh":"春风得意，财运进门，好消息如平地一声雷。"},{"no":87,"lv":"中签","st":"咬金探地穴","v":["人行半岭日衔山","峻岭崖岩未可安","仰望上天为护佑","此身犹在太平间"],"jie":["凿石见玉","淘沙见金","须要着力","只是劳心"],"bh":"爬坡辛苦，但有人在护着你，坚持就有收获。"},{"no":88,"lv":"中签","st":"庞洪畏包公","v":["木为一虎在当门","须是有威不害人","分明说是无防事","忧恼迟疑恐惧心"],"jie":["炉头点雪","似耳边风","可宜作福","后吉前凶"],"bh":"看着吓人的事其实没什么，别自己吓自己。"},{"no":89,"lv":"上签","st":"智服姜维","v":["出入营谋大吉昌","似玉无瑕石里藏","若得贵人来指引","斯时得宝喜风光"],"jie":["如石藏玉","贵人指示","得宝称心","欢怀得意"],"bh":"石中藏玉，有贵人指点，得偿所愿。"},{"no":90,"lv":"上签","st":"苇佩遇仙","v":["忽然一信向天飞","泰山宝贝满船归","若问路途成好事","前头仍有贵人推"],"jie":["若问功名","前有贵人","更添喜气","财禄丰盈"],"bh":"好消息飞来，满载而归，前面还有贵人推一把。"},{"no":91,"lv":"中签","st":"三战吕布","v":["好把愁眉须展开","前途改变喜多财","一条大路如天阔","凡有施为尽称怀"],"jie":["一条大路","可向前行","心中用事","只可向前"],"bh":"把眉头舒展开，前路宽阔，想做的事都能如意。"},{"no":92,"lv":"上签","st":"蔡卿报恩","v":["自幼为商任设谋","财禄盈丰不用求","若是只身谋望事","秀才出去状元回"],"jie":["自小至大","无阻无碍","作意营谋","功名顺遂"],"bh":"经营有方，财禄自来，出门谋事会满载而归。"},{"no":93,"lv":"中签","st":"高君保招亲","v":["鸾凤翔毛雨淋漓","当时却被雀儿欺","终教一日云消散","依旧还君整羽衣"],"jie":["小人日盛","君子莫为","只宜守己","待时施为"],"bh":"一时被小人欺，雨过天晴，你依旧光彩。"},{"no":94,"lv":"下签","st":"伯牙访友","v":["君子莫体小人为","事若差池多是非","琴鸣须用知音听","守常安静得依稀"],"jie":["知音方许","闲事莫理","待得贵人","无不欢喜"],"bh":"少和小人计较，去找懂你的人，安静守常最好。"},{"no":95,"lv":"中签","st":"曹丕称帝","v":["志气功业在朝朝","莫嫌价贵不坚牢","若见金鸡报君语","钱财福禄与君招"],"jie":["志气心动","守己未迟","金鸡报诺","无不欢喜"],"bh":"有志气，肯坚持，好消息会准时报到。"},{"no":96,"lv":"上签","st":"窦燕山积善","v":["巍巍宝塔不寻常","八面玲珑尽放光","劝君立志勤顶礼","作善苍天降福祥"],"jie":["这些福份","众人皆有","不用心忙","福德前定"],"bh":"心存善念，福气自会降临，不必着急。"},{"no":97,"lv":"中签","st":"六出祁山","v":["当风点烛空疏影","恍惚铺成镜里花","累累河山待收拾","怎知只是幻浮槎"],"jie":["富贵在天","贫穷是命","不用求谋","皆是前定"],"bh":"风中点烛，虚影一场，别为空名白忙，回到实处。"},{"no":98,"lv":"下签","st":"吉平遇难","v":["出入求谋事宜迟","只恐闲愁惹是非","如鸟飞入罗网里","相逢能有几多时"],"jie":["守旧随时","待贵人至","若问诸般","主事定迟"],"bh":"现在宜慢不宜快，少惹闲愁，等贵人到了再动。"},{"no":99,"lv":"下签","st":"陶三春挂帅","v":["勒马持鞭直过来","半有忧危半有灾","恰似遭火焚烧屋","天降时雨荡成灰"],"jie":["终身劳力","莫管是非","枷锁临时","怨尤自至"],"bh":"一半忧一半喜，多做好事，难关会过去。"},{"no":100,"lv":"下签","st":"三教谈道","v":["佛神灵变与君知","痴人说事转昏迷","老人求得灵签去","不如守旧待时来"],"jie":["完满灵签","尽报君知","信旧勿动","待等时至"],"bh":"一时看不清没关系，守住本分，静待时机就好。"}];/* 观音灵签 100 支，来自 game-art/fortune/text/guanyin/guanyin_lots.json */
+const TAROT=[['0','愚者','新的开始'],['I','魔术师','行动力'],['II','女祭司','直觉'],['III','皇后','丰盛'],['IV','皇帝','秩序'],['V','教皇','传承'],['VI','恋人','选择'],['VII','战车','前进'],['VIII','力量','温柔的勇气'],['IX','隐士','独处思考'],['X','命运之轮','转机'],['XI','正义','平衡'],['XII','倒吊人','换个视角'],['XIII','死神','结束与新生'],['XIV','节制','调和'],['XV','恶魔','诱惑'],['XVI','高塔','突变'],['XVII','星星','希望'],['XVIII','月亮','不安与梦'],['XIX','太阳','成功'],['XX','审判','觉醒'],['XXI','世界','圆满']];
+const SIGNS=[['白羊座','3.21–4.19'],['金牛座','4.20–5.20'],['双子座','5.21–6.21'],['巨蟹座','6.22–7.22'],['狮子座','7.23–8.22'],['处女座','8.23–9.22'],['天秤座','9.23–10.23'],['天蝎座','10.24–11.22'],['射手座','11.23–12.21'],['摩羯座','12.22–1.19'],['水瓶座','1.20–2.18'],['双鱼座','2.19–3.20']];
+
+/* ---------- 场景 ---------- */
+const S={};let scene,curId;
+function el(){return VT-scene.t0}
+
+S.boot={name:'开机',enter(){this.t0=VT;welcomeVoice()},key(k,d){if(d&&k==='ok'&&el()>500){sfx.enter();go('menu')}},update(){},
+draw(){const t=el();c.fillStyle='#000';c.fillRect(0,0,W,H);
+ if(t<250){const w=W*E.out(t/250);c.fillStyle='#fff';c.fillRect(120-w/2,159,w,2);return}
+ if(t<450){const h=H*E.out((t-250)/200);c.fillStyle='#fff';c.fillRect(0,160-h/2,W,h);return}
+ c.drawImage(bgc,0,0);
+ if(t<620){c.fillStyle=`rgba(255,255,255,${1-(t-450)/170})`;c.fillRect(0,0,W,H)}
+ const rp=E.back(clamp((t-500)/700,0,1));
+ c.save();c.translate(120,120);c.scale(rp,rp);c.rotate((1-rp)*2+VT/6000);
+ c.strokeStyle=C.mag;c.lineWidth=1.5;c.beginPath();c.arc(0,0,70,0,Math.PI*2);c.stroke();
+ c.strokeStyle=C.cyan;c.beginPath();c.arc(0,0,56,0,Math.PI*2);c.stroke();
+ for(let i=0;i<8;i++){c.save();c.rotate(i*Math.PI/4);tri(0,-63,MENU[i].b,16,C.gold,4,2);c.restore()}
+ c.restore();
+ const title='NABO赛博算命机';
+ const shown=clamp(Math.floor((t-600)/90),0,title.length);
+ if(shown>0){const s1=title.slice(0,Math.min(4,shown)),s2=title.slice(4,shown);const k=(t-600)%90<40&&shown<title.length?1:0;
+  const ti=PI_('title');if(ti){const wv=Math.round(200*shown/title.length);c.save();c.beginPath();c.rect(20,190,wv,70);c.clip();if(k){c.globalAlpha=.55;c.drawImage(ti,18,190);c.drawImage(ti,22,190);c.globalAlpha=1}c.drawImage(ti,20,190);c.restore();box(20,190,200,70,'title · Codex','x')}
+  else{if(s1)glitch(s1,120,214,26,C.white,k);if(s2)glitch(s2,120,244,30,C.gold,k)}}
+ if(t>1400){const p=E.out(clamp((t-1400)/500,0,1));naboThen('N-WELCOME',120,120,lerp(380,124,p),t-1400,'N-IDLE')}
+ if(t>1900&&Math.floor(VT/500)%2)T('按 OK 开始',120,292,13,C.cyan,'center',F.sans)}};
+
+S.menu={name:'主转盘',sel:0,ang:0,enter(){this.t0=VT},key(k,d){if(!d)return;if(k==='down'){this.sel=(this.sel+1)%8;sfx.tick()}if(k==='up'){this.sel=(this.sel+7)%8;sfx.tick()}if(k==='ok'){sfx.enter();go(MENU[this.sel].id)}},
+update(dt){let d=-this.sel*Math.PI/4-this.ang;while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;this.ang+=d*Math.min(1,dt*.013)},
+draw(){const cx=120,cy=136,Rr=86;
+ c.strokeStyle=C.bg2;c.lineWidth=28;c.beginPath();c.arc(cx,cy,Rr,0,Math.PI*2);c.stroke();
+ c.lineWidth=1;c.strokeStyle=C.mag;c.beginPath();c.arc(cx,cy,Rr+14,0,Math.PI*2);c.stroke();c.strokeStyle=C.cyan;c.beginPath();c.arc(cx,cy,Rr-14,0,Math.PI*2);c.stroke();
+ for(let i=0;i<64;i++){const a=this.ang+i*Math.PI/32;c.fillStyle=i%8?C.dim:C.mag;c.fillRect(cx+Math.cos(a)*(Rr+18)-1,cy+Math.sin(a)*(Rr+18)-1,2,2)}
+ for(let i=0;i<8;i++){const a=this.ang+i*Math.PI/4-Math.PI/2,x=cx+Math.cos(a)*Rr,y=cy+Math.sin(a)*Rr,on=i===this.sel,ti=PI_('trigram-'+i);if(ti){const w=on?20:14,h=on?14:10;c.globalAlpha=on?1:.45;c.drawImage(ti,Math.round(x-w/2),Math.round(y-h/2),w,h);c.globalAlpha=1}else tri(x,y,MENU[i].b,on?20:14,on?C.gold:C.dim,on?5:4,on?3:2)}
+ c.fillStyle=C.gold;c.beginPath();c.moveTo(cx,cy-Rr-20);c.lineTo(cx-6,cy-Rr-30);c.lineTo(cx+6,cy-Rr-30);c.closePath();c.fill();
+ taiji(cx,cy,52,VT/2400,'#241a4c','#170f33');
+ nabo('N-IDLE',76,cx,cy-2,VT);
+ const m=MENU[this.sel];G(m.n,120,256,26,C.white,C.mag);T(m.d,120,282,11,C.dim);T('↑↓ 转盘   OK 进入',120,306,10,'#5c4f8a')}};
+
+/* 摇卦 */
+S.shake={name:'摇卦问事',enter(){this.t0=VT;this.lines=[];this.ph='ready';this.coins=[];this.msg='';this.card=0;this.page=0;this.pages=1},
+key(k,d,held){if(this.ph==='done'&&this.card&&d&&(k==='up'||k==='down')){this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages;return}if(k!=='ok')return;
+ if(d){if(this.ph==='done'){if(!this.card){this.card=1;this.ct=VT;this.page=0;sfx.whoosh()}else{this.card=0;this.lines=[];this.ph='ready'}return}if(this.ph==='ready'){this.ph='hold';this.hs=VT;this.lr=0;this.msg=''}}
+ else if(this.ph==='hold'){const h=VT-this.hs;if(h<250){this.ph='ready';this.msg='按住久一点再松开';return}
+  const M=SPR_META['N-SHELL-TOSS'],mx=60+M.anchor[0],my=20+M.anchor[1];this.tossT=VT;this.launchAt=VT+M.release*1000/12;this.coins=[0,1,2].map(i=>({x:mx+(i-1)*6,y:my,vx:(i-1)*75+(R()-.5)*30,vy:-(60+R()*50),rot:0,vr:16+R()*10,face:R()<.5?0:1,b:0,land:false}));this.ph='toss'}},
+update(dt){const s=dt/1000;
+ if(this.ph==='hold'&&VT-this.lr>90){this.lr=VT;sfx.rattle()}
+ if(this.ph==='toss'&&VT>=this.launchAt){if(!this.wh){this.wh=1;sfx.whoosh()}let all=true;for(const k of this.coins){if(k.land)continue;all=false;k.vy+=900*s;k.x+=k.vx*s;k.y+=k.vy*s;k.rot+=k.vr*s;if(k.y>=196&&k.vy>0){k.y=196;sfx.clink();if(k.b<1){k.vy*=-.32;k.vx*=.5;k.b++}else{k.land=true;k.lt=VT;const tgt=k.face?Math.PI:0;k.rot=tgt+Math.round((k.rot-tgt)/(2*Math.PI))*2*Math.PI}}}
+  if(all){if(!this.at)this.at=VT;if(VT-this.at>500){this.at=0;const sum=this.coins.reduce((a,k)=>a+(k.face?3:2),0);this.lines.push({v:sum,t:VT});sfx.line();this.wh=0;
+   if(this.lines.length===6){this.ph='reveal';this.rt=VT;setTimeout(()=>sfx.reveal(),300)}else this.ph='ready'}}}
+ if(this.ph==='reveal'&&VT-this.rt>1400){this.ph='done';burst(120,110,30)}},
+drawCard(){const rd=FortuneCore.liuyaoRead(this.lines.map(L=>L.v)),HN=i=>HEX[i>>3][i&7];
+ const rule=['六爻皆静，看本卦卦辞','一爻动，看本卦动爻的爻辞','二爻动，看本卦两动爻，以上爻为主','三爻动，看本卦和变卦卦辞，以本卦为主','四爻动，看变卦两静爻，以下爻为主','五爻动，看变卦静爻的爻辞',rd.ben===0?'六爻皆动，乾卦看“用九”':rd.ben===63?'六爻皆动，坤卦看“用六”':'六爻皆动，看变卦卦辞'][rd.moving];
+ const L=[rule];rd.items.forEach(([k,h,p])=>{const z=ZY[h];L.push(k==='gua'?HN(h)+' · 卦辞':HN(h)+' · '+(k==='line'?z.l[p][0]:z.s[0]),k==='gua'?z.g:k==='line'?z.l[p][1]:z.s[1])});L.push('白话',ZY[rd.main].b);this.pages=readCard('本卦 '+HN(rd.ben),rd.moving?'变卦 '+HN(rd.bian):'',L.join('\n'),this.page)},
+coin(x,y,r,rot,face){const cs=Math.cos(rot),sx=Math.max(.1,Math.abs(cs)),side=cs>=0?0:1;
+ c.fillStyle='rgba(0,0,0,.35)';c.beginPath();c.ellipse(x,206,r*.9,3,0,0,Math.PI*2);c.fill();
+ const ci=PI_(side?'coin-back':'coin-front');if(ci){c.save();c.translate(Math.round(x),Math.round(y));c.scale(sx,1);c.drawImage(ci,-11,-11);c.restore();if(sx<.25){c.fillStyle='#8a5a12';c.fillRect(Math.round(x)-1,Math.round(y)-11,2,22)}return}
+ c.fillStyle='#8a5a12';c.beginPath();c.ellipse(x,y,r*sx+1,r+1,0,0,Math.PI*2);c.fill();
+ c.fillStyle=side?'#d9a640':C.gold;c.beginPath();c.ellipse(x,y,r*sx,r,0,0,Math.PI*2);c.fill();
+ if(sx>.3){c.fillStyle='#3a2208';c.fillRect(x-3.5*sx,y-3.5,7*sx,7);if(!side&&sx>.55){c.fillStyle='#6b4410';c.fillRect(x-1.5*sx,y-r+3,3*sx,4);c.fillRect(x-1.5*sx,y+r-7,3*sx,4);c.fillRect(x-r*sx+3,y-1.5,4*sx,3);c.fillRect(x+r*sx-3-4*sx,y-1.5,4*sx,3)}}},
+draw(){const h=this.ph==='hold'?VT-this.hs:0,amp=Math.min(6,h/120);
+ const jx=this.ph==='hold'?(R()*2-1)*amp:0,jy=this.ph==='hold'?(R()*2-1)*amp*.6:0;
+ if(this.ph!=='reveal'&&this.ph!=='done'){
+  if(this.ph==='toss')nabo('N-SHELL-TOSS',120,120,80,VT-this.tossT);
+  else if(this.ph==='hold')nabo('N-SHELL',120,120+jx,80+jy,VT-this.hs);
+  else nabo('N-SHELL',120,120,80,0,'idle',0);
+  if(this.ph==='hold'){c.fillStyle=C.bg2;c.fillRect(70,150,100,5);c.fillStyle=C.mag;c.fillRect(70,150,100*Math.min(1,h/1200),5)}}
+ for(const k of this.coins)if((this.ph==='toss'&&VT>=this.launchAt)||this.ph==='ready')this.coin(k.x,k.y,11,k.rot,k.face);
+ if(this.ph==='toss'||this.ph==='ready')box(96,184,48,24,'铜钱 字/背 + 16 帧翻转','x');
+ c.fillStyle=C.bg2;c.fillRect(64,212,1,94);
+ for(let i=0;i<6;i++){const y=296-i*14;T(['初','二','三','四','五','上'][i],54,y,9,'#5c4f8a','right')}
+ this.lines.forEach((L,i)=>{const y=296-i*14,p=E.out(clamp((VT-L.t)/260,0,1)),w=100*p,yang=L.v===7||L.v===9,mv=L.v===6||L.v===9,col=mv?C.gold:C.cyan;
+  c.fillStyle=col;if(yang)c.fillRect(120-w/2,y-2,w,4);else{c.fillRect(120-w/2,y-2,w*.42,4);c.fillRect(120+w/2-w*.42,y-2,w*.42,4)}
+  if(mv&&p>.9){c.strokeStyle=C.gold;c.lineWidth=1.3;if(L.v===9){c.beginPath();c.arc(184,y,4,0,Math.PI*2);c.stroke()}else{c.beginPath();c.moveTo(180,y-4);c.lineTo(188,y+4);c.moveTo(188,y-4);c.lineTo(180,y+4);c.stroke()}}
+  T(['','','','','','','老阴','少阳','少阴','老阳'][L.v],210,y,9,mv?C.gold:C.dim)});
+ if(this.ph==='ready'){T(this.msg||`长按 OK 摇卦 · 第 ${this.lines.length+1} 爻`,120,166,11,this.msg?C.mag:C.dim)}
+ if(this.ph==='done'&&this.card){this.drawCard();return}
+ if(this.ph==='reveal'||this.ph==='done'){const yy=this.lines.map(L=>L.v===7||L.v===9?1:0),bn=hexName(yy);const mv=this.lines.some(L=>L.v===6||L.v===9);
+  const t=VT-this.rt,k=t<700?1:0;T('本卦',120,58,11,C.dim);glitch(bn,120,94,34,C.white,k);
+  if(mv&&t>700){const ch=this.lines.map(L=>L.v===6?1:L.v===9?0:(L.v===7?1:0));T('变卦  '+hexName(ch),120,136,14,C.gold,'center',F.serif)}
+  if(this.ph==='done'){naboThen('N-NOD',56,204,166,VT-this.rt-1400,'N-IDLE');T('OK 看解卦',120,190,11,C.cyan)}}}};
+
+/* 灵签 */
+S.lot={name:'灵签筒',enter(){this.t0=VT;this.reset()},reset(){this.ph='ready';this.rise=0;this.msg='';this.ang=0;this.hl=[...Array(12)].map(()=>14+R()*16);this.pick=ri(12);this.lot=LOTS[(window.__lot!=null?window.__lot:ri(LOTS.length))];this.no=this.lot.no;this.page=0;this.pages=1},
+key(k,d){if(this.ph==='done'&&d&&(k==='up'||k==='down')){this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages;return}if(k!=='ok')return;if(d){if(this.ph==='done'){this.reset();return}if(this.ph==='ready'){this.ph='hold';this.hs=VT;this.lr=0;this.msg=''}}
+ else if(this.ph==='hold'){if(this.rise>=.75){const a=this.ang,sx=-22+this.pick*4,ly=-110-this.hl[this.pick]-this.rise*46+40;this.st={x:120+sx*Math.cos(a)-ly*Math.sin(a),y:250+sx*Math.sin(a)+ly*Math.cos(a),vx:70+R()*30,vy:-140,rot:a,vr:7,b:0};this.ph='drop';sfx.whoosh()}else{this.ph='sink';this.msg='再摇久一点'}}},
+update(dt){const s=dt/1000;
+ if(this.ph==='hold'){const h=VT-this.hs,amp=Math.min(16,h/60)*Math.PI/180;this.ang=Math.sin(VT/55)*amp;this.rise=Math.min(1,h/1600);if(VT-this.lr>80){this.lr=VT;sfx.rattle()}}
+ else if(this.ph==='sink'){this.rise=Math.max(0,this.rise-s*1.5);this.ang*=.85;if(this.rise===0)this.ph='ready'}
+ else this.ang*=.85;
+ if(this.ph==='drop'){const k=this.st;k.vy+=900*s;k.x+=k.vx*s;k.y+=k.vy*s;k.rot+=k.vr*s;if(k.y>=292&&k.vy>0){k.y=292;sfx.clink();if(k.b<1){k.vy*=-.3;k.vr*=.4;k.b++}else{this.ph='rest';this.pt=VT;this.from={x:k.x,y:k.y,rot:k.rot}}}}
+ if(this.ph==='rest'&&VT-this.pt>350){this.ph='fly';this.pt=VT}
+ if(this.ph==='fly'&&VT-this.pt>520){this.ph='scroll';this.pt=VT}
+ if(this.ph==='scroll'&&VT-this.pt>900){this.ph='stamp';this.pt=VT}
+ if(this.ph==='stamp'&&VT-this.pt>180&&!this.slam){this.slam=1;shake=7;sfx.stamp();if(this.lot.lv==='上签')burst(176,236,50)}
+ if(this.ph==='stamp'&&VT-this.pt>700){this.ph='done';this.slam=0;this.doneT=VT}},
+stick(x,y,rot,sc,txt){c.save();c.translate(x,y);c.rotate(rot);c.scale(sc,sc);const si=PI_('stick');if(si)c.drawImage(si,-3,-40);else{c.fillStyle='#d9b26a';c.fillRect(-3,-40,6,80);c.fillStyle=C.red;c.fillRect(-3,-40,6,9)}if(txt){for(let i=0;i<txt.length;i++)T(txt[i],0,-24+i*9,7,C.ink,'center',F.serif)}c.restore()},
+draw(){if(this.ph==='done'){const L=this.lot,body=['签诗',L.v.join('\n'),'解曰',L.jie.join(' '),'白话',L.bh,'签象',L.xiang||''].join('\n');this.pages=readCard('第'+cnNum(this.no)+'签 · '+L.lv,L.st,body,this.page);return}const ph=this.ph,showTube=['ready','hold','sink','drop','rest'].includes(ph);
+ if(showTube){c.save();c.translate(120,250);c.rotate(this.ang);
+  for(let i=0;i<12;i++){const x=-22+i*4,top=-110-this.hl[i]-(i===this.pick?this.rise*46:0)+(ph==='hold'?Math.sin(VT/40+i)*2:0);if(i===this.pick&&(ph==='drop'||ph==='rest'))continue;const si=PI_('stick');if(si){if(i===this.pick&&this.rise>.75){c.fillStyle='#ffe08a';c.fillRect(x-2.5,top-1,5,42)}c.drawImage(si,0,0,6,40,x-1.5,top,3,40)}else{c.fillStyle=i===this.pick&&this.rise>.75?'#ffe08a':'#d9b26a';c.fillRect(x-1.5,top,3,40);c.fillStyle=C.red;c.fillRect(x-1.5,top,3,5)}}
+  const tu=PI_('tube');if(tu)c.drawImage(tu,-32,-110);else{c.fillStyle='#8a2e1e';rr(-32,-110,64,110,6);c.fill();c.fillStyle=C.gold;c.fillRect(-32,-100,64,4);c.fillRect(-32,-14,64,4);
+  c.fillStyle='#5a1a10';c.fillRect(-32,-110,64,6);T('签',0,-58,22,C.gold,'center',F.serif)}c.restore();
+  box(84,130,72,124,'签筒 11 个倾角帧 · 64×110','x');
+  nabo('N-TUBE',76,40,90,VT);
+  if(ph==='ready'||ph==='sink')T(this.msg||'长按 OK 摇签',120,302,11,this.msg?C.mag:C.dim);
+  if(ph==='hold'){c.fillStyle=C.bg2;c.fillRect(70,300,100,4);c.fillStyle=C.mag;c.fillRect(70,300,100*this.rise,4);if(this.rise>=.75)T('松开！',120,312,10,C.gold)}}
+ if(ph==='drop'||ph==='rest')this.stick(this.st.x,this.st.y,this.st.rot,1);
+ if(ph==='fly'){const p=E.io(clamp((VT-this.pt)/520,0,1));this.stick(lerp(this.from.x,120,p),lerp(this.from.y,150,p),lerp(this.from.rot,0,p),lerp(1,1.6,p),'第'+cnNum(this.no)+'签')}
+ if(['scroll','stamp','done'].includes(ph)){const p=ph==='scroll'?E.out(clamp((VT-this.pt)/600,0,1)):1,sc=PI_('scroll');
+  const tl=ph==='scroll'?(VT-this.pt-250)/140:9,L=this.lot;
+  if(sc){const hh=Math.round(152*p),y0=134-Math.round(hh/2);
+   c.drawImage(sc,0,32,208,hh,16,y0,208,hh);c.drawImage(sc,0,0,208,32,16,y0-32,208,32);c.drawImage(sc,0,184,208,32,16,y0+hh,208,32);
+   c.save();c.beginPath();c.rect(42,y0,156,hh);c.clip();
+   T('第'+cnNum(this.no)+'签 · '+L.st,120,70,13,C.ink,'center',F.serif);c.fillStyle='#b58e5a';c.fillRect(56,81,128,1);
+   L.v.forEach((l,i)=>{if(i<tl)T(l,120,97+i*18,15,C.ink,'center',F.serif)});
+   if(tl>4){T('解曰  '+L.jie.slice(0,2).join(' '),120,168,10.5,'#8a2e1e','center',F.serif);T(L.jie.slice(2).join(' '),120+15,181,10.5,'#8a2e1e','center',F.serif)}
+   if(tl>5)wrap(L.bh,14).slice(0,3).forEach((l,i)=>T(l,120,192+i*11,9.5,'#6b4a2a','center',F.sans));c.restore();
+   box(16,26,208,216,'scroll · Codex','x')}
+  else{const hh=204*p,y0=140-hh/2;c.fillStyle=C.paper;c.fillRect(22,y0,196,hh);c.fillStyle='#4a2a14';c.fillRect(16,y0-6,208,7);c.fillRect(16,y0+hh-1,208,7);
+   c.save();c.beginPath();c.rect(22,y0,196,hh);c.clip();T('第'+cnNum(this.no)+'签 · '+L.st,120,56,14,C.ink,'center',F.serif);
+   L.v.forEach((l,i)=>{if(i<tl)T(l,120,86+i*21,15,C.ink,'center',F.serif)});c.restore()}}
+ if(ph==='stamp'||ph==='done'){const p=clamp((VT-this.pt)/180,0,1),sc=ph==='done'?1:lerp(2.6,1,E.in(p));c.save();c.translate(176,262);c.rotate(-.14);c.scale(sc,sc);c.globalAlpha=ph==='stamp'?Math.min(1,p*1.5):1;
+  const se=PI_({上签:'seal-shang',中签:'seal-zhong',下签:'seal-xia'}[this.lot.lv]);if(se)c.drawImage(se,-26,-20);else{c.fillStyle=C.red;rr(-26,-20,52,40,4);c.fill();c.strokeStyle='#ffd6c8';c.lineWidth=1.5;rr(-22,-16,44,32,3);c.stroke();T(this.lot.lv,0,1,18,'#fff2e8','center',F.serif)}c.restore();c.globalAlpha=1;
+  box(146,238,60,48,'印章 上签/中签/下签','x');
+  if(ph==='done'){const id=this.lot.lv==='上签'?'N-WOW':this.lot.lv==='下签'?'N-SIGH':'N-NOD';naboThen(id,76,42,278,VT-this.doneT,'N-IDLE');T('OK 再求一签',120,312,10,C.cyan)}}}};
+
+/* 塔罗 */
+S.tarot={name:'塔罗',enter(){this.t0=VT;this.deal()},deal(){this.ph='shuffle';this.pt=VT;const h=FortuneCore.tarotHand(FortuneCore.rng((R()*4294967296)>>>0));this.hand=h.hand;this.sel=3;this.rev=h.rev;this.fl=0},
+key(k,d){if(!d)return;if(this.ph==='fan'&&VT-this.pt>1000){if(k==='up'){this.sel=Math.max(0,this.sel-1);sfx.tick()}if(k==='down'){this.sel=Math.min(6,this.sel+1);sfx.tick()}if(k==='ok'){this.ph='fly';this.pt=VT;sfx.whoosh()}}else if(this.ph==='show'&&VT-this.pt>1500&&k==='ok')this.deal()},
+update(){const t=VT-this.pt;if(this.ph==='shuffle'){if(Math.floor(t/90)!==this.fl){this.fl=Math.floor(t/90);sfx.print()}if(t>2600){this.ph='fan';this.pt=VT}}
+ else if(this.ph==='fly'&&t>1200){this.ph='poise';this.pt=VT}else if(this.ph==='poise'&&t>600){this.ph='flip';this.pt=VT}else if(this.ph==='flip'&&t>1400){this.ph='show';this.pt=VT;sfx.reveal();burst(120,130,36)}},
+fanPos(i){const a=(i-3)*.17,lift=i===this.sel?16:0;return{x:120+Math.sin(a)*(200+lift),y:470-Math.cos(a)*(200+lift),a}},
+back(x,y,w,h,a,sx=1){const bi=PI_(w<=48?'card-back-s':'card-back-l');if(bi){c.save();c.translate(x,y);c.rotate(a);c.scale(sx,1);c.drawImage(bi,-w/2,-h/2,w,h);c.restore();return}c.save();c.translate(x,y);c.rotate(a);c.scale(sx,1);c.fillStyle='#2a1660';rr(-w/2,-h/2,w,h,3);c.fill();c.strokeStyle=C.cyan;c.lineWidth=1;rr(-w/2+2,-h/2+2,w-4,h-4,2);c.stroke();c.strokeStyle=C.mag;c.beginPath();c.ellipse(0,0,w*.28,h*.1,0,0,Math.PI*2);c.stroke();circ(0,0,Math.max(1.5,w*.07),C.mag);c.restore()},
+front(x,y,w,h,a,sx,idx){const[n,name]=TAROT[idx].slice(0,2);if(okI(TIMG[idx])){c.save();c.translate(x,y);c.rotate(a);c.scale(sx,1);c.drawImage(TIMG[idx],-w/2,-h/2,w,h);c.restore();return}c.save();c.translate(x,y);c.rotate(a);c.scale(sx,1);c.fillStyle='#140c2c';rr(-w/2,-h/2,w,h,4);c.fill();c.strokeStyle=C.gold;c.lineWidth=1.5;rr(-w/2+3,-h/2+3,w-6,h-6,3);c.stroke();c.lineWidth=.8;rr(-w/2+6,-h/2+6,w-12,h-12,2);c.stroke();
+ T(n,0,-h/2+16,12,C.gold,'center',F.serif);
+ if(idx===19){circ(0,-4,14,C.gold);c.strokeStyle=C.gold;c.lineWidth=2;for(let i=0;i<12;i++){const aa=i*Math.PI/6+VT/2000;c.beginPath();c.moveTo(Math.cos(aa)*18,-4+Math.sin(aa)*18);c.lineTo(Math.cos(aa)*25,-4+Math.sin(aa)*25);c.stroke()}}
+ else if(idx===17){star5(0,-4,22,C.cyan);star5(-20,-28,5,C.white);star5(22,14,4,C.white)}
+ else if(idx===18){circ(0,-4,18,'#e9e2ff');circ(8,-9,16,'#140c2c')}
+ else{c.strokeStyle=C.mag;c.lineWidth=1.5;c.beginPath();c.arc(0,-4,22,0,Math.PI*2);c.stroke();T(name[0],0,-4,26,C.white,'center',F.serif)}
+ T(name,0,h/2-18,13,C.white,'center',F.serif);c.restore()},
+draw(){const t=VT-this.pt;
+ if(this.ph==='shuffle'){const p=t/2600;for(let k=0;k<10;k++){const side=k%2?-1:1,off=side*42*Math.abs(Math.sin(p*Math.PI*2))*(p<.85?1:(1-p)/.15);this.back(120+off,150-k*1.4,44,72,side*.05*Math.abs(Math.sin(p*Math.PI*2)))}T('洗牌中……',120,236,12,C.dim);box(98,114,44,72,'牌背 44×72','x')}
+ if(this.ph==='fan'){for(let i=0;i<7;i++){const q=this.fanPos(i),in_=E.out(clamp((t-i*90)/450,0,1));this.back(q.x,lerp(380,q.y,in_),44,72,q.a)}const q=this.fanPos(this.sel);c.strokeStyle=C.gold;c.lineWidth=1.5;c.save();c.translate(q.x,q.y);c.rotate(q.a);rr(-23,-37,46,74,4);c.stroke();c.restore();
+  G('选一张牌',120,70,22,C.white,C.mag);T('心里想着你的问题',120,98,11,C.dim);T('↑↓ 选牌   OK 抽出',120,140,10,'#5c4f8a')}
+ if(this.ph==='fly'){const q=this.fanPos(this.sel),p=E.io(clamp(t/1200,0,1));const x=lerp(q.x,120,p),y=lerp(q.y,136,p)-Math.sin(p*Math.PI)*30,sc=lerp(1,2.05,p);this.back(x,y,lerp(44,112,(sc-1)/1.05),lerp(72,184,(sc-1)/1.05),lerp(q.a,0,p))}
+ if(this.ph==='poise'){this.back(120,136,112,184,0);T('翻牌中…',120,262,12,C.dim)}
+ if(this.ph==='flip'){const p=clamp(t/1400,0,1),sx=Math.abs(Math.cos(p*Math.PI)),rot=this.rev?p*Math.PI:0;if(p<.5)this.back(120,136,112,184,rot,sx);else this.front(120,136,112,184,rot,sx,this.hand[this.sel])}
+ if(this.ph==='show'){this.front(120,136,112,184,this.rev?Math.PI:0,1,this.hand[this.sel]);box(64,44,112,184,'牌面 22 张 NABO 版 · 82×135','x');const tc=TAROT[this.hand[this.sel]];
+  G(tc[1]+(this.rev?' · 逆位':' · 正位'),120,252,20,C.white,this.rev?C.cyan:C.mag);T(this.rev?'留意：'+tc[2]+'受阻':'关键词：'+tc[2],120,280,12,C.gold);T('OK 重新洗牌',120,308,10,C.cyan)}}};
+
+/* 生辰档案 */
+const ZHI=FortuneCore.ZHI,pad=n=>String(n).padStart(2,'0');
+const PKEY='nabo-fortune-profile';
+let PF={y:1985,m:6,d:15,h:4,g:'男',demo:true};
+try{const s=localStorage.getItem(PKEY);if(s){const o=JSON.parse(s);if(o&&o.y)PF=o}}catch(e){}
+function savePF(){PF.demo=false;try{localStorage.setItem(PKEY,JSON.stringify(PF))}catch(e){}}
+const HAS_LUNAR=typeof Solar!=='undefined';
+function lunarOf(p){return Solar.fromYmdHms(p.y,p.m,p.d,p.h===0?0:p.h*2,30,0).getLunar()}
+const dim=(y,m)=>new Date(y,m,0).getDate();
+function signOf(m,d){const v=m*100+d,st=[[120,10],[219,11],[321,0],[420,1],[521,2],[622,3],[723,4],[823,5],[923,6],[1024,7],[1123,8],[1222,9]];let r=9;for(const[s,i]of st)if(v>=s)r=i;return r}
+function wrap(s,n){const o=[];let i=0;while(i<s.length){let e=Math.min(s.length,i+n);if(e<s.length&&'，。；：、）'.includes(s[e]))e++;o.push(s.slice(i,e));i=e}return o}
+function wrapWidth(s,width,sz=11,f=F.sans){c.font=`${readableSize(sz)}px ${f}`;const lines=[];let line='';for(const ch of s){if(ch==='\n'){lines.push(line);line='';continue}if(line&&c.measureText(line+ch).width>width){if('，。；：、）'.includes(ch)&&[...line].length>1){const a=[...line],last=a.pop();lines.push(a.join(''));line=last}else{lines.push(line);line=''}}line+=ch}if(line)lines.push(line);return lines}
+function readCard(title,sub,body,page){const ls=wrapWidth(body,192),pages=Math.max(1,Math.ceil(ls.length/7));page=((page||0)%pages+pages)%pages;c.fillStyle=C.paper;rr(8,30,224,286,4);c.fill();T(title,120,55,15,C.ink,'center',F.serif);T(sub,120,82,9,'#8a2e1e');c.fillStyle='#c9b48c';c.fillRect(24,98,192,1);ls.slice(page*7,page*7+7).forEach((l,i)=>T(l,24,120+i*22,11,'#3a2414','left'));T('仅供娱乐',120,278,9,'#7a6248');T(`↑↓ 翻页 ${page+1}/${pages} · OK 返回`,120,302,9,'#7a6248');return pages}
+function drawPF(p,y0,demo){
+ if(!HAS_LUNAR){T('历法库没有加载成功，请联网后刷新',120,y0+40,11,C.mag);return}
+ const l=lunarOf(p),ec=l.getEightChar();
+ T(`${p.y}.${pad(p.m)}.${pad(p.d)}  ${ZHI[p.h]}时  ${p.g}`,120,y0,12,C.white,'center',F.mono);
+ T(`农历 ${l.getYearInGanZhi()}年 ${l.getMonthInChinese()}月${l.getDayInChinese()} ${l.getTimeZhi()}时`,120,y0+20,11,C.dim,'center',F.serif);
+ [ec.getYear(),ec.getMonth(),ec.getDay(),ec.getTime()].forEach((gz,i)=>{const x=120+(i-1.5)*56;c.strokeStyle='#3a2d6a';c.lineWidth=1;c.strokeRect(x-24.5,y0+36.5,49,64);
+  T(['年柱','月柱','日柱','时柱'][i],x,y0+47,9,C.dim);T(gz[0],x,y0+67,18,C.gold,'center',F.serif);T(gz[1],x,y0+89,18,C.white,'center',F.serif)});
+ T(`属${l.getYearShengXiao()} · ${SIGNS[signOf(p.m,p.d)][0]}`,120,y0+114,11,C.cyan);
+ if(demo&&p.demo)T('示例生辰 · ↓ 修改',120,y0+132,10,C.mag)}
+function drawConfirm(title){G(title,120,40,22,C.white,C.mag);T('命主生辰',120,62,10,C.dim);drawPF(PF,84,true);T('OK 开始',120,262,13,C.cyan);T('↓ 修改生辰',120,284,11,C.dim)}
+
+S.birth={name:'生辰八字',noDouble:true,ret:null,fields:[['年',56],['月',34],['日',34],['时辰',44],['性别',34]],
+enter(){this.t0=VT;this.f=0;this.v={...PF};this.off=[0,0,0,0,0];this.rep=null},
+chg(v,f,dir){if(f===0)v.y=clamp(v.y+dir,1930,2025);if(f===1)v.m=((v.m-1+dir+12)%12)+1;if(f===2){const n=dim(v.y,v.m);v.d=((Math.min(v.d,n)-1+dir+n)%n)+1}if(f===3)v.h=(v.h+dir+12)%12;if(f===4)v.g=v.g==='男'?'女':'男';v.d=Math.min(v.d,dim(v.y,v.m));return v},
+fmt(f,v){return[v.y+'',v.m+'月',v.d+'日',ZHI[v.h]+'时',v.g][f]},
+step(dir){this.chg(this.v,this.f,dir);this.off[this.f]=dir*18;sfx.tick()},
+key(k,d){if(k==='up'||k==='down'){const dir=k==='up'?-1:1;if(d){this.step(dir);this.rep={dir,at:VT+380}}else this.rep=null;return}
+ if(k==='ok'&&d){if(this.f<4){this.f++;sfx.tick()}else{const dm=PF.demo;Object.assign(PF,this.v);savePF();sfx.enter();go(this.ret||'menu');this.ret=null}}},
+update(dt){if(this.rep&&VT>=this.rep.at){this.step(this.rep.dir);this.rep.at=VT+70}for(let i=0;i<5;i++)this.off[i]*=Math.max(0,1-dt*.018)},
+draw(){G('输入生辰',120,34,20,C.white,C.mag);T('公历出生日期和时辰',120,54,9,C.dim);
+ let x=7;this.fields.forEach(([n,w],i)=>{const cx=x+w/2,on=i===this.f;T(n,cx,70,9,on?C.mag:C.dim);
+  c.save();c.beginPath();c.rect(x,78,w,66);c.clip();const o=this.off[i];
+  for(const dd of[-1,0,1]){const vv=dd?this.chg({...this.v},i,dd):this.v;T(this.fmt(i,vv),cx,111+dd*22+o,dd?11:15,dd?'#4a3d78':(on?C.gold:C.white),'center',i===0?F.mono:F.serif)}
+  c.restore();if(on){c.strokeStyle=C.mag;c.lineWidth=1.5;c.strokeRect(x+.5,99,w-1,24)}x+=w+6});
+ drawPF(this.v,160,false);
+ T(this.f<4?'↑↓ 调整 · OK 下一项':'OK 保存生辰',120,304,10,this.f<4?'#5c4f8a':C.cyan)}};
+
+/* 称骨 */
+S.bone={name:'称骨论命',enter(){this.t0=VT;this.ph='confirm';this.page=0},
+start(){const B=FortuneCore.bone(lunarOf(PF));this.B=B;this.page=0;this.ph='weigh';this.wt0=VT;this.tilt=0;this.v=0;this.load=0;this.p=20;this.added=0;this.fl=[];this.dn=0;this.ws=B.parts.map(p=>[p[0],p[2],p[1]]);this.total=B.total;this.pT=20+this.total/7.2*76},
+ key(k,d){if(!d)return;if(this.ph==='confirm'){if(k==='ok'&&HAS_LUNAR){sfx.enter();this.start()}if(k==='down'){S.birth.ret='bone';go('birth')}}else if(this.ph==='weigh'&&VT-this.wt0>9000){if(k==='ok'){this.ph='read';this.rt=VT}}else if(this.ph==='read'){if(k==='ok')this.ph='confirm';if(k==='down')this.page=(this.page+1)%3;if(k==='up')this.page=(this.page+2)%3}},
+read(){return(this.p-20)/76*7.2},
+update(dt){if(this.ph!=='weigh')return;const s=dt/1000,t=VT-this.wt0;
+ for(let i=0;i<4;i++){const land=800+i*1300+600;if(t>=land&&this.added===i){this.added++;this.load+=this.ws[i][1];this.v-=2.2;sfx.thump();this.fl.push({s:'+'+this.ws[i][1].toFixed(1),t:VT})}}
+ if(t>6200){const p=E.io(clamp((t-6200)/2200,0,1));this.p=lerp(20,this.pT,p);if(Math.floor(t/60)!==this.tk&&t<8400){this.tk=Math.floor(t/60);sfx.tick()}}
+ const target=clamp((this.load-this.read())*.1,-.3,.3);this.v+=(60*(target-this.tilt)-7*this.v)*s;this.tilt+=this.v*s;
+ if(t>8400&&!this.dn){this.dn=1;sfx.reveal()}},
+draw(){if(this.ph==='confirm'){drawConfirm('称骨论命');return}
+ const t=VT-this.wt0,Px=118,Py=96,a=-this.tilt;
+ c.strokeStyle=C.dim;c.lineWidth=1;c.beginPath();c.moveTo(Px,22);c.lineTo(Px,Py-4);c.stroke();circ(Px,Py-4,3,C.gold);
+ const cos=Math.cos(a),sin=Math.sin(a),wp=(lx,ly)=>[Px+lx*cos-ly*sin,Py+lx*sin+ly*cos];
+ c.save();c.translate(Px,Py);c.rotate(a);const bm=PI_('scale-beam');if(bm)c.drawImage(bm,-80,-3);else{c.fillStyle='#a9773f';rr(-80,-3,182,6,3);c.fill();c.fillStyle=C.gold;for(let x=14;x<=98;x+=7)c.fillRect(x,-2,1.5,1.5)}c.restore();
+ const [hx,hy]=wp(-72,2),panY=hy+56;c.strokeStyle=C.dim;c.beginPath();c.moveTo(hx,hy);c.lineTo(hx-22,panY);c.moveTo(hx,hy);c.lineTo(hx+22,panY);c.stroke();
+ const pn=PI_('scale-pan');if(pn)c.drawImage(pn,Math.round(hx-28),Math.round(panY-6));else{c.fillStyle='#c79a4a';c.beginPath();c.moveTo(hx-28,panY);c.quadraticCurveTo(hx,panY+16,hx+28,panY);c.closePath();c.fill()}
+ const [gx,gy]=wp(this.p,2);c.strokeStyle=C.dim;c.beginPath();c.moveTo(gx,gy);c.lineTo(gx,gy+20);c.stroke();const wt=PI_('scale-weight');if(wt)c.drawImage(wt,Math.round(gx-9),Math.round(gy+18));else{c.fillStyle='#3b3550';c.beginPath();c.moveTo(gx-6,gy+20);c.lineTo(gx+6,gy+20);c.lineTo(gx+9,gy+34);c.lineTo(gx-9,gy+34);c.closePath();c.fill();c.fillStyle=C.gold;c.fillRect(gx-1,gy+24,2,6)}
+ box(38,84,184,24,'scale-beam · 引擎旋转','e');box(hx-30,panY-10,60,30,'scale-pan + weight · Codex','x');
+ this.ws.forEach((w,i)=>{const st=800+i*1300;if(t<st)return;const x=hx+(i-1.5)*12;const y=t<st+600?lerp(24,panY-6,E.in((t-st)/600)):panY-6;const wi=PI_(['weight-nian','weight-yue','weight-ri','weight-shi'][i]);if(wi)c.drawImage(wi,Math.round(x-6),Math.round(y-6));else{c.fillStyle=C.gold;rr(x-6,y-6,12,12,2);c.fill();T(w[0],x,y+.5,9,C.ink,'center',F.serif)}});
+ this.fl=this.fl.filter(f=>VT-f.t<900);this.fl.forEach(f=>{const p=(VT-f.t)/900;T(f.s+'两',hx+36,panY-14-p*20,11,C.gold)});
+ nabo('N-CALC',56,206,48,VT);
+ if(t<6200)T(`放入砝码 ${this.added}/4`,120,192,12,C.dim);
+ else{const r=Math.round(this.read()*10),li=Math.floor(r/10),q=r%10;G(CN[li]+'两'+(q?CN[q]+'钱':''),120,186,26,C.gold,'#5a3a00');T(this.ws.map(w=>w[2]+' '+w[1].toFixed(1)).join('  '),120,212,9,C.dim,'center',F.serif)}
+ if(this.ph==='weigh'&&t>9000)T('OK 看完整解读',120,300,12,C.cyan);
+ if(this.ph==='read'){const B=this.B,p=E.out(clamp((VT-this.rt)/650,0,1)),y=lerp(330,30,p),r=Math.round(B.total*10);c.fillStyle=C.paper;rr(8,y,224,286,4);c.fill();
+  T(`${CN[Math.floor(r/10)]}两${r%10?CN[r%10]+'钱':''}`,120,y+25,24,C.ink,'center',F.disp);
+  T(B.type,120,y+55,15,'#8a2e1e','center',F.serif);c.fillStyle='#c9b48c';c.fillRect(24,y+72,192,1);
+  if(this.page===0){T('白话解读',24,y+91,11,C.ink,'left');wrapWidth(B.text,192,11).forEach((l,i)=>T(l,24,y+119+i*22,11,'#4a3020','left'))}
+  else if(this.page===1){T('称骨歌原文',24,y+91,11,C.ink,'left');(B.poem.match(/[^，]+，|[^，]+$/g)||[]).forEach((l,i)=>T(l,120,y+125+i*29,13,'#8a2e1e','center',F.serif))}
+  else{T('骨重明细',24,y+91,11,C.ink,'left');this.ws.forEach((w,i)=>T(`${w[0]}重  ${w[2]}  ${w[1].toFixed(1)}两`,24,y+126+i*32,11,C.ink,'left'))}
+  T('仅供娱乐',120,y+247,9,'#7a6248');T(`↑↓ 翻页 ${this.page+1}/3 · OK 返回`,120,y+271,9,'#7a6248')}}};
+
+/* 星座 */
+
+S.star={name:'星座',enter(){this.t0=VT;this.ph='pick';this.sel=signOf(PF.m,PF.d)},
+key(k,d){if(!d)return;if(this.ph==='pick'){if(k==='up'){this.sel=(this.sel+11)%12;sfx.tick()}if(k==='down'){this.sel=(this.sel+1)%12;sfx.tick()}if(k==='ok'){this.ph='draw';this.pt=VT;const r=mulberry32(this.sel*977+3);const n=6+Math.floor(r()*3);this.pts=[...Array(n)].map(()=>({x:40+r()*160,y:52+r()*130})).sort((a,b)=>a.x-b.x);this.rate=[0,1,2,3].map(()=>2+ri(4));this.lucky=[ri(9)+1,['金','青','紫','红','白'][ri(5)]]}}else if(k==='ok'&&this.ph==='done')this.ph='pick'},
+update(){if(this.ph==='draw'){const t=VT-this.pt,n=this.pts.length,ti=Math.floor(t/120);if(ti!==this.lt&&ti<n){this.lt=ti;tone(880+ti*90,.12,'triangle',.05)}if(t>n*120+(n-1)*170+300){this.ph='done';this.pt=VT}}},
+draw(){const r=mulberry32(42);for(let i=0;i<50;i++){const x=r()*240,y=26+r()*190,tw=Math.sin(VT/500+i)*.5+.5;c.fillStyle=tw>.7?C.white:'#4a3d78';c.fillRect(x|0,y|0,1,1)}
+ if(this.ph==='pick'){const s=SIGNS[this.sel];G(s[0],120,140,32,C.white,C.mag);T(s[1],120,174,12,C.dim,'center',F.mono);T('▲',120,96,12,C.dim);T('▼',120,198,12,C.dim);T('已按生辰定好 · ↑↓ 可换 · OK 看今日',120,300,10,'#5c4f8a');return}
+ const t=this.ph==='draw'?VT-this.pt:99999,n=this.pts.length,base=n*120;
+ c.strokeStyle=C.cyan;c.lineWidth=1;for(let i=0;i<n-1;i++){const p=clamp((t-base-i*170)/170,0,1);if(p<=0)break;const a=this.pts[i],b=this.pts[i+1];c.beginPath();c.moveTo(a.x,a.y);c.lineTo(lerp(a.x,b.x,p),lerp(a.y,b.y,p));c.stroke()}
+ this.pts.forEach((q,i)=>{const p=clamp((t-i*120)/200,0,1);if(p>0){star5(q.x,q.y,2+4*E.back(p)*(1-.4*p),C.white);circ(q.x,q.y,1.5,C.gold)}});
+ T(SIGNS[this.sel][0],120,194,15,C.gold,'center',F.disp);
+ if(this.ph==='done'){const tt=VT-this.pt;['爱情','事业','财运','心情'].forEach((nm,i)=>{const y=215+i*20;T(nm,58,y,11,C.dim,'right');for(let j=0;j<5;j++){const on=j<this.rate[i]&&tt>i*220+j*70;star5(74+j*14,y,5,on?C.gold:'#33295a')}});T(`幸运数字 ${this.lucky[0]} · 幸运色 ${this.lucky[1]}`,120,294,10,C.cyan);T('OK 换星座',120,312,9,'#5c4f8a')}}};
+
+/* 紫微 */
+const BPOS={子:[2,3],丑:[1,3],寅:[0,3],卯:[0,2],辰:[0,1],巳:[0,0],午:[1,0],未:[2,0],申:[3,0],酉:[3,1],戌:[3,2],亥:[3,3]};
+const MUTC={禄:C.gold,权:C.mag,科:C.cyan,忌:C.red};
+S.ziwei={name:'紫微斗数',enter(){this.t0=VT;this.ph='confirm';this.err=''},
+start(){try{this.a=iztro.astro.bySolar(`${PF.y}-${PF.m}-${PF.d}`,PF.h,PF.g,true,'zh-CN')}catch(e){this.err='排盘失败：'+e;return}
+ const a=this.a;this.ph='chart';this.ct=VT;this.soul=a.palaces.findIndex(p=>p.name==='命宫');this.cur=this.soul;this.order=[...Array(12)].map((_,i)=>(this.soul+i)%12);
+ this.fly=[];a.palaces.forEach((p,i)=>p.majorStars.forEach((s,j)=>this.fly.push({i,j,s})));this.fly.forEach((f,k)=>{f.at=1300+k*90;f.d=0});this.dd=0;this.lk=0},
+cellOf(i){const[cx,cy]=BPOS[this.a.palaces[i].earthlyBranch];return{x:4+cx*58,y:38+cy*62}},
+key(k,d){if(!d)return;
+ if(this.ph==='confirm'){if(k==='ok'&&typeof iztro!=='undefined'){sfx.enter();this.start()}if(k==='down'){S.birth.ret='ziwei';go('birth')}return}
+ if(this.ph==='chart'&&VT-this.ct>3000){if(k==='down'){this.cur=(this.cur+1)%12;sfx.tick()}if(k==='up'){this.cur=(this.cur+11)%12;sfx.tick()}if(k==='ok'){this.ph='detail';this.dt=VT;this.page=0;this.pages=1;this.rd=FortuneCore.ziweiRead(this.a,this.cur);sfx.whoosh()}return}
+ if(this.ph==='detail'){if(k==='ok')this.ph='chart';if(k==='up'||k==='down')this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages}},
+update(){if(this.ph!=='chart')return;const t=VT-this.ct;const lk=Math.min(12,Math.floor(t/50)+1);if(lk>this.lk){this.lk=lk;sfx.tick()}
+ this.fly.forEach((f,k)=>{if(!f.d&&t>f.at+400){f.d=1;tone(1200+k*40,.06,'triangle',.04)}});if(t>2900&&!this.dd){this.dd=1;sfx.reveal()}},
+draw(){if(this.ph==='confirm'){drawConfirm('紫微斗数');if(this.err)T(this.err,120,240,9,C.mag);return}
+ const a=this.a;
+ if(this.ph==='detail'){const p=a.palaces[this.cur],rd=this.rd,stars=rd.stars.length?rd.stars.map(s=>s.name+(s.brightness||'')+(s.mutagen?'化'+s.mutagen:'')).join('  '):'无主星',body=['主星 '+stars,'辅星 '+(p.minorStars.map(s=>s.name).join(' ')||'—'),...rd.lines].join('\n');this.pages=readCard(`${p.name} · ${p.heavenlyStem}${p.earthlyBranch}${p.isBodyPalace?' · 身宫':''}`,'星曜解读 · 仅供娱乐',body,this.page);return}
+ const t=VT-this.ct;
+ this.order.forEach((i,k)=>{if(t<k*50)return;const q=this.cellOf(i),p=a.palaces[i],on=t>3000&&i===this.cur,soul=i===this.soul;
+  c.strokeStyle=on?C.gold:soul&&t>3000?C.mag:'#3a2d6a';c.lineWidth=on?2:1;c.strokeRect(q.x+.5,q.y+.5,57,61);
+  if(t>600+k*50){T(p.name,q.x+29,q.y+52,9,soul?C.mag:C.white);if(p.isBodyPalace)T('身',q.x+54,q.y+12,8,C.cyan,'right')}});
+ const cx=120,cy=164;
+ this.fly.forEach(f=>{if(t<f.at)return;const q=this.cellOf(f.i),tx=q.x+12+f.j*22,ty=q.y+11,p=E.out(clamp((t-f.at)/400,0,1)),x=lerp(cx,tx,p),y=lerp(cy,ty,p),br=f.s.brightness||'';
+  if(p<1){c.strokeStyle='rgba(53,240,220,.5)';c.lineWidth=1;c.beginPath();c.moveTo(lerp(cx,tx,Math.max(0,p-.25)),lerp(cy,ty,Math.max(0,p-.25)));c.lineTo(x,y);c.stroke()}
+  const col=p<1?C.white:(br&&'庙旺'.includes(br))?C.gold:(br&&'陷不'.includes(br))?'#8f82b8':C.cyan;
+  T(f.s.name[0],x,y,10,col,'center',F.serif);T(f.s.name[1],x,y+17,10,f.s.mutagen?MUTC[f.s.mutagen]:col,'center',F.serif);
+  });
+ if(t<2900){nabo('N-CALC',100,cx,cy-10,VT);T('排盘中…',cx,cy+50,11,C.dim)}
+ else{const p=a.palaces[this.cur];T(a.fiveElementsClass,cx,111,10,C.dim,'center',F.serif);T('命主'+a.soul,cx,131,9,C.dim);T('身主'+a.body,cx,151,9,C.dim);G(p.name,cx,178,24,C.white,this.cur===this.soul?C.mag:'#3a2d6a');T(p.majorStars.length?p.majorStars.map(s=>s.name+(s.mutagen||'')).join(' · '):'空宫借对宫',cx,202,10,C.gold,'center',F.serif);T('OK 解读',cx,222,9,C.cyan)}}};
+
+/* 奇门 */
+const LS={4:[0,0],9:[1,0],2:[2,0],3:[0,1],5:[1,1],7:[2,1],8:[0,2],1:[1,2],6:[2,2]},GUA={1:'坎',2:'坤',3:'震',4:'巽',5:'中',6:'乾',7:'兑',8:'艮',9:'离'};
+const RING=[4,9,2,7,6,1,8,3],STAR9={1:'天蓬',2:'天芮',3:'天冲',4:'天辅',6:'天心',7:'天柱',8:'天任',9:'天英'},DOOR={1:'休',2:'死',3:'伤',4:'杜',6:'开',7:'惊',8:'生',9:'景'};
+const ASKHINT=['看生门','看开门','看六合','看景门','看值使门'];
+S.qimen={name:'奇门遁甲',enter(){this.t0=VT;this.ph='ask';this.sel=this.sel||0;this.nowL=HAS_LUNAR?Solar.fromDate(new Date()).getLunar():null},
+start(){this.q=FortuneCore.qimen(this.nowL);this.rd=FortuneCore.qimenRead(this.q,this.sel);this.ph='anim';this.at=VT;this.f=[0,0,0];this.hop=0},
+cc(n){const[x,y]=LS[n];return{x:12+x*72,y:56+y*72}},
+rp(f){f=((f%8)+8)%8;const i=Math.floor(f),u=f-i,a=this.cc(RING[i]),b=this.cc(RING[(i+1)%8]);return{x:lerp(a.x,b.x,u),y:lerp(a.y,b.y,u)}},
+key(k,d){if(!d)return;
+ if(this.ph==='ask'){if(k==='up'){this.sel=(this.sel+4)%5;sfx.tick()}if(k==='down'){this.sel=(this.sel+1)%5;sfx.tick()}if(k==='ok'&&this.nowL){sfx.enter();this.start()}return}
+ if(this.ph==='anim'&&k==='ok'&&VT-this.at>4200){this.ph='read';this.rt=VT;this.page=0;this.pages=1;sfx.whoosh();return}
+ if(this.ph==='read'){if(k==='ok')this.enter();if(k==='up'||k==='down')this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages}},
+update(){if(this.ph!=='anim')return;const t=VT-this.at;for(let i=1;i<=9;i++){if(t>500+(i-1)*130&&this.hop<i){this.hop=i;tone(500+i*60,.07,'triangle',.05)}}
+ [[2500,0],[3400,1]].forEach(([a,j])=>{if(t>a&&!this.f[j]){this.f[j]=1;sfx.lock();shake=3}});if(t>4100&&!this.f[2]){this.f[2]=1;sfx.reveal()}},
+draw(){
+ if(this.ph==='ask'){G('问什么事？',120,46,22,C.white,C.mag);
+  FortuneCore.QM_ASK.forEach((a,i)=>{const y=88+i*34,on=i===this.sel;if(on){c.fillStyle=C.bg2;rr(30,y-14,180,28,4);c.fill();c.strokeStyle=C.mag;c.lineWidth=1.5;rr(30,y-14,180,28,4);c.stroke()}T(a[0],60,y,15,on?C.gold:C.white,'left',F.serif);T(ASKHINT[i],196,y,10,on?C.cyan:C.dim,'right')});
+  if(this.nowL){const n=new Date();T(`起局时间 ${n.getFullYear()}.${pad(n.getMonth()+1)}.${pad(n.getDate())} ${this.nowL.getTimeZhi()}时`,120,270,10,C.dim,'center',F.serif);T(`${this.nowL.getDayInGanZhi()}日 ${this.nowL.getTimeInGanZhi()}时 · 按此刻起局`,120,286,10,C.dim,'center',F.serif)}
+  T('↑↓ 选择  OK 起局',120,306,9,'#5c4f8a');return}
+ const q=this.q,rd=this.rd;
+ if(this.ph==='read'){const body=[`${q.dayGZ}日 ${q.shiGZ}时`,`${q.yang?'阳':'阴'}遁${CN[q.ju]}局${q.yuan}`,`用神：${rd.key}`,`落宫：${rd.gua}${rd.palace}宫（${rd.dir}）`,`方位：办这件事，可以多往${rd.dir}走动。`,...rd.lines].join('\n');this.pages=readCard(rd.ask,rd.verdict,body,this.page);return}
+ const t=VT-this.at,gp=clamp(t/500,0,1);c.strokeStyle='#3a2d6a';c.lineWidth=1;
+ for(let i=0;i<=3;i++){const L=216*gp;c.beginPath();c.moveTo(12,56+i*72);c.lineTo(12+L,56+i*72);c.stroke();c.beginPath();c.moveTo(12+i*72,56);c.lineTo(12+i*72,56+L);c.stroke()}
+ for(let n=1;n<=9;n++){if(t<500+(n-1)*130)continue;const p=this.cc(n);T(n+GUA[n],p.x+5,p.y+64,8,C.dim,'left');T(q.earth[n],p.x+66,p.y+64,10,'#b9b0d8','right',F.serif)}
+ if(t>500&&t<1700){const f=(t-500)/130,i=Math.min(8,Math.floor(f)),u=f-i,a=this.cc(i+1),b=this.cc(Math.min(9,i+2));const x=lerp(a.x,b.x,i<8?u:0)+36,y=lerp(a.y,b.y,i<8?u:0)+36;circ(x,y,5,C.gold);circ(x,y,2.5,'#fff')}
+ if(t>1700){const p=E.back(clamp((t-1700)/800,0,1));RING.forEach((n,i)=>{const r=this.rp(i+q.ringShift*p);T(STAR9[n],r.x+36,r.y+30,13,C.cyan,'center',F.serif)});
+  if(t>2500)RING.forEach(n=>T(q.heaven[n],this.cc(n).x+66,this.cc(n).y+12,10,C.white,'right',F.serif))}
+ if(t>2600){const p=E.back(clamp((t-2600)/800,0,1));RING.forEach((n,i)=>{const r=this.rp(i+q.doorShift*p);T(DOOR[n]+'门',r.x+36,r.y+48,12,C.gold,'center',F.serif)})}
+ if(t>3500){const gi=RING.indexOf(q.zhifuAt);for(let j=0;j<8;j++){if(t<3500+j*60)break;const n=RING[((q.yang?gi+j:gi-j)%8+8)%8];T(q.god[n],this.cc(n).x+5,this.cc(n).y+12,9,C.mag,'left')}}
+ const z=this.cc(5);if(t<2600)nabo('N-CALC',56,z.x+36,z.y+34,VT);else T('中五',z.x+36,z.y+34,12,C.dim,'center',F.serif);
+ T(t>4100?`${q.yang?'阳':'阴'}遁${CN[q.ju]}局 ${q.yuan} · ${q.jq}`:'起局中…',120,40,12,t>4100?C.white:C.dim,'center',F.serif);
+ if(t>4100){const u=this.cc(rd.palace),pl=.5+.5*Math.sin(VT/160);c.strokeStyle=`rgba(255,201,74,${.4+.6*pl})`;c.lineWidth=2.5;c.strokeRect(u.x+1.5,u.y+1.5,69,69);
+  T(`用神 ${rd.key} 落${rd.gua}${rd.palace}宫 · ${rd.dir}`,120,288,11,C.gold,'center',F.serif);T('OK 看解读',120,306,10,C.cyan)}}};
+
+/* 今日小票 */
+
+S.daily={name:'今日一卦',enter(){this.t0=VT;this.ph='idle';this.L=0},
+key(k,d){if(!d)return;if(this.ph==='done'){if(k==='ok')this.ph='idle';if(k==='up'||k==='down')this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages}else if(k==='ok'&&this.ph!=='print'){this.make();this.ph='print';this.L=0;this.lt=VT;this.pause=0;this.page=0;this.pages=1}},
+make(){const d=new Date(),wd='日一二三四五六'[d.getDay()],FC=FortuneCore;
+ const t=FC.dailyTicket(FC.dailySeed(d.getFullYear(),d.getMonth()+1,d.getDate(),PF.y,PF.m,PF.d,PF.h,PF.g==='男'?0:1),signOf(PF.m,PF.d));
+ this.printN=(this.printN||0)+1;const tc=TAROT[t.tarot],sg=SIGNS[t.sign];
+ this.rows=[[14,'★ NABO 赛博算命机 ★','d'],[34,'今日一卦','h'],[52,`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}  周${wd}`,'m'],[64,'','-'],[80,`星座  ${sg[0]}  `+'★★★★★☆☆☆☆☆'.substr(5-t.signStars,5),'t'],[100,`塔罗  ${tc[0]} ${tc[1]}${t.tarotRev?' · 逆位':''}`,'t'],[120,`灵签  第${cnNum(t.lotNo)}签 · ${['上签','中签','下签'][t.lotLevel]}`,'t'],[140,`卦象  ${HEX[t.hexUp][t.hexLo]}`,'t'],[154,'','-'],[170,'宜  '+t.yi.map(i=>FC.YI[i]).join(' · '),'t'],[188,'忌  '+t.ji.map(i=>FC.JI[i]).join(' · '),'t'],[202,'','-'],[220,'','bar'],[242,`仅供娱乐 · NO.${String(t.serial).padStart(4,'0')}-${this.printN}`,'s']];this.TH=256},
+update(){if(this.ph!=='print')return;if(VT<this.pause)return;if(VT-this.lt>26){this.lt=VT;this.L+=3;sfx.print();for(const r of this.rows)if(Math.abs(r[0]-this.L)<2&&r[2]!=='-')this.pause=VT+(r[2]==='d'?180:90);if(this.L>=this.TH){this.L=this.TH;this.ph='tear';this.tt=VT;sfx.whoosh()}}if(this.ph==='tear'&&VT-this.tt>400){this.ph='done';burst(120,290,20,C.cyan)}},
+draw(){if(this.ph==='done'){const body=this.rows.filter(r=>r[2]==='t'||r[2]==='s').map(r=>r[1]).join('\n');this.pages=readCard('今日一卦',this.rows[2][1],body,this.page);return}const slot=296;
+ if(this.ph!=='idle'){const lift=this.ph==='tear'||this.ph==='done'?-8*E.back(clamp((VT-this.tt)/400,0,1)):0,top=slot-this.L+lift;
+  c.save();c.beginPath();c.rect(0,0,W,slot);c.clip();c.fillStyle='#f4efe4';c.fillRect(32,top,176,this.L);
+  c.fillStyle=C.bg;for(let x=32;x<208;x+=8){c.beginPath();c.moveTo(x,top-1);c.lineTo(x+4,top+4);c.lineTo(x+8,top-1);c.fill()}
+  if(this.ph!=='print'){for(let x=32;x<208;x+=8){c.beginPath();c.moveTo(x,slot+lift+1);c.lineTo(x+4,slot+lift-4);c.lineTo(x+8,slot+lift+1);c.fill()}}
+  for(const[o,s,ty]of this.rows){if(o>this.L-4)continue;const y=top+o;
+   if(ty==='d')T(s,120,y,13,'#c0187a','center',F.disp);else if(ty==='h')T(s,120,y,15,C.ink,'center',F.serif);else if(ty==='m')T(s,120,y,10,'#5a4a3a','center',F.mono);
+   else if(ty==='-'){c.fillStyle='#b8ab92';for(let x=40;x<200;x+=6)c.fillRect(x,y,3,1)}else if(ty==='bar'){const r=mulberry32(o*31+7);let x=48;while(x<192){const w=1+Math.floor(r()*3);c.fillStyle=C.ink;c.fillRect(x,y-9,w,18);x+=w+1+Math.floor(r()*3)}}
+   else if(ty==='s')T(s,120,y,9,'#8a7a62','center',F.mono);else T(s,44,y,s.length>14?10:11,C.ink,'left',F.sans)}
+  c.restore();box(32,top,176,this.L,'小票：纸纹底 + 文字，引擎逐行生成','e')}
+ const pr=PI_('printer');if(pr)c.drawImage(pr,14,slot-4);else{c.fillStyle='#211a3c';rr(14,slot-4,212,30,6);c.fill();c.fillStyle='#05030c';c.fillRect(28,slot-1,184,4);T('NABO PRINT',30,slot+14,8,C.dim,'left',F.mono)}
+ if(this.ph==='print'&&Math.floor(VT/120)%2)circ(204,slot+14,2.5,C.cyan);box(14,slot-4,212,28,'打印机外壳 · Codex','x');
+ if(this.ph==='idle'){naboThen('N-PRINT',120,120,138,VT-this.t0,'N-IDLE');G('今日一卦',120,214,24,C.white,C.mag);T('OK 打印今天的命签小票',120,244,11,C.dim)}
+ if(this.ph==='done')T('OK 再打一张',120,22+10,10,C.cyan)}};
+
+/* ---------- 场景说明 ---------- */
+const NOTE={
+boot:{sub:'开机到可操作约 1.9 秒，任何时刻按 OK 都能跳过。',st:[['0–250 ms','CRT 开机：屏幕中间一道白线横向拉开'],['250–450 ms','白线纵向展开成整屏闪白，随后褪去'],['450–1400 ms','八卦环旋转缩入；“NABO赛博算命机”逐字出现，每个字带 2 帧红青错位'],['1.4 s 起','NABO 从底部升起作揖，“按 OK 开始”呼吸闪烁']],g:['N-WELCOME 登场作揖，120×120，约 1.2 s'],x:['标题字样（霓虹描边）','八卦环 8 个卦符'],e:['白线、闪白：纯填色','错位闪烁：同一字形两色错开 2 px 各画一次','八卦环：8 个位置查表旋转']},
+menu:{sub:'八卦转盘就是主菜单，每个卦位对应一种算法。',st:[['↑ / ↓','转盘转 45°，约 180 ms 缓停，伴随“咔嗒”'],['常驻','中心太极缓慢自转，NABO 坐在太极上待机'],['顶部','金色指针指着当前项，下方显示名称和一句说明'],['OK','进入当前玩法']],g:['N-IDLE 待机循环：呼吸、眨眼、推眼镜，76×76，2–3 s 循环'],x:['转盘底环、64 格刻度','太极 32 帧旋转（也可引擎画）'],e:['转盘只重画环形脏区','卦符位置用 sin/cos 定点表']},
+shake:{sub:'六爻起卦：每一爻摇一次，共六次。',st:[['待机','NABO 双手捧龟甲，底部显示已成的爻'],['长按 OK','龟甲抖动，幅度随按住时长增大；每 90 ms 一声铜钱碰撞；底部蓄力条'],['松开','三枚铜钱从龟甲口抛出，翻转着落地，弹一次后停住，显示字或背'],['停住 0.5 s','算出本爻（背 3、字 2，相加 6–9），从中间向两边长出；老阳 ○、老阴 × 标金色'],['第 6 爻','卦名红青错位闪烁后定格；有变爻时显示变卦；撒金粉，NABO 点头'],['OK','解卦卡：按朱熹《易学启蒙》变爻断法，列出要读的卦辞或爻辞原文（武英殿本）和白话；再按 OK 重新起卦']],g:['N-SHELL 摇龟甲循环，120×116；抖动幅度由引擎叠加位移','N-NOD 点头（完成时）'],x:['铜钱正面（四字）与背面各 1 张，22×22','龟甲口位置在 N-SHELL 里固定，作为铜钱出生点'],e:['铜钱翻转：横向缩放 16 帧','抛物线和弹跳：定点数积分','结果在松开瞬间由硬件随机数和按住时长决定，动画只负责演出']},
+lot:{sub:'求签：摇得越久，那支签冒得越高；够高了松手才掉出来。',st:[['长按 OK','签筒左右摇摆，幅度逐渐加大，签子乱跳；被选中的那支慢慢冒出，变亮'],['冒够了松开','这支签飞出筒外，翻滚落地弹一下；太早松开则缩回去，提示再摇久一点'],['落地 0.35 s','签子飞到屏幕中央放大，竖排显示签号'],['展开','卷轴从中间向上下展开，签诗逐行显现，最后一行解曰'],['盖章','“上签 / 中签 / 下签”印章砸下，屏幕震动；上签撒金粉'],['结束','NABO 按签的好坏做反应：惊喜、点头或温和安慰']],g:['N-TUBE 盯着签筒（期待）','N-WOW 惊喜 / N-NOD 点头 / N-SIGH 安慰，各约 1 s'],x:['签筒正面 1 张 → 脚本生成 11 个倾角帧','签子 1 根（带红头）','卷轴纸底、轴杆','印章 3 枚：上签、中签、下签'],e:['签子掉落：刚体抛物线 + 旋转','卷轴展开：只改裁剪高度','印章：3 级缩放 + 屏幕震动']},
+tarot:{sub:'单张牌占卜，以后可以扩展三张牌阵。',st:[['进入','洗牌：牌堆左右分开再交错合拢，约 1.3 s'],['扇形','7 张牌从下方依次弹入成扇形，↑↓ 选牌，选中的那张上浮并描金边'],['OK','牌沿弧线飞向中央，同时放大到 2 倍'],['翻牌','横向缩放翻面；逆位时同时旋转 180°'],['揭晓','牌名、正逆位和关键词，金粉散开']],g:['（可选）N-SHUFFLE 洗牌手部特写，用在进入时'],x:['牌背 1 张','22 张大阿卡纳 NABO 版牌面，82×135','逆位不出图'],e:['扇形布局、飞行弧线、翻面缩放','逆位：整张旋转 180° 绘制']},
+bone:{sub:'称骨论命：按农历年、月、日、时查骨重表，四块砝码放上杆秤称出总重。',st:[['进入','先确认生辰（↓ 修改），OK 开始称'],['0.4 s 起','年、月、日、时四块砝码依次落入秤盘，每块落下秤杆一沉一弹，浮出“+X两”'],['3.5 s','秤砣沿秤杆向右滑，读数实时滚动，秤杆逐渐回正'],['4.9 s','找平，读出“X两X钱”，下面列出四项骨重'],['5 s','解读卡从下方滑入：按骨重分 9 档，显示类型和正向白话']],g:['N-CALC 掐指一算循环，小尺寸 56×56'],x:['秤杆（带秤星）、秤盘、秤砣','砝码 4 块（年月日时）','解读卡底纹'],e:['骨重表：年 60 甲子、月 12、日 30、时 12，查表相加（待对照古本校对）','秤杆：二阶阻尼弹簧，整数实现','称骨歌原文校对后录入；白话不涉及寿命、疾病、灾祸']},
+star:{sub:'星座今日运势：连星成座，再点亮四项星级。',st:[['选星座','↑↓ 切换（正式版按生日自动确定，这一步跳过）'],['OK','星点依次亮起并弹一下，每颗 120 ms，伴随上行音阶'],['连线','一笔一笔连成星座，每段 170 ms'],['评分','爱情、事业、财运、心情四项星级逐颗点亮；最后显示幸运数字和幸运色']],g:['（可选）N-TELESCOPE 举望远镜'],x:['12 星座的真实星点坐标表','星级图标'],e:['连线：Bresenham 逐段延长','背景星空闪烁只改单个像素']},
+ziwei:{sub:'紫微斗数：按生辰真实排盘（iztro 开源库），十二宫按标准地支方位，寅宫在左下。',st:[['进入','先确认生辰和性别（↓ 修改），OK 排盘'],['0–0.6 s','十二宫从命宫开始逐格亮起，标出宫干支'],['0.6–1.3 s','宫名依次出现，身宫标“身”'],['1.3 s 起','NABO 在中宫掐指，主星从中心带拖尾飞入各宫；庙旺金色、陷地灰色，四化用不同颜色'],['完成','中宫显示五行局、命主、身主；↑↓ 换宫'],['OK','解读卡：主星按本宫主题解读，加庙旺和四化；空宫借对宫；疾厄宫不做健康判断']],g:['N-CALC 掐指（放在中宫，约 100×100）'],x:['宫格框线样式','解读卡底纹'],e:['排盘：固件里用 C 重写，和 iztro 逐盘对拍','解读：14 主星 × 4 个主题的原创短句，加庙旺、四化修饰']},
+qimen:{sub:'时家奇门：按此刻起局，先选问什么事，再看用神落在哪一宫。',st:[['进入','选问事类型：求财看生门、事业看开门、感情看六合、考试看景门、出行看值使门'],['0–0.5 s','九宫格线描出'],['0.5–1.7 s','金色光点按洛书 1→9 飞宫，经过的宫亮出数字、卦名和地盘干'],['1.7–2.5 s','九星层整体转到位，回弹定位，“咔”一声，轻微震屏；天盘干出现'],['2.6–3.4 s','八门层转到位'],['3.5–4.1 s','八神从值符所在宫起逐宫浮现；顶部显示阴阳遁、局数、元和节气'],['揭晓','用神所在宫描金闪烁，底部显示方位'],['OK','解读卡：门、星、神各一句，综合给出大顺 / 顺 / 平 / 宜缓，附方位建议']],g:['N-CALC（起局期间在中五宫）'],x:['九宫底纹（可选）','解读卡底纹、结论印章'],e:['起局：时家转盘拆补法；和 kinqimen 对拍 600 个随机时间点，局数、地盘、九星、八门、八神全部一致','转盘移动期间只重画外圈 8 格']},
+birth:{sub:'生辰档案：称骨、紫微、星座、今日小票共用。固件里存在 NVS，原型里存在你的浏览器。',st:[['↑ / ↓','滚动当前一格；按住快速滚动，适合调年份'],['OK','跳到下一格：年 → 月 → 日 → 时辰 → 性别'],['实时','下方同步显示农历、四柱八字、生肖和星座'],['最后一格 OK','保存，回到刚才的玩法'],['注意','这一页双击上键不返回，避免快速滚动时误退出']],g:['（可选）N-IDLE 小尺寸放在角落'],x:['滚轮外框（可选）'],e:['农历和八字：固件里用 1900–2100 农历表 + 节气表，整数实现','滚轮滑动：位移缓动']},
+daily:{sub:'每天的主入口：把星座、塔罗、灵签、卦象合成一张热敏小票。',st:[['待机','NABO 站在打印机上方，提示按 OK'],['OK','底部打印机开始出纸，小票向上推出'],['打印中','走纸一步一停，遇到标题行停得久一点，配细碎的针打声'],['打完','撕纸：小票上跳一下，出纸口闪青光'],['内容','日期、星座星级、塔罗日牌、灵签、卦象、宜忌、条码、编号；同一天同一生辰打印结果相同，只有打印次数递增']],g:['N-PRINT 递小票 / 拍打印机'],x:['打印机外壳','小票纸纹（可选）'],e:['小票整张由文字逐行生成；出纸就是改起始行，可用 ST7789 硬件滚动']}};
+
+const ORDER=['boot','menu','birth','daily','shake','lot','tarot','bone','star','ziwei','qimen'];
+const chips=document.getElementById('chips');
+ORDER.forEach(id=>{const b=document.createElement('button');b.textContent=id==='boot'?'开机':id==='menu'?'主转盘':S[id].name;b.dataset.id=id;b.onclick=()=>{go(id);cv.focus?.()};chips.appendChild(b)});
+function li(arr,el){el.innerHTML='';arr.forEach(s=>{const l=document.createElement('li');l.textContent=s;el.appendChild(l)})}
+function go(id){curId=id;scene=S[id];scene.enter();P.length=0;
+ const n=NOTE[id];document.getElementById('sName').textContent=id==='boot'?'开机':scene.name;document.getElementById('sSub').textContent=n.sub;
+ const ol=document.getElementById('sSteps');ol.innerHTML='';n.st.forEach(([a,b])=>{const l=document.createElement('li');l.innerHTML='<span class="tm"></span><span></span>';l.children[0].textContent=a;l.children[1].textContent=b;ol.appendChild(l)});
+ li(n.g,document.getElementById('wG'));li(n.x,document.getElementById('wX'));li(n.e,document.getElementById('wE'));
+ chips.querySelectorAll('button').forEach(b=>b.setAttribute('aria-current',b.dataset.id===id?'true':'false'))}
+function back(){if(curId!=='menu'&&curId!=='boot'){sfx.tick();go('menu')}}
+
+/* ---------- 输入 ---------- */
+const held={};let lastUp=0;
+function press(k){if(held[k])return;held[k]=VT;btn[k].classList.add('on');
+ if(k==='up'&&!scene.noDouble){const n=performance.now();if(n-lastUp<300){lastUp=0;back();return}lastUp=n}
+ scene.key&&scene.key(k,true)}
+function release(k){if(!held[k])return;held[k]=0;btn[k].classList.remove('on');scene.key&&scene.key(k,false)}
+const btn={up:document.getElementById('kUp'),down:document.getElementById('kDown'),ok:document.getElementById('kOk')};
+for(const k in btn){const b=btn[k];b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture?.(e.pointerId);press(k)});['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>release(k)));b.addEventListener('contextmenu',e=>e.preventDefault())}
+const KM={ArrowUp:'up',ArrowDown:'down',Enter:'ok',' ':'ok'};
+addEventListener('keydown',e=>{if(e.key==='Escape'||e.key==='Backspace'){back();e.preventDefault();return}const k=KM[e.key];if(!k)return;e.preventDefault();if(e.repeat)return;press(k)});
+addEventListener('keyup',e=>{const k=KM[e.key];if(k)release(k)});
+function tog(id,fn){const b=document.getElementById(id);b.onclick=()=>{const v=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',v);fn(v)}}
+tog('oSlow',v=>speed=v?.25:1);tog('oBox',v=>showBox=v);tog('oScan',v=>scan=v);tog('oSnd',v=>{snd=v;if(v){au();if(curId==='boot')welcomeVoice()}else bootVoice.pause()});
+document.getElementById('oBack').onclick=back;
+
+/* ---------- 主循环 ---------- */
+let last=performance.now();
+function frame(now){const rdt=Math.min(50,now-last);last=now;const dt=rdt*speed;VT+=dt;
+ scene.update(dt);stepP(dt);boxes.length=0;
+ c.setTransform(1,0,0,1,0,0);c.drawImage(bgc,0,0);
+ if(shake>0){c.translate((Math.random()*2-1)*shake,(Math.random()*2-1)*shake);shake=Math.max(0,shake-dt*.03)}
+ scene.draw();drawP();c.setTransform(1,0,0,1,0,0);
+ if(curId!=='boot'){c.fillStyle='#08051a';c.fillRect(0,0,W,24);T('NABO 赛博算命机',6,12,13,C.cyan,'left',F.disp);T(scene.name,234,12,9,C.dim,'right');if(Math.floor(VT/700)%2)circ(166,12,2,C.mag)}
+ if(showBox)for(const b of boxes){c.strokeStyle=b.type==='g'?C.mag:b.type==='x'?C.cyan:C.gold;c.setLineDash([3,2]);c.lineWidth=1;c.strokeRect(b.x+.5,b.y+.5,b.w,b.h);c.setLineDash([]);c.font=`8px ${F.sans}`;const tw=c.measureText(b.label).width+4;c.fillStyle='rgba(8,5,26,.85)';c.fillRect(b.x,b.y-10,tw,10);T(b.label,b.x+2,b.y-5,8,c.strokeStyle,'left')}
+ if(scan)c.drawImage(scc,0,0);
+ requestAnimationFrame(frame)}
+const txt=document.querySelector('script:last-of-type').textContent;
+if(document.fonts&&document.fonts.load){[F.disp,F.serif,F.sans,F.mono].flatMap(f=>f.split(',').slice(0,2)).forEach(f=>{try{document.fonts.load(`16px ${f}`,txt.replace(/[\x00-\x7f]/g,''))}catch(e){}})}
+let start=0;try{start=location.hash.slice(1)}catch(e){}
+go(ORDER.includes(start)?start:'boot');requestAnimationFrame(frame);
+window.__nf={S,go};/* 测试钩子：宿主截图脚本用 */
+})();
+</script>

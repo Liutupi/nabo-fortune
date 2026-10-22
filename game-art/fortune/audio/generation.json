@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-22",
+  "generator": "Dreamina Canvas TTS",
+  "text": "NABO，在此恭候。",
+  "voice_name": "阳光小男孩",
+  "project_id": "d055c42c-03d2-418c-b154-3cde93da0764",
+  "node_id": "node_60gws99ypj",
+  "submit_id": "44c34e4b-427d-4596-a409-a947a3ab9a54",
+  "resource_id": "a2b1be32-2b20-433b-8746-e9640c4e8d84",
+  "original": "originals/dreamina-a2b1be32-2b20-433b-8746-e9640c4e8d84.mp3",
+  "original_sha256": "a50f59b7108fff6861b669a69dfc9e77c6caf0a523dd714e2a809afea29adc77",
+  "processed": "boot-welcome.wav",
+  "processed_format": "PCM signed 16-bit little-endian, mono, 16000 Hz",
+  "processing": "highpass=f=90,lowpass=f=6500,loudnorm=I=-16:TP=-3:LRA=7,afade=t=in:d=0.01",
+  "runtime_resource": "snd/boot-welcome",
+  "runtime_note": "Start 1.4 seconds after boot scene entry; other cues duck to one-quarter while speech plays. Audio task has higher priority than rendering."
+}

@@ -1,0 +1,169 @@
+{
+  "date": "2026-10-22",
+  "version": "0.1.2",
+  "acceptance": "complete_local_device_validation",
+  "app_sha256": "d46453682debe1f4199b66bf2d5e84eda9f256964210cb883c41c9e0aaa72834",
+  "assets_sha256": "fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664",
+  "device": {
+    "chip": "ESP32-C3 rev 1.1",
+    "flash_bytes": 8388608,
+    "mac_suffix": "a9:58"
+  },
+  "installation": {
+    "original_full_backup_digest_verified": true,
+    "original_backup_is_private": true,
+    "mode": "app_only",
+    "existing_bootloader_and_nvs_preserved": false,
+    "partition_table_compared_before_write": true,
+    "app_and_assets_readback_digest_matched": true,
+    "merged_bootloader_not_flashed_in_this_upgrade": false,
+    "nvs_preserved": true,
+    "bootloader_updated_to_release_build": true
+  },
+  "serial": {
+    "profile_preserved_mode": true,
+    "invalid_date_commands_rejected": true,
+    "all_eight_play_routes_exercised": true,
+    "stress_rounds": 10,
+    "unexpected_restarts": 0,
+    "double_up_returned_to_menu": true,
+    "sfx_triggers": 11,
+    "image_misses_zero": true,
+    "serial_reply_retries": 1,
+    "min_heap": 88144,
+    "min_largest": 24576
+  },
+  "profile_before_and_after_equal": true,
+  "performance_windows": [
+    {
+      "phase": "pre-route",
+      "frames": 926,
+      "avg_ms": 21,
+      "max_ms": 28,
+      "over_33ms": 0
+    },
+    {
+      "phase": "daily",
+      "frames": 251,
+      "avg_ms": 8,
+      "max_ms": 32,
+      "over_33ms": 0
+    },
+    {
+      "phase": "shake",
+      "frames": 751,
+      "avg_ms": 5,
+      "max_ms": 34,
+      "over_33ms": 1
+    },
+    {
+      "phase": "lot",
+      "frames": 319,
+      "avg_ms": 12,
+      "max_ms": 68,
+      "over_33ms": 40
+    },
+    {
+      "phase": "tarot",
+      "frames": 277,
+      "avg_ms": 16,
+      "max_ms": 44,
+      "over_33ms": 2
+    },
+    {
+      "phase": "bone",
+      "frames": 358,
+      "avg_ms": 12,
+      "max_ms": 46,
+      "over_33ms": 13
+    },
+    {
+      "phase": "star",
+      "frames": 135,
+      "avg_ms": 5,
+      "max_ms": 26,
+      "over_33ms": 0
+    },
+    {
+      "phase": "ziwei",
+      "frames": 186,
+      "avg_ms": 7,
+      "max_ms": 32,
+      "over_33ms": 0
+    },
+    {
+      "phase": "qimen",
+      "frames": 222,
+      "avg_ms": 7,
+      "max_ms": 30,
+      "over_33ms": 0
+    },
+    {
+      "phase": "stress",
+      "frames": 1428,
+      "avg_ms": 8,
+      "max_ms": 45,
+      "over_33ms": 36
+    }
+  ],
+  "sleep": {
+    "sleep_request_seen": true,
+    "idle_before_sleep_ms": 300163,
+    "usb_disconnected_after_sleep": false,
+    "deep_sleep_wake_seen": false,
+    "reset_reason_log_captured": false,
+    "physical_input_events": 0,
+    "ready_after_wake": true,
+    "uptime_restarted_after_sleep": true,
+    "manual_screen_off_and_upper_wake_confirmed": true,
+    "manual_user_reply": "已从熄屏唤醒，回到开机画面",
+    "wake_clock_is_calibrated": true,
+    "clock_advanced_minutes": 8.0,
+    "profile_retained_after_wake": true,
+    "functional_sleep_and_wake_passed": true,
+    "note": "Windows COM12 remained enumerated and early reset logs were not captured. Actual evidence: 300-second idle log, codec/display shutdown, user-confirmed upper-key wake, restarted uptime and advancing calibrated RTC."
+  },
+  "user_retest": {
+    "date": "2026-10-22",
+    "version": "0.1.2",
+    "accepted": true,
+    "user_reply": "可以了",
+    "requested_retest_scope": [
+      "visible enlarged tarot art and readable draw/flip timing",
+      "four bone weights and moving scale weight; stopped result and OK to read",
+      "new sound",
+      "font readability"
+    ],
+    "note": "Acceptance applies to this explicitly requested physical retest. Sleep/wake and power-off persistence are recorded separately."
+  },
+  "power_cycle": {
+    "version": "0.1.2",
+    "same_live_mac": true,
+    "restarted_uptime_observed": true,
+    "profile_equal_after_user_power_cycle": true,
+    "clock_marked_unknown_after_cold_start": true,
+    "clock_synced_to_local_pc_after_check": true
+  },
+  "private_serial_log_sha256": "ed3ee2237bf60a1c057b10040cebd7f917c766acd36a70d3948f75aae5b381cb",
+  "pending": [],
+  "limits": [
+    "Serial key injection is not physical button verification.",
+    "Average frame times include waits/result pages; lot still has frames above 33 ms.",
+    "Host PCM without clipping does not establish speaker quality."
+  ],
+  "release_boot_validation": {
+    "version": "0.1.2",
+    "all_four_build_images_digest_verified_on_device": true,
+    "new_build_bootloader_installed_and_booted": true,
+    "nvs_written": false,
+    "profile_preserved": true,
+    "startup_version_verified": true,
+    "initial_menu_responded": true,
+    "images": {
+      "bootloader": "d19fe10d519d95f3ae1dc06d45f2cc07b29922585c32004635b650be7af9a12d",
+      "partition_table": "43311cbc95711332aa26b5e5002a58a9099b1a3be0b394408bc7b2b5dd986d86",
+      "app": "d46453682debe1f4199b66bf2d5e84eda9f256964210cb883c41c9e0aaa72834",
+      "assets": "fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664"
+    }
+  }
+}

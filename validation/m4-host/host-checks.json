@@ -1,0 +1,33 @@
+{
+  "sound": {
+    "cues": 11,
+    "peaks": [
+      3425,
+      5890,
+      7194,
+      3870,
+      7550,
+      9175,
+      5165,
+      7138,
+      1535,
+      5477,
+      6620
+    ],
+    "all_cues_nonzero_unclipped_and_end_silent": true,
+    "voice_sample_rate": 16000,
+    "voice_seconds": 2.2465625,
+    "voice_peak": 22419,
+    "boot_voice_matches_packed_pcm_after_1400ms": true
+  },
+  "bundle": {
+    "valid_bundle_passed": true,
+    "unsafe_bundles_rejected": [
+      "missing_assets",
+      "wrong_assets_offset",
+      "broken_assets_header",
+      "merged_app_differs_from_build",
+      "truncated_merged_image"
+    ]
+  }
+}
