@@ -22,3 +22,4 @@ for fn in ['kai15', 'kai13', 'kai10', 'sans11', 'sans9', 'disp24', 'disp13']:
     miss = sorted(c for c in chars if ord(c) not in font(fn) and not c.isascii() or (c.isascii() and ord(c) not in font(fn)))
     if miss: bad += 1; print(fn, len(miss), ''.join(miss)[:200])
 print('chars', len(chars), 'fonts with gaps', bad)
+sys.exit(1 if bad else 0)

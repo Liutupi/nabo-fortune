@@ -4,9 +4,12 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--version',required=True);a=p.parse_args()
-    b=json.loads((ROOT/'validation/m4-build.json').read_text(encoding='utf-8'))
-    v=json.loads((ROOT/'validation/M4-device.json').read_text(encoding='utf-8'))
+    p=argparse.ArgumentParser();p.add_argument('--version',required=True)
+    p.add_argument('--build-record',type=Path)
+    p.add_argument('--device-record',type=Path)
+    a=p.parse_args()
+    b=json.loads((a.build_record or ROOT/'validation/m4-build.json').read_text(encoding='utf-8'))
+    v=json.loads((a.device_record or ROOT/'validation/M4-device.json').read_text(encoding='utf-8'))
     boot=json.loads((ROOT/f'validation/RELEASE-v{a.version}.json').read_text(encoding='utf-8'))
     assert b['version']==v['version']==boot['version']==a.version
     assert v['acceptance']=='complete_local_device_validation'
@@ -17,7 +20,7 @@ def main():
     for name,expected in b['saved_sources'].items():assert sha(ROOT/name)==expected,name
     dest=ROOT/'dist'/('nabo-fortune-v'+a.version);dest.mkdir(parents=True,exist_ok=False)
     files={'bootloader':'bootloader.bin','partition_table':'partition-table.bin','app':'nabo-fortune-passport.bin','assets':'fortune_assets.bin'}
-    manifest={'format':'nabo-fortune-release-v1','version':a.version,'chip':'esp32c3','flash_bytes':8388608,'source_commit':commit,'saved_source_snapshot_sha256':b['saved_source_snapshot_sha256'],'images':{}}
+    manifest={'format':'nabo-fortune-release-v1','version':a.version,'chip':'esp32c3','flash_bytes':8388608,'source_commit':commit,'saved_source_snapshot_sha256':b['saved_source_snapshot_sha256'],'app_elf_sha256':b.get('app_elf_sha256'),'images':{}}
     for key,name in files.items():
         entry=b['images'][key];src=ROOT/entry['path'];assert sha(src)==entry['sha256']
         assert boot['images'][key]==entry['sha256']
@@ -29,13 +32,14 @@ def main():
     for name in ('LICENSE','NOTICE.md','THIRD_PARTY_NOTICES.md'):shutil.copyfile(ROOT/name,dest/name)
     shutil.copytree(ROOT/'licenses',dest/'licenses')
     shutil.copyfile(ROOT/'docs/FLASHING.md',dest/'FLASHING.md')
+    shutil.copyfile(ROOT/'docs/FLASHING.zh_CN.md',dest/'FLASHING.zh_CN.md')
     shutil.copyfile(ROOT/'tools/flash_release.py',dest/'flash_release.py')
     paths=sorted(p for p in dest.rglob('*') if p.is_file())
     (dest/'bundle-SHA256SUMS.txt').write_text(''.join(sha(p)+'  '+p.relative_to(dest).as_posix()+'\n' for p in paths),encoding='ascii')
     archive=dest/('nabo-fortune-v'+a.version+'.zip')
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for file in sorted(p for p in dest.rglob('*') if p.is_file() and p!=archive):
-            name=file.relative_to(dest).as_posix();info=zipfile.ZipInfo(name,(2026,10,22,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
+            name=file.relative_to(dest).as_posix();info=zipfile.ZipInfo(name,(*map(int,b['date'].split('-')),0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
             z.writestr(info,file.read_bytes())
     assets=[dest/x for x in files.values()]+[dest/full,archive,dest/'manifest.json']
     (dest/'SHA256SUMS.txt').write_text(''.join(sha(p)+'  '+p.name+'\n' for p in assets),encoding='ascii')

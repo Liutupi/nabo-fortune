@@ -9,7 +9,7 @@ import ctypes as C, json, os, shutil, subprocess, sys, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'firmware', 'main', 'fortune')
 GOLD = os.path.join(ROOT, 'tests', 'fortune_host', 'golden')
-FILES = ['fortune_tables.c', 'fortune_calendar.c', 'fortune_misc.c', 'fortune_qimen.c', 'fortune_ziwei.c']
+FILES = ['fortune_tables.c', 'fortune_calendar.c', 'fortune_misc.c', 'fortune_ssq.c', 'fortune_qimen.c', 'fortune_ziwei.c']
 
 i8, u8, i16, u32, bl = C.c_int8, C.c_uint8, C.c_int16, C.c_uint32, C.c_bool
 class Lunar(C.Structure): _fields_ = [('year', i16), ('month', i8), ('leap', bl), ('day', i8), ('month_days', i8)]

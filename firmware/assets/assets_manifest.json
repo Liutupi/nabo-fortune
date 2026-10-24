@@ -1,6 +1,6 @@
 {
- "bytes": 3677860,
- "sha256": "fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664",
+ "bytes": 3682224,
+ "sha256": "9a0c9063b73403a2415a7fcd0190ad06c75b1bf7532c1901ab7a435d90e49c80",
  "count": 80,
  "items": {
   "spr/N-CALC/100": {
@@ -253,74 +253,74 @@
   },
   "font/disp13": {
    "offset": 1236560,
-   "size": 280941
+   "size": 281469
   },
   "font/disp24": {
-   "offset": 1517504,
-   "size": 539717
+   "offset": 1518032,
+   "size": 540729
   },
   "font/kai10": {
-   "offset": 2057224,
-   "size": 213780
+   "offset": 2058764,
+   "size": 214148
   },
   "font/kai13": {
-   "offset": 2271004,
-   "size": 317737
+   "offset": 2272912,
+   "size": 318320
   },
   "font/kai15": {
-   "offset": 2588744,
-   "size": 415787
+   "offset": 2591232,
+   "size": 416652
   },
   "font/mono10": {
-   "offset": 3004532,
+   "offset": 3007884,
    "size": 5714
   },
   "font/sans11": {
-   "offset": 3010248,
-   "size": 299776
+   "offset": 3013600,
+   "size": 300332
   },
   "font/sans9": {
-   "offset": 3310024,
-   "size": 241986
+   "offset": 3313932,
+   "size": 242444
   },
   "txt/lot_story": {
-   "offset": 3552012,
+   "offset": 3556376,
    "size": 1832
   },
   "txt/lot_poem": {
-   "offset": 3553844,
+   "offset": 3558208,
    "size": 9206
   },
   "txt/lot_jie": {
-   "offset": 3563052,
+   "offset": 3567416,
    "size": 5606
   },
   "txt/lot_bh": {
-   "offset": 3568660,
+   "offset": 3573024,
    "size": 6785
   },
   "txt/lot_xiang": {
-   "offset": 3575448,
+   "offset": 3579812,
    "size": 4997
   },
   "txt/zy_gua": {
-   "offset": 3580448,
+   "offset": 3584812,
    "size": 2895
   },
   "txt/zy_bh": {
-   "offset": 3583344,
+   "offset": 3587708,
    "size": 3875
   },
   "txt/zy_line": {
-   "offset": 3587220,
+   "offset": 3591584,
    "size": 18369
   },
   "txt/zy_special": {
-   "offset": 3605592,
+   "offset": 3609956,
    "size": 376
   },
   "snd/boot-welcome": {
-   "offset": 3605968,
+   "offset": 3610332,
    "size": 71890
   }
  }

@@ -5,7 +5,7 @@
   "scripts": {
     "tables": "node tools/gen_fortune_tables.js",
     "golden": "node tests/fortune_host/record_golden.js",
-    "test": "python tests/test_fortune.py && python tests/test_fortune.py --mutate"
+    "test": "python tests/test_fortune.py && python tests/test_fortune.py --mutate && python tests/test_ssq.py"
   },
   "devDependencies": {
     "lunar-javascript": "1.7.7",

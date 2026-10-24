@@ -1,6 +1,6 @@
 idf_component_register(
     SRCS "main.c" "fc_sound.c"
-         "fortune/fortune_calendar.c" "fortune/fortune_misc.c" "fortune/fortune_qimen.c" "fortune/fortune_tables.c"
+         "fortune/fortune_calendar.c" "fortune/fortune_misc.c" "fortune/fortune_ssq.c" "fortune/fortune_qimen.c" "fortune/fortune_tables.c"
          "fortune/fortune_ziwei.c" "fortune/fortune_text.c" "fortune/fortune_names.c"
          "fortune/gfx/fc_gfx.c" "fortune/gfx/fc_res.c"
          "fortune/ui/fc_ui.c" "fortune/ui/scenes.c" "fortune/ui/scene_boot_menu.c" "fortune/ui/scene_birth.c" "fortune/ui/scene_clock.c"

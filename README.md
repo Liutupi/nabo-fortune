@@ -1,67 +1,70 @@
-# NABO 赛博算命机
+<p align="right"><a href="README.zh_CN.md">简体中文</a> · <strong>English</strong></p>
 
-FoloToy AI Passport 工牌上的离线娱乐固件。ESP32-C3、8 MB Flash、240×320 竖屏，开机由 NABO 道长迎接，无需配网。
+# NABO Cyber Fortune
 
-**首个公开版本：[v0.1.2](https://github.com/Liutupi/nabo-fortune/releases/tag/v0.1.2)** · [下载固件](https://github.com/Liutupi/nabo-fortune/releases/latest) · [刷机说明](docs/FLASHING.md) · [真机验收](validation/M4-device.md)
+Offline entertainment firmware for the FoloToy AI Passport: ESP32-C3, 8 MB Flash, 240×320 portrait screen. NABO welcomes you on boot; no Wi-Fi setup is required.
 
-<img src="validation/m4-v012/menu.png" width="200" alt="主转盘"> <img src="validation/m4-v012/tarot.png" width="200" alt="NABO 塔罗"> <img src="validation/m4-v012/bone_balance.png" width="200" alt="称骨杆秤">
+**[v0.1.3 firmware](https://github.com/Liutupi/nabo-fortune/releases/tag/v0.1.3)** · [Downloads](https://github.com/Liutupi/nabo-fortune/releases/latest) · [Flashing](docs/FLASHING.md) · [Release notes and validation](docs/RELEASE_v0.1.3.md)
 
-上图为固件 C 渲染器生成的界面预览，原尺寸 240×320。
+<img src="validation/v0.1.3/daily-options.png" width="200" alt="Daily Fortune options"> <img src="validation/v0.1.3/daily-ssq.png" width="200" alt="Daily SSQ sample result">
 
-## 玩法
+240×320 previews from the firmware's host renderer, using the public example profile. These are entertainment numbers, not a prediction.
 
-| 玩法 | 内容 |
+## Modes
+
+| Mode | Content |
 |---|---|
-| 今日一卦 | 星座、塔罗、灵签、卦象合成今日小票 |
-| 摇卦问事 | 三枚铜钱六次成卦，变爻断法与完整解读 |
-| 灵签筒 | 长按摇签，掉签、卷轴、签诗与白话 |
-| 塔罗 | 22 张原创 NABO 大阿卡纳，洗牌、选牌、抽出与翻面 |
-| 称骨论命 | 年月日时四块砝码、秤砣称重、白话/原诗/明细三页 |
-| 星座 | 连星成座，四项星级与幸运数字、颜色 |
-| 紫微斗数 | 十二宫、主辅星与分宫解读 |
-| 奇门遁甲 | 拆补法排盘、飞宫动画与问事解读 |
+| Daily Fortune | A daily zodiac, tarot, lot and hexagram ticket; Up/Down also selects **Daily SSQ** |
+| Daily SSQ | One stable daily set of 6 distinct ascending red balls (01–33) and 1 blue ball (01–16), with paged personalization inputs |
+| Coin hexagram | Six tosses of three coins, changing-line rules and full readings |
+| Fortune sticks | Hold to shake, drop a stick, unfold the scroll, read the poem and plain-language explanation |
+| Tarot | 22 original NABO major arcana; shuffle, select, extract and flip |
+| Bone weighing | Four birth weights, moving scale weight, plain-language/poem/detail pages |
+| Zodiac | Constellation drawing, four star ratings, lucky number and color |
+| Ziwei | Twelve palaces, major/minor stars and palace readings |
+| Qimen | Chai-bu chart generation, animated placement and question readings |
 
-生辰档案保存在 NVS。正文 16 px，辅助提示至少 14 px；开机播放“NABO，在此恭候”。全部结果仅供娱乐。
+All results are for entertainment. Daily SSQ combines the birth profile, lunar dates/four pillars, daily ticket, bone weights, Ziwei and Qimen fixed at 12:00 East-8. The same date/profile stays stable across repeat views and restarts. It cannot predict draws or improve winning odds; “daily” denotes a calendar date, not a lottery issue. See [the v1 contract](docs/DAILY_SSQ.md).
 
-## 操作
+## Controls and stored data
 
-- 上、下选择，OK 确认；双击上键返回主转盘。
-- 摇卦、摇签：按住 OK，再松开。
-- 解读页：上下翻页；称骨称完后停留，按 OK 查看完整解读。
-- 塔罗抽出约 1.2 秒、停顿 0.6 秒、翻面 1.4 秒，牌面保留到再次按 OK。
-- 无操作五分钟自动休眠，上键唤醒。断电重开保留生辰，时间需要重新校准。
+- Up/Down selects; OK confirms; double-Up returns to the main wheel.
+- Hold/release OK to shake coins or sticks. Up/Down pages through readings.
+- In Daily Fortune, choose the original ticket or Daily SSQ, then OK to print. In the SSQ result, Up/Down cycles through numbers and explanations; OK returns to the two choices.
+- Tarot extraction takes 1.2 seconds, pauses 0.6 seconds, then flips for 1.4 seconds. The revealed card stays until OK.
+- Bone weighing stops at the balanced scale; OK opens all readings.
+- Birth data is stored in NVS. After a cold power-on, calibrate the clock. Five minutes without input enters sleep; the upper key wakes the device.
+- Body text is 16 px and hints are at least 14 px. The boot voice says “NABO，在此恭候”.
 
-## 安装
+## Install or upgrade
 
-这是独立固件，会替换设备原有程序。请先备份。首次切换请使用完整安装；已有相同算命机分区布局时可用保留 NVS 的升级模式。
+This independent firmware replaces the installed application. Download the release ZIP and SHA256SUMS.txt, verify the checksum, then extract it. A compatible `upgrade` writes the app and assets and preserves NVS. A merged full image at **0x0** may overwrite NVS and PHY data; use it for an intentional full installation. A backup is optional; no provided mode performs a whole-chip erase. See [flashing instructions](docs/FLASHING.md).
 
-1. 下载 Release 的 ZIP 和 SHA256SUMS.txt，核对校验值并解压。
-2. 网页工具的“本地固件刷机”可选择 `nabo-fortune-v0.1.2-full.bin`，地址为 **0x0**，执行完整安装。
-3. 或使用 ZIP 内的 `flash_release.py`，按 [刷机说明](docs/FLASHING.md) 核对 MAC、备份和安装。
+The assets partition starts at **0x200000**. Do not use offsets from the Xiaozhi or vocabulary firmware. Releases contain no user NVS, personal birth data, device backups or raw serial logs.
 
-不能套用小智版或单词护照的素材偏移。本项目 assets 在 **0x200000**。发布包不含用户 NVS、设备备份或个人档案。
+## Source, resources and build
 
-## 源码和全部原始资源
+- `firmware/`: independent ESP-IDF 5.5.3 project.
+- `prototype/`: offline browser prototype; open prototype/index.html, or use the root Windows launcher.
+- `game-art/fortune/`: NABO identity, costumes, Grok starting images and original v1/v2 videos, props, 22 cards/original art, font bitmaps and text sources.
+- `tools/fonts/`: source fonts and OFL licenses; tools build sprites/fonts/assets and release bundles.
+- `tests/`, `validation/`: logic comparisons, renderer regressions and sanitized device evidence.
 
-- `firmware/`：独立 ESP-IDF 5.5.3 工程。
-- `prototype/`：可离线打开的浏览器原型；运行根目录“打开原型.bat”。
-- `game-art/fortune/`：NABO 身份基准、造型、Grok 起始图、原始 v1/v2 视频、道具、22 张牌及原始大图、字体点阵和文本来源。
-- `tools/fonts/`：源字体和 OFL 许可；其他工具负责抽帧、字体、素材包和发行打包。
-- `tests/`、`validation/`：逻辑对拍、渲染回归和脱敏真机记录。
-
-```powershell
+```sh
+npm install
 python tools/pack_assets_fortune.py
-./firmware/tools/build.ps1 -Action all
+# Activate ESP-IDF v5.5.3; choose HOST_PYTHON if the IDF Python lacks host-render libraries.
+./tools/validate.sh
 ```
 
-构建环境、离线组件配置见 [firmware/README.md](firmware/README.md)，测试步骤见 [tests/README.md](tests/README.md)。Windows 宿主测试不带 ASan/UBSan。重新生成逻辑表需要 `npm install`；排盘依赖的版本固定在 package.json。
+Windows can use firmware/tools/build.ps1. Build setup is in firmware/README.md; tests are in tests/README.md and the [Daily SSQ guide](docs/DAILY_SSQ.md). The firmware does not depend on Node; package.json pins development-only chart/table libraries. Native Windows host builds do not use ASan/UBSan.
 
-## 验证与边界
+## Validation and limits
 
-已在工牌验证八玩法流程、十二场景十轮切换、个人档案断电保留、五分钟休眠和上键唤醒。用户已接受牌面/动画、称骨、声音和字号复测。7831 帧宿主增量/整屏一致；全部 22 张牌可解码，长名牌面反复读取不再造成部件消失。
+The SSQ increment passed 1,795 JS/C cases, 19 mutation checks, 10,741 renderer frames with zero incremental/full differences, font coverage and offline browser input/date/reload checks. The 0.1.3-dev device increment passed verified writes with byte-identical NVS, serial flows/restart, and user-confirmed screen numbers and three physical keys. Release-image checks are recorded separately in [v0.1.3 release notes](docs/RELEASE_v0.1.3.md); older device acceptance is never reassigned to a new binary.
 
-摇签仍有少量慢帧，NABO 原视频素材为 12 fps；具体耗时、内存与验证范围见验收记录。休眠时 USB 端口未消失、启动早期复位日志未捕获，使用实际熄屏/上键恢复、运行时间重新计时和时钟连续性作为功能验收依据。
+The v0.1.2 baseline covered eight modes, ten scene cycles, power-off profile retention and functional five-minute sleep/wake. Some stick-shaking frames remain slow; original NABO clips are 12 fps. This increment does not newly establish speaker quality, sleep/wake or power consumption. No sleep-current measurement is claimed.
 
-## 许可
+## License
 
-自有程序源码 MIT。NABO 形象及美术、视频、音频不随 MIT 授权；第三方字体与程序保留各自许可。见 [NOTICE.md](NOTICE.md)、[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。本项目与 FoloToy 官方无关联。
+Own program source is MIT. NABO characters, art, video and audio are excluded from MIT; third-party software/fonts retain their licenses. See [NOTICE](NOTICE.md) and [third-party notices](THIRD_PARTY_NOTICES.md). This project is not affiliated with FoloToy.

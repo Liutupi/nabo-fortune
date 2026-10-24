@@ -136,5 +136,37 @@ function ziweiRead(a,idx){
  return{p,stars,borrow,lines};
 }
 
-root.FortuneCore={liuyaoRead,lotLevel,LOT_LEVEL,rng,dailySeed,dailyTicket,tarotHand,coinLine,liuyao,YI,JI,BONE_BAND,GAN,ZHI,gzIdx,bone,qimen,qimenRead,QM_ASK,GUA,DIR,RING,ziweiRead,ZW_FIELD};
+/* 今日双色球 v1：数值字段按固定顺序混合，独立于互动随机源；当天东八区 12:00 起局。
+   个性化娱乐选号，不是预测模型，不读取开奖历史。改字段顺序即改变算法版本。 */
+function dailySsq(y,m,d,py,pm,pd,ph,pg){
+ const valid=(y,m,d)=>Number.isInteger(y)&&y>=1901&&y<=2100&&Number.isInteger(m)&&m>=1&&m<=12&&Number.isInteger(d)&&d>=1&&d<=new Date(Date.UTC(y,m,0)).getUTCDate();
+ if(!valid(y,m,d)||!valid(py,pm,pd)||!Number.isInteger(ph)||ph<0||ph>11||!Number.isInteger(pg)||pg<0||pg>1)return null;
+ const iz=root.iztro||(typeof require!=='undefined'?require('iztro'):undefined);
+ const pl=Solar.fromYmdHms(py,pm,pd,ph===0?0:ph*2,30,0).getLunar(),l=Solar.fromYmdHms(y,m,d,12,0,0).getLunar();
+ const sign=(()=>{let s=9;for(const[v,k]of[[120,10],[219,11],[321,0],[420,1],[521,2],[622,3],[723,4],[823,5],[923,6],[1024,7],[1123,8],[1222,9]])if(pm*100+pd>=v)s=k;return s})();
+ const base=dailySeed(y,m,d,py,pm,pd,ph,pg),t=dailyTicket(base,sign),b=bone(pl),q=qimen(l),qr=qimenRead(q,0);
+ const a=iz.astro.bySolar(`${py}-${pm}-${pd}`,ph,pg===0?'男':'女',true,'zh-CN');
+ const five={水二局:2,木三局:3,金四局:4,土五局:5,火六局:6}[a.fiveElementsClass];
+ const major=['紫微','天机','太阳','武曲','天同','廉贞','天府','太阴','贪狼','巨门','天相','天梁','七杀','破军'];
+ const minor=['左辅','右弼','文昌','文曲','天魁','天钺','禄存','天马','地空','地劫','火星','铃星','擎羊','陀罗'];
+ const pal=['命宫','父母','福德','田宅','官禄','仆役','迁移','疾厄','财帛','子女','夫妻','兄弟'];
+ const soul=a.palaces.findIndex(p=>p.name==='命宫'),body=a.palaces.findIndex(p=>p.isBodyPalace);
+ const starCode=n=>major.includes(n)?major.indexOf(n):100+minor.indexOf(n);
+ const ma=Array(14).fill(-1),br=Array(14).fill(0),mu=Array(14).fill(-1),mi=Array(14).fill(-1),nm=Array(14).fill(-1);
+ a.palaces.forEach((p,i)=>{p.majorStars.forEach(s=>{const k=major.indexOf(s.name);if(k<0)return;ma[k]=i;br[k]=Math.max(0,['','庙','旺','得','利','平','不','陷'].indexOf(s.brightness||''));mu[k]=s.mutagen?'禄权科忌'.indexOf(s.mutagen):-1});p.minorStars.forEach(s=>{const k=minor.indexOf(s.name);if(k<0)return;mi[k]=i;nm[k]=s.mutagen?'禄权科忌'.indexOf(s.mutagen):-1})});
+ const lucky=1+rng((base^0x4C55434B)>>>0).int(9),e=l.getEightChar(),pe=pl.getEightChar();
+ const values=[0x53535101,base,pl.getYear(),Math.abs(pl.getMonth()),pl.getDay(),+(pl.getMonth()<0),...['Year','Month','Day','Time'].map(k=>gzIdx(pe['get'+k]())),
+  l.getYear(),Math.abs(l.getMonth()),l.getDay(),+(l.getMonth()<0),...['Year','Month','Day','Time'].map(k=>gzIdx(e['get'+k]())),
+  sign,t.signStars,lucky,t.tarot,+t.tarotRev,t.lotNo,t.lotLevel,t.hexUp,t.hexLo,...t.yi,...t.ji,...b.parts.map(x=>Math.round(x[2]*10)),Math.round(b.total*10),
+  soul,body,five,starCode(a.soul),starCode(a.body)];
+ a.palaces.forEach(p=>values.push(GAN.indexOf(p.heavenlyStem),pal.indexOf(p.name)));
+ for(let i=0;i<14;i++)values.push(ma[i],br[i],mu[i],mi[i],nm[i]);
+ values.push(+q.yang,'上中下'.indexOf(q.yuan[0]),q.ju,gzIdx(q.dayGZ),gzIdx(q.shiGZ),q.zhifuAt,q.zhishiAt);
+ for(let p=1;p<=9;p++){values.push(GAN.indexOf(q.earth[p]));if(p!==5)values.push(GAN.indexOf(q.heaven[p][0]),Object.keys(STAR0).map(Number).find(k=>STAR0[k]===q.star[p]),Object.keys(DOOR0).map(Number).find(k=>DOOR0[k]===q.door[p]),GODS.indexOf(q.god[p]))}
+ let seed=2166136261;for(const v of values)seed=Math.imul(seed^(v>>>0),16777619)>>>0;
+ const r=rng(seed),bounded=n=>{let u;do{u=r.u32()}while(u<4294967296%n);return u%n},pool=Array.from({length:33},(_,i)=>i+1),red=[];
+ for(let i=0;i<6;i++)red.push(pool.splice(bounded(pool.length),1)[0]);red.sort((a,b)=>a-b);
+ return{seed,red,blue:1+bounded(16),lucky,ticket:t,lunar:[l.getYear(),Math.abs(l.getMonth()),l.getDay(),+(l.getMonth()<0)],dayGz:gzIdx(l.getDayInGanZhi()),boneTotal:Math.round(b.total*10),soul,body,five,qYang:q.yang,qYuan:'上中下'.indexOf(q.yuan[0]),qJu:q.ju,qPalace:qr.palace};
+}
+root.FortuneCore={dailySsq,liuyaoRead,lotLevel,LOT_LEVEL,rng,dailySeed,dailyTicket,tarotHand,coinLine,liuyao,YI,JI,BONE_BAND,GAN,ZHI,gzIdx,bone,qimen,qimenRead,QM_ASK,GUA,DIR,RING,ziweiRead,ZW_FIELD};
 })(typeof window!=='undefined'?window:globalThis);

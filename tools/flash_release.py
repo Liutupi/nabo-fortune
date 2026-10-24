@@ -1,9 +1,9 @@
 """Guarded ESP32-C3 install/upgrade from an extracted release ZIP.
 
-Requires esptool 4.x. Every write requires an explicit MAC and a verified
-private full-flash backup. Upgrade preserves NVS and checks the exact layout.
+Requires esptool 4.x and an explicit MAC. Upgrade preserves NVS and checks
+the exact layout. A full-flash backup is optional; no mode erases the chip.
 """
-import argparse,datetime,hashlib,json,re,subprocess,sys
+import argparse,datetime,hashlib,json,re,subprocess,sys,tempfile
 from pathlib import Path
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -13,11 +13,11 @@ def main():
     p.add_argument('--mode',choices=('inspect','install','upgrade'),required=True)
     p.add_argument('--port',required=True);p.add_argument('--expected-mac',required=True)
     p.add_argument('--release-dir',type=Path,default=Path(__file__).resolve().parent)
-    p.add_argument('--backup-dir',type=Path,default=Path.cwd()/'private/backups')
-    p.add_argument('--confirm-full-install',action='store_true',help='Explicitly allow erasing the entire device')
+    p.add_argument('--backup-dir',type=Path,default=None,help='Optional, explicitly requested local full-Flash backup')
+    p.add_argument('--confirm-full-install',action='store_true',help='Allow replacing firmware/partition layout; no whole-chip erase is performed')
     a=p.parse_args();mac=a.expected_mac.lower()
     if not re.fullmatch(r'(?:[0-9a-f]{2}:){5}[0-9a-f]{2}',mac):p.error('Expected MAC must be xx:xx:xx:xx:xx:xx')
-    if a.mode=='install' and not a.confirm_full_install:p.error('Install erases all device data; --confirm-full-install is required')
+    if a.mode=='install' and not a.confirm_full_install:p.error('Install replaces firmware/layout; --confirm-full-install is required')
     folder=a.release_dir.resolve();m=json.loads((folder/'manifest.json').read_text(encoding='utf-8'))
     assert m['chip']=='esp32c3' and m['flash_bytes']==0x800000
     for v in m['images'].values():
@@ -36,22 +36,28 @@ def main():
     security=run('get_security_info')
     if 'Secure Boot: Disabled' not in security or 'Flash Encryption: Disabled' not in security:
         raise RuntimeError('Unencrypted, non-secure-boot device required')
-    backup=a.backup_dir.resolve()/(mac.replace(':','')+'-'+datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
-    backup.mkdir(parents=True,exist_ok=False)
-    run('read_flash','0','0x800000',backup/'before.bin')
-    run('verify_flash','0',backup/'before.bin')
-    (backup/'backup.json').write_text(json.dumps({'mac':mac,'mode':a.mode,'sha256':sha(backup/'before.bin'),'private':True},indent=2)+'\n')
+    backup=None
+    if a.backup_dir is not None:
+        backup=a.backup_dir.resolve()/(mac.replace(':','')+'-'+datetime.datetime.now().strftime('%Y%m%d-%H%M%S'))
+        backup.mkdir(parents=True,exist_ok=False)
+        run('read_flash','0','0x800000',backup/'before.bin')
+        run('verify_flash','0',backup/'before.bin')
+        (backup/'backup.json').write_text(json.dumps({'mac':mac,'mode':a.mode,'sha256':sha(backup/'before.bin'),'private':True},indent=2)+'\n')
     if a.mode=='upgrade':
         table=m['images']['partition_table'];start=int(table['offset'],0)
-        with (backup/'before.bin').open('rb') as f:f.seek(start);current=f.read(table['bytes'])
-        if current!=(folder/table['file']).read_bytes():raise RuntimeError('Partition layout differs; refusing upgrade')
+        with tempfile.TemporaryDirectory(prefix='nabo-layout-') as temporary:
+            current=Path(temporary)/'partition.bin'
+            run('read_flash',hex(start),'0x1000',current)
+            if current.read_bytes()[:table['bytes']]!=(folder/table['file']).read_bytes():
+                raise RuntimeError('Partition layout differs; refusing upgrade')
         keys=('app','assets')
     else:
-        run('erase_flash');keys=('bootloader','partition_table','app','assets')
+        keys=('bootloader','partition_table','app','assets')
     images=[]
     for k in keys:images += [m['images'][k]['offset'],folder/m['images'][k]['file']]
     run('write_flash','--flash_mode','dio','--flash_freq','80m','--flash_size','8MB',*images)
     run('verify_flash',*images,reset='hard_reset')
-    print('Verified. Personal backup remains only at:',backup)
+    print('Verified. NVS preserved by compatible upgrade.' if a.mode=='upgrade' else 'Verified installation; no whole-chip erase performed.')
+    if backup is not None:print('Optional personal backup remains only at:',backup)
 
 if __name__=='__main__':main()

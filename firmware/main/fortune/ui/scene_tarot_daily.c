@@ -99,17 +99,63 @@ static void t_draw(void) {
 const fc_scene_t SC_TAROT = {"tarot", "塔罗", false, t_enter, t_key, t_update, t_draw};
 
 /* ================= 今日小票 ================= */
-enum { D_IDLE, D_PRINT, D_TEAR, D_DONE };
+enum { D_IDLE, D_CALC, D_PRINT, D_TEAR, D_DONE };
 enum { R_D, R_H, R_M, R_DASH, R_T, R_BAR, R_S };
 static int dph, L, lt, pause_, tt, print_n;
 static int dpage, dpages = 1;
+static int dsel;
+static fc_ssq_t ssq;
+static char ssq_basis[1536], ssq_stamp[32];
+static const char *daily_error;
 static struct { int16_t o; int8_t ty; char s[96]; } rows[16];
 static int nrows;
 #define TH 256
 #define SLOT 296
 static void addrow(int o, int ty, const char *s) { rows[nrows].o = (int16_t)o; rows[nrows].ty = (int8_t)ty; snprintf(rows[nrows].s, sizeof rows[0].s, "%s", s); nrows++; }
-static void make(void) {
+static bool make_ssq(const fc_time_t *d) {
+  if (!fc_daily_ssq(d->y, d->m, d->d, PF.y, PF.m, PF.d, PF.h, PF.g, &ssq)) {
+    daily_error = "日期或生辰无效，请校准"; return false;
+  }
+  const fc_ticket_t *t = &ssq.ticket;
+  snprintf(ssq_stamp, sizeof ssq_stamp, "%d.%02d.%02d", d->y, d->m, d->d);
+  ssq_basis[0] = 0;
+  fc_body_add(ssq_basis, sizeof ssq_basis, "档案 %d.%02d.%02d %s时 %s%s\n", PF.y, PF.m, PF.d, FT_ZHI[PF.h], PF.g ? "女" : "男", PF.demo ? "（示例）" : "");
+  fc_body_add(ssq_basis, sizeof ssq_basis, "农历 %d年%s%d月%d日\n%s%s日 · 固定午时\n", ssq.lunar.year, ssq.lunar.leap ? "闰" : "", ssq.lunar.month, ssq.lunar.day, FT_GAN[ssq.day_gz % 10], FT_ZHI[ssq.day_gz % 12]);
+  fc_body_add(ssq_basis, sizeof ssq_basis, "%s %d星 · 幸运数%d\n塔罗 %s·%s\n灵签 第%d签·%s\n卦象 %s\n", FT_SIGN_NAME[t->sign], t->sign_stars, ssq.lucky, FT_TAROT_NAME[t->tarot], t->tarot_rev ? "逆位" : "正位", t->lot_no, t->lot_level == 0 ? "上签" : t->lot_level == 1 ? "中签" : "下签", FT_HEX_NAME[t->hex_up * 8 + t->hex_lo]);
+  fc_body_add(ssq_basis, sizeof ssq_basis, "称骨 %d两%d钱\n紫微 %s\n命宫%s · 身宫%s\n", ssq.bone_total / 10, ssq.bone_total % 10, FT_ZW_FIVE[ssq.five], FT_ZHI[(ssq.soul + 2) % 12], FT_ZHI[(ssq.body + 2) % 12]);
+  fc_body_add(ssq_basis, sizeof ssq_basis, "奇门 12:00 %s遁%d局%s元\n生门落%s%d宫\n同日同档案固定一组\n娱乐选号，不预测开奖\n不提高中奖概率", ssq.q_yang ? "阳" : "阴", ssq.q_ju, ssq.q_yuan == 0 ? "上" : ssq.q_yuan == 1 ? "中" : "下", FT_QM_GUA[ssq.q_palace], ssq.q_palace);
+  const char *ln[64]; int len[64];
+  dpages = 1 + (wrap_px(&F_SANS11, ssq_basis, 192, ln, len, 64) + 6) / 7;
+  char b[96]; nrows = 0;
+  addrow(14, R_D, "★ NABO 幸运选号 ★"); addrow(34, R_H, "今日双色球"); addrow(52, R_M, ssq_stamp); addrow(64, R_DASH, "");
+  snprintf(b, sizeof b, "红球  %02d %02d %02d", ssq.red[0], ssq.red[1], ssq.red[2]); addrow(84, R_T, b);
+  snprintf(b, sizeof b, "红球  %02d %02d %02d", ssq.red[3], ssq.red[4], ssq.red[5]); addrow(106, R_T, b);
+  snprintf(b, sizeof b, "蓝球  %02d", ssq.blue); addrow(132, R_T, b);
+  addrow(154, R_DASH, ""); addrow(174, R_T, "同日同档案固定一组"); addrow(198, R_T, "娱乐选号，不预测开奖");
+  addrow(220, R_BAR, ""); addrow(242, R_S, "仅供娱乐 · v1");
+  return true;
+}
+static void draw_ssq(void) {
+  if (dpage > 0) fc_read_card("选号依据", ssq_stamp, ssq_basis, dpage - 1);
+  else {
+    fc_rect(8, 30, 224, 286, C_PAPER, 255);
+    T(&F_KAI15, "今日双色球", 120, 55, C_INK, AL_C);
+    TF(&F_SANS9, 120, 82, RGB(0x8A, 0x2E, 0x1E), AL_C, "%s · 东八区", ssq_stamp);
+    T(&F_SANS11, "红球", 120, 103, C_INK, AL_C);
+    for (int i = 0; i < 6; i++) {
+      int x = 56 + (i % 3) * 64, y = 134 + (i / 3) * 48;
+      fc_disc(x, y, 22, C_RED, 255); TF(&F_DISP24, x, y, C_WHITE, AL_C, "%02d", ssq.red[i]);
+    }
+    T(&F_SANS11, "蓝球", 72, 236, C_INK, AL_C);
+    fc_disc(139, 233, 22, RGB(0x17, 0x63, 0xAD), 255); TF(&F_DISP24, 139, 233, C_WHITE, AL_C, "%02d", ssq.blue);
+    T(&F_SANS9, "娱乐选号，不预测开奖", 120, 279, RGB(0x7A, 0x62, 0x48), AL_C);
+  }
+  fc_rect(16, 288, 208, 24, C_PAPER, 255);
+  TF(&F_SANS9, 120, 302, RGB(0x7A, 0x62, 0x48), AL_C, "↑↓ 翻页 %d/%d · OK 返回", dpage + 1, dpages);
+}
+static bool make(void) {
   fc_time_t d; fc_now(&d);
+  if (dsel == 1) return make_ssq(&d);
   static const char *const WD[7] = {"日", "一", "二", "三", "四", "五", "六"};
   fc_ticket_t t;
   fc_daily_ticket(fc_daily_seed(d.y, d.m, d.d, PF.y, PF.m, PF.d, PF.h, PF.g), fc_zodiac_sign(PF.m, PF.d), &t);
@@ -132,18 +178,21 @@ static void make(void) {
   addrow(202, R_DASH, "");
   addrow(220, R_BAR, "");
   snprintf(b, sizeof b, "仅供娱乐 · NO.%04d-%d", t.serial, print_n); addrow(242, R_S, b);
+  return true;
 }
-static void d_enter(void) { dph = D_IDLE; L = 0; dpage = 0; }
+static void d_enter(void) { dph = D_IDLE; L = 0; dpage = 0; dsel = 0; daily_error = NULL; }
 static void d_key(int k, bool d) {
   if (!d) return;
+  if (dph == D_IDLE && (k == K_UP || k == K_DOWN)) { dsel = 1 - dsel; daily_error = NULL; fc_sfx_play(SFX_TICK); return; }
   if (dph == D_DONE) {
     if (k == K_UP || k == K_DOWN) { dpage = (dpage + (k == K_DOWN ? 1 : dpages - 1)) % dpages; fc_sfx_play(SFX_TICK); }
     if (k == K_OK) dph = D_IDLE;
-  } else if (k == K_OK && dph != D_PRINT) { make(); dph = D_PRINT; L = 0; lt = (int)VT; pause_ = 0; dpage = 0; }
+  } else if (k == K_OK && dph == D_IDLE && make()) { dph = dsel == 1 ? D_CALC : D_PRINT; tt = (int)VT; L = 0; lt = (int)VT; pause_ = 0; dpage = 0; }
 }
 static void d_update(int dt) {
   (void)dt;
   int v = (int)VT;
+  if (dph == D_CALC && v - tt >= 1200) { dph = D_PRINT; lt = v; }
   if (dph == D_PRINT) {
     if (v < pause_) return;
     if (v - lt > 26) {
@@ -156,7 +205,12 @@ static void d_update(int dt) {
 }
 static void d_draw(void) {
   int v = (int)VT;
+  if (dph == D_CALC) {
+    nabo("N-CALC", 100, 120, 130, v); G(&F_DISP24, "今日双色球", 120, 208, C_WHITE, C_MAG);
+    T(&F_SANS11, "汇合今日信息…", 120, 244, C_GOLD, AL_C); T(&F_SANS9, "娱乐选号，不预测开奖", 120, 284, C_DIM, AL_C); return;
+  }
   if (dph == D_DONE) {
+    if (dsel == 1) { draw_ssq(); return; }
     char body[2048] = "";
     for (int i = 0; i < nrows; i++) if (rows[i].ty == R_T || rows[i].ty == R_S) fc_body_add(body, sizeof body, "%s\n", rows[i].s);
     dpages = fc_read_card("今日一卦", rows[2].s, body, dpage);
@@ -190,9 +244,14 @@ static void d_draw(void) {
   if (pr) fc_img(pr, 0, 14, SLOT - 4, 255);
   if (dph == D_PRINT && (v / 120) % 2) fc_disc(204, SLOT + 14, 2, C_CYAN, 255);
   if (dph == D_IDLE) {
-    nabo_then("N-PRINT", 120, 120, 138, EL(), "N-IDLE");
-    G(&F_DISP24, "今日一卦", 120, 214, C_WHITE, C_MAG);
-    T(&F_SANS11, "OK 打印今天的命签小票", 120, 244, C_DIM, AL_C);
+    nabo_then("N-PRINT", 120, 120, 112, EL(), "N-IDLE");
+    G(&F_DISP24, "今日一卦", 120, 184, C_WHITE, C_MAG);
+    static const char *const choices[2] = {"命签小票", "今日双色球"};
+    for (int i = 0; i < 2; i++) {
+      fc_rect(24, 203 + i * 36, 192, 32, i == dsel ? RGB(0x3A, 0x28, 0x58) : C_BG2, 255);
+      TF(&F_SANS11, 120, 219 + i * 36, i == dsel ? C_GOLD : C_DIM, AL_C, "%s%s", i == dsel ? "→ " : "", choices[i]);
+    }
+    T(&F_SANS9, daily_error ? daily_error : "↑↓ 选择 · OK 打印", 120, 284, daily_error ? C_RED : C_CYAN, AL_C);
   }
   if (dph == D_DONE) T(&F_SANS9, "OK 再打一张", 120, 32, C_CYAN, AL_C);
 }

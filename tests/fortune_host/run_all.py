@@ -57,6 +57,7 @@ def main(blob, out):
     u.go('daily'); run(2000, (2000, 'daily_0idle')); u.tap(OK)
     run(5200, (1200, 'daily_1print'), (5200, 'daily_2done'))
     assert L.fc_ui_image_misses()==0
+    assert u.bad == 0, f'{u.bad} incremental/full frame mismatches'
     print(f'frames={u.frames} mismatchFrames={u.bad} avgStrips={u.strips / u.frames:.1f}/40 maxOps={u.maxops} cache={L.host_cache_bytes()} image_misses={L.fc_ui_image_misses()}')
     sheet(shots, os.path.join(out, 'sheet_all.png'), cols=8)
 

@@ -3,70 +3,70 @@
   "source": "LXGWWenKai-Regular.ttf",
   "source_sha256": "bf73f995c05f3f7baf7840b9d76d8d9678c8b150a020946a394ca63c67ed1350",
   "px": 20,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 25,
   "ascent": 19,
-  "bytes": 415787,
+  "bytes": 416652,
   "fallback": ""
  },
  "kai13": {
   "source": "LXGWWenKai-Regular.ttf",
   "source_sha256": "bf73f995c05f3f7baf7840b9d76d8d9678c8b150a020946a394ca63c67ed1350",
   "px": 17,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 21,
   "ascent": 16,
-  "bytes": 317737,
+  "bytes": 318320,
   "fallback": ""
  },
  "kai10": {
   "source": "LXGWWenKai-Regular.ttf",
   "source_sha256": "bf73f995c05f3f7baf7840b9d76d8d9678c8b150a020946a394ca63c67ed1350",
   "px": 14,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 17,
   "ascent": 13,
-  "bytes": 213780,
+  "bytes": 214148,
   "fallback": ""
  },
  "sans11": {
   "source": "SourceHanSansCN-Medium.otf",
   "source_sha256": "a94e558a2fe972bee4f46bce0843abff37063fd68c33f1e7d9058f6f09432b01",
   "px": 16,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 24,
   "ascent": 19,
-  "bytes": 299776,
+  "bytes": 300332,
   "fallback": ""
  },
  "sans9": {
   "source": "SourceHanSansCN-Medium.otf",
   "source_sha256": "a94e558a2fe972bee4f46bce0843abff37063fd68c33f1e7d9058f6f09432b01",
   "px": 14,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 22,
   "ascent": 17,
-  "bytes": 241986,
+  "bytes": 242444,
   "fallback": ""
  },
  "disp24": {
   "source": "ZCOOLQingKeHuangYou-Regular.ttf",
   "source_sha256": "54f0c0df4308cd74cd0f2fd3494ae054dbc4a1fd6fa7d71f4807eb4cdd8b4136",
   "px": 26,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 27,
   "ascent": 23,
-  "bytes": 539717,
+  "bytes": 540729,
   "fallback": "·↑→↓▲▼○★☆㧑刲卼咥嗃夬姤寘愬柅沬洟甃畬祐禴稊窞繘胏脢臲茀菑蔀藟虩衎袽豮蹢輹邅鞶頄鼫𦈡𫗧𬙊"
  },
  "disp13": {
   "source": "ZCOOLQingKeHuangYou-Regular.ttf",
   "source_sha256": "54f0c0df4308cd74cd0f2fd3494ae054dbc4a1fd6fa7d71f4807eb4cdd8b4136",
   "px": 18,
-  "glyphs": 2161,
+  "glyphs": 2165,
   "line_h": 19,
   "ascent": 16,
-  "bytes": 280941,
+  "bytes": 281469,
   "fallback": "·↑→↓▲▼○★☆㧑刲卼咥嗃夬姤寘愬柅沬洟甃畬祐禴稊窞繘胏脢臲茀菑蔀藟虩衎袽豮蹢輹邅鞶頄鼫𦈡𫗧𬙊"
  },
  "mono10": {
@@ -79,5 +79,5 @@
   "bytes": 5714,
   "fallback": ""
  },
- "_charset_size": 2162
+ "_charset_size": 2166
 }

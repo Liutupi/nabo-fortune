@@ -246,7 +246,39 @@ function ziweiRead(a,idx){
  return{p,stars,borrow,lines};
 }
 
-root.FortuneCore={liuyaoRead,lotLevel,LOT_LEVEL,rng,dailySeed,dailyTicket,tarotHand,coinLine,liuyao,YI,JI,BONE_BAND,GAN,ZHI,gzIdx,bone,qimen,qimenRead,QM_ASK,GUA,DIR,RING,ziweiRead,ZW_FIELD};
+/* 今日双色球 v1：数值字段按固定顺序混合，独立于互动随机源；当天东八区 12:00 起局。
+   个性化娱乐选号，不是预测模型，不读取开奖历史。改字段顺序即改变算法版本。 */
+function dailySsq(y,m,d,py,pm,pd,ph,pg){
+ const valid=(y,m,d)=>Number.isInteger(y)&&y>=1901&&y<=2100&&Number.isInteger(m)&&m>=1&&m<=12&&Number.isInteger(d)&&d>=1&&d<=new Date(Date.UTC(y,m,0)).getUTCDate();
+ if(!valid(y,m,d)||!valid(py,pm,pd)||!Number.isInteger(ph)||ph<0||ph>11||!Number.isInteger(pg)||pg<0||pg>1)return null;
+ const iz=root.iztro||(typeof require!=='undefined'?require('iztro'):undefined);
+ const pl=Solar.fromYmdHms(py,pm,pd,ph===0?0:ph*2,30,0).getLunar(),l=Solar.fromYmdHms(y,m,d,12,0,0).getLunar();
+ const sign=(()=>{let s=9;for(const[v,k]of[[120,10],[219,11],[321,0],[420,1],[521,2],[622,3],[723,4],[823,5],[923,6],[1024,7],[1123,8],[1222,9]])if(pm*100+pd>=v)s=k;return s})();
+ const base=dailySeed(y,m,d,py,pm,pd,ph,pg),t=dailyTicket(base,sign),b=bone(pl),q=qimen(l),qr=qimenRead(q,0);
+ const a=iz.astro.bySolar(`${py}-${pm}-${pd}`,ph,pg===0?'男':'女',true,'zh-CN');
+ const five={水二局:2,木三局:3,金四局:4,土五局:5,火六局:6}[a.fiveElementsClass];
+ const major=['紫微','天机','太阳','武曲','天同','廉贞','天府','太阴','贪狼','巨门','天相','天梁','七杀','破军'];
+ const minor=['左辅','右弼','文昌','文曲','天魁','天钺','禄存','天马','地空','地劫','火星','铃星','擎羊','陀罗'];
+ const pal=['命宫','父母','福德','田宅','官禄','仆役','迁移','疾厄','财帛','子女','夫妻','兄弟'];
+ const soul=a.palaces.findIndex(p=>p.name==='命宫'),body=a.palaces.findIndex(p=>p.isBodyPalace);
+ const starCode=n=>major.includes(n)?major.indexOf(n):100+minor.indexOf(n);
+ const ma=Array(14).fill(-1),br=Array(14).fill(0),mu=Array(14).fill(-1),mi=Array(14).fill(-1),nm=Array(14).fill(-1);
+ a.palaces.forEach((p,i)=>{p.majorStars.forEach(s=>{const k=major.indexOf(s.name);if(k<0)return;ma[k]=i;br[k]=Math.max(0,['','庙','旺','得','利','平','不','陷'].indexOf(s.brightness||''));mu[k]=s.mutagen?'禄权科忌'.indexOf(s.mutagen):-1});p.minorStars.forEach(s=>{const k=minor.indexOf(s.name);if(k<0)return;mi[k]=i;nm[k]=s.mutagen?'禄权科忌'.indexOf(s.mutagen):-1})});
+ const lucky=1+rng((base^0x4C55434B)>>>0).int(9),e=l.getEightChar(),pe=pl.getEightChar();
+ const values=[0x53535101,base,pl.getYear(),Math.abs(pl.getMonth()),pl.getDay(),+(pl.getMonth()<0),...['Year','Month','Day','Time'].map(k=>gzIdx(pe['get'+k]())),
+  l.getYear(),Math.abs(l.getMonth()),l.getDay(),+(l.getMonth()<0),...['Year','Month','Day','Time'].map(k=>gzIdx(e['get'+k]())),
+  sign,t.signStars,lucky,t.tarot,+t.tarotRev,t.lotNo,t.lotLevel,t.hexUp,t.hexLo,...t.yi,...t.ji,...b.parts.map(x=>Math.round(x[2]*10)),Math.round(b.total*10),
+  soul,body,five,starCode(a.soul),starCode(a.body)];
+ a.palaces.forEach(p=>values.push(GAN.indexOf(p.heavenlyStem),pal.indexOf(p.name)));
+ for(let i=0;i<14;i++)values.push(ma[i],br[i],mu[i],mi[i],nm[i]);
+ values.push(+q.yang,'上中下'.indexOf(q.yuan[0]),q.ju,gzIdx(q.dayGZ),gzIdx(q.shiGZ),q.zhifuAt,q.zhishiAt);
+ for(let p=1;p<=9;p++){values.push(GAN.indexOf(q.earth[p]));if(p!==5)values.push(GAN.indexOf(q.heaven[p][0]),Object.keys(STAR0).map(Number).find(k=>STAR0[k]===q.star[p]),Object.keys(DOOR0).map(Number).find(k=>DOOR0[k]===q.door[p]),GODS.indexOf(q.god[p]))}
+ let seed=2166136261;for(const v of values)seed=Math.imul(seed^(v>>>0),16777619)>>>0;
+ const r=rng(seed),bounded=n=>{let u;do{u=r.u32()}while(u<4294967296%n);return u%n},pool=Array.from({length:33},(_,i)=>i+1),red=[];
+ for(let i=0;i<6;i++)red.push(pool.splice(bounded(pool.length),1)[0]);red.sort((a,b)=>a-b);
+ return{seed,red,blue:1+bounded(16),lucky,ticket:t,lunar:[l.getYear(),Math.abs(l.getMonth()),l.getDay(),+(l.getMonth()<0)],dayGz:gzIdx(l.getDayInGanZhi()),boneTotal:Math.round(b.total*10),soul,body,five,qYang:q.yang,qYuan:'上中下'.indexOf(q.yuan[0]),qJu:q.ju,qPalace:qr.palace};
+}
+root.FortuneCore={dailySsq,liuyaoRead,lotLevel,LOT_LEVEL,rng,dailySeed,dailyTicket,tarotHand,coinLine,liuyao,YI,JI,BONE_BAND,GAN,ZHI,gzIdx,bone,qimen,qimenRead,QM_ASK,GUA,DIR,RING,ziweiRead,ZW_FIELD};
 })(typeof window!=='undefined'?window:globalThis);
 </script>
 <script>
@@ -663,14 +695,24 @@ draw(){
 
 /* 今日小票 */
 
-S.daily={name:'今日一卦',enter(){this.t0=VT;this.ph='idle';this.L=0},
-key(k,d){if(!d)return;if(this.ph==='done'){if(k==='ok')this.ph='idle';if(k==='up'||k==='down')this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages}else if(k==='ok'&&this.ph!=='print'){this.make();this.ph='print';this.L=0;this.lt=VT;this.pause=0;this.page=0;this.pages=1}},
-make(){const d=new Date(),wd='日一二三四五六'[d.getDay()],FC=FortuneCore;
- const t=FC.dailyTicket(FC.dailySeed(d.getFullYear(),d.getMonth()+1,d.getDate(),PF.y,PF.m,PF.d,PF.h,PF.g==='男'?0:1),signOf(PF.m,PF.d));
+S.daily={name:'今日一卦',enter(){this.t0=VT;this.ph='idle';this.L=0;this.sel=0;this.err=''},
+key(k,d){if(!d)return;if(this.ph==='idle'&&(k==='up'||k==='down')){this.sel=1-this.sel;this.err='';sfx.tick();return}if(this.ph==='done'){if(k==='ok')this.ph='idle';if(k==='up'||k==='down')this.page=(this.page+(k==='down'?1:this.pages-1))%this.pages}else if(k==='ok'&&this.ph==='idle'){if(this.make()===false)return;this.ph=this.sel===1?'calc':'print';this.ct=VT;this.L=0;this.lt=VT;this.pause=0;this.page=0;this.pages=1}},
+make(){const d=new Date(Date.now()+8*3600000),wd='日一二三四五六'[d.getUTCDay()],FC=FortuneCore;
+ const y=d.getUTCFullYear(),m=d.getUTCMonth()+1,day=d.getUTCDate();this.stamp=`${y}.${pad(m)}.${pad(day)}`;
+ if(this.sel===1){try{this.ssq=FC.dailySsq(y,m,day,PF.y,PF.m,PF.d,PF.h,PF.g==='男'?0:1)}catch(e){this.ssq=null}if(!this.ssq){this.err='日期或生辰无效，请校准';return false}return this.makeSsq()}
+ const t=FC.dailyTicket(FC.dailySeed(d.getUTCFullYear(),d.getUTCMonth()+1,d.getUTCDate(),PF.y,PF.m,PF.d,PF.h,PF.g==='男'?0:1),signOf(PF.m,PF.d));
  this.printN=(this.printN||0)+1;const tc=TAROT[t.tarot],sg=SIGNS[t.sign];
- this.rows=[[14,'★ NABO 赛博算命机 ★','d'],[34,'今日一卦','h'],[52,`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}  周${wd}`,'m'],[64,'','-'],[80,`星座  ${sg[0]}  `+'★★★★★☆☆☆☆☆'.substr(5-t.signStars,5),'t'],[100,`塔罗  ${tc[0]} ${tc[1]}${t.tarotRev?' · 逆位':''}`,'t'],[120,`灵签  第${cnNum(t.lotNo)}签 · ${['上签','中签','下签'][t.lotLevel]}`,'t'],[140,`卦象  ${HEX[t.hexUp][t.hexLo]}`,'t'],[154,'','-'],[170,'宜  '+t.yi.map(i=>FC.YI[i]).join(' · '),'t'],[188,'忌  '+t.ji.map(i=>FC.JI[i]).join(' · '),'t'],[202,'','-'],[220,'','bar'],[242,`仅供娱乐 · NO.${String(t.serial).padStart(4,'0')}-${this.printN}`,'s']];this.TH=256},
-update(){if(this.ph!=='print')return;if(VT<this.pause)return;if(VT-this.lt>26){this.lt=VT;this.L+=3;sfx.print();for(const r of this.rows)if(Math.abs(r[0]-this.L)<2&&r[2]!=='-')this.pause=VT+(r[2]==='d'?180:90);if(this.L>=this.TH){this.L=this.TH;this.ph='tear';this.tt=VT;sfx.whoosh()}}if(this.ph==='tear'&&VT-this.tt>400){this.ph='done';burst(120,290,20,C.cyan)}},
-draw(){if(this.ph==='done'){const body=this.rows.filter(r=>r[2]==='t'||r[2]==='s').map(r=>r[1]).join('\n');this.pages=readCard('今日一卦',this.rows[2][1],body,this.page);return}const slot=296;
+ this.rows=[[14,'★ NABO 赛博算命机 ★','d'],[34,'今日一卦','h'],[52,`${d.getUTCFullYear()}.${String(d.getUTCMonth()+1).padStart(2,'0')}.${String(d.getUTCDate()).padStart(2,'0')}  周${wd}`,'m'],[64,'','-'],[80,`星座  ${sg[0]}  `+'★★★★★☆☆☆☆☆'.substr(5-t.signStars,5),'t'],[100,`塔罗  ${tc[0]} ${tc[1]}${t.tarotRev?' · 逆位':''}`,'t'],[120,`灵签  第${cnNum(t.lotNo)}签 · ${['上签','中签','下签'][t.lotLevel]}`,'t'],[140,`卦象  ${HEX[t.hexUp][t.hexLo]}`,'t'],[154,'','-'],[170,'宜  '+t.yi.map(i=>FC.YI[i]).join(' · '),'t'],[188,'忌  '+t.ji.map(i=>FC.JI[i]).join(' · '),'t'],[202,'','-'],[220,'','bar'],[242,`仅供娱乐 · NO.${String(t.serial).padStart(4,'0')}-${this.printN}`,'s']];this.TH=256},
+makeSsq(){const o=this.ssq,t=o.ticket,cn=FortuneCore;this.printN=(this.printN||0)+1;
+ const gz=cn.GAN[o.dayGz%10]+cn.ZHI[o.dayGz%12];
+ this.basis=[`档案 ${PF.y}.${pad(PF.m)}.${pad(PF.d)} ${cn.ZHI[PF.h]}时 ${PF.g}${PF.demo?'（示例）':''}`,`农历 ${o.lunar[0]}年${o.lunar[3]?'闰':''}${o.lunar[1]}月${o.lunar[2]}日`,`${gz}日 · 固定午时`,`${SIGNS[t.sign][0]} ${t.signStars}星 · 幸运数${o.lucky}`,`塔罗 ${TAROT[t.tarot][1]}·${t.tarotRev?'逆位':'正位'}`,`灵签 第${t.lotNo}签·${['上签','中签','下签'][t.lotLevel]}`,`卦象 ${HEX[t.hexUp][t.hexLo]}`,`称骨 ${Math.floor(o.boneTotal/10)}两${o.boneTotal%10}钱`,`紫微 ${['','','水二局','木三局','金四局','土五局','火六局'][o.five]}`,`命宫${cn.ZHI[(o.soul+2)%12]} · 身宫${cn.ZHI[(o.body+2)%12]}`,`奇门 12:00 ${o.qYang?'阳':'阴'}遁${o.qJu}局${'上中下'[o.qYuan]}元`,`生门落${cn.GUA[o.qPalace]}${o.qPalace}宫`,'同日同档案固定一组','娱乐选号，不预测开奖','不提高中奖概率'].join('\n');
+ this.rows=[[14,'★ NABO 幸运选号 ★','d'],[34,'今日双色球','h'],[52,this.stamp,'m'],[64,'','-'],[84,'红球  '+o.red.slice(0,3).map(pad).join(' '),'t'],[106,'红球  '+o.red.slice(3).map(pad).join(' '),'t'],[132,'蓝球  '+pad(o.blue),'t'],[154,'','-'],[174,'同日同档案固定一组','t'],[198,'娱乐选号，不预测开奖','t'],[220,'','bar'],[242,'仅供娱乐 · v1','s']];this.TH=256;return true},
+ drawSsq(){const o=this.ssq;this.pages=1+Math.max(1,Math.ceil(wrapWidth(this.basis,192).length/7));
+ if(this.page>0)readCard('选号依据',this.stamp,this.basis,this.page-1);
+ else{c.fillStyle=C.paper;rr(8,30,224,286,4);c.fill();T('今日双色球',120,55,15,C.ink,'center',F.serif);T(this.stamp+' · 东八区',120,82,9,'#8a2e1e');T('红球',120,103,11,C.ink);o.red.forEach((n,i)=>{const x=56+(i%3)*64,y=134+Math.floor(i/3)*48;circ(x,y,22,C.red);T(pad(n),x,y,20,C.white,'center',F.disp)});T('蓝球',72,236,11,C.ink);circ(139,233,22,'#1763ad');T(pad(o.blue),139,233,20,C.white,'center',F.disp);T('娱乐选号，不预测开奖',120,279,9,'#7a6248')}
+ c.fillStyle=C.paper;c.fillRect(16,288,208,24);T(`↑↓ 翻页 ${this.page+1}/${this.pages} · OK 返回`,120,302,9,'#7a6248')},
+update(){if(this.ph==='calc'){if(VT-this.ct<1200)return;this.ph='print';this.lt=VT}if(this.ph==='tear'&&VT-this.tt>400){this.ph='done';burst(120,290,20,C.cyan);return}if(this.ph!=='print')return;if(VT<this.pause)return;if(VT-this.lt>26){this.lt=VT;this.L+=3;sfx.print();for(const r of this.rows)if(Math.abs(r[0]-this.L)<2&&r[2]!=='-')this.pause=VT+(r[2]==='d'?180:90);if(this.L>=this.TH){this.L=this.TH;this.ph='tear';this.tt=VT;sfx.whoosh()}}if(this.ph==='tear'&&VT-this.tt>400){this.ph='done';burst(120,290,20,C.cyan)}},
+draw(){if(this.ph==='calc'){nabo('N-CALC',100,120,130,VT);G('今日双色球',120,208,24,C.white,C.mag);T('汇合今日信息…',120,244,11,C.gold);T('娱乐选号，不预测开奖',120,284,10,C.dim);return}if(this.ph==='done'&&this.sel===1){this.drawSsq();return}if(this.ph==='done'){const body=this.rows.filter(r=>r[2]==='t'||r[2]==='s').map(r=>r[1]).join('\n');this.pages=readCard('今日一卦',this.rows[2][1],body,this.page);return}const slot=296;
  if(this.ph!=='idle'){const lift=this.ph==='tear'||this.ph==='done'?-8*E.back(clamp((VT-this.tt)/400,0,1)):0,top=slot-this.L+lift;
   c.save();c.beginPath();c.rect(0,0,W,slot);c.clip();c.fillStyle='#f4efe4';c.fillRect(32,top,176,this.L);
   c.fillStyle=C.bg;for(let x=32;x<208;x+=8){c.beginPath();c.moveTo(x,top-1);c.lineTo(x+4,top+4);c.lineTo(x+8,top-1);c.fill()}
@@ -682,7 +724,7 @@ draw(){if(this.ph==='done'){const body=this.rows.filter(r=>r[2]==='t'||r[2]==='s
   c.restore();box(32,top,176,this.L,'小票：纸纹底 + 文字，引擎逐行生成','e')}
  const pr=PI_('printer');if(pr)c.drawImage(pr,14,slot-4);else{c.fillStyle='#211a3c';rr(14,slot-4,212,30,6);c.fill();c.fillStyle='#05030c';c.fillRect(28,slot-1,184,4);T('NABO PRINT',30,slot+14,8,C.dim,'left',F.mono)}
  if(this.ph==='print'&&Math.floor(VT/120)%2)circ(204,slot+14,2.5,C.cyan);box(14,slot-4,212,28,'打印机外壳 · Codex','x');
- if(this.ph==='idle'){naboThen('N-PRINT',120,120,138,VT-this.t0,'N-IDLE');G('今日一卦',120,214,24,C.white,C.mag);T('OK 打印今天的命签小票',120,244,11,C.dim)}
+ if(this.ph==='idle'){naboThen('N-PRINT',120,120,112,VT-this.t0,'N-IDLE');G('今日一卦',120,184,24,C.white,C.mag);['命签小票','今日双色球'].forEach((s,i)=>{c.fillStyle=i===this.sel?'#3a2858':'#1a1035';c.fillRect(24,203+i*36,192,32);T((i===this.sel?'→ ':'')+s,120,219+i*36,12,i===this.sel?C.gold:C.dim)});T(this.err||'↑↓ 选择 · OK 打印',120,284,10,this.err?C.red:C.cyan)}
  if(this.ph==='done')T('OK 再打一张',120,22+10,10,C.cyan)}};
 
 /* ---------- 场景说明 ---------- */
@@ -697,7 +739,7 @@ star:{sub:'星座今日运势：连星成座，再点亮四项星级。',st:[['�
 ziwei:{sub:'紫微斗数：按生辰真实排盘（iztro 开源库），十二宫按标准地支方位，寅宫在左下。',st:[['进入','先确认生辰和性别（↓ 修改），OK 排盘'],['0–0.6 s','十二宫从命宫开始逐格亮起，标出宫干支'],['0.6–1.3 s','宫名依次出现，身宫标“身”'],['1.3 s 起','NABO 在中宫掐指，主星从中心带拖尾飞入各宫；庙旺金色、陷地灰色，四化用不同颜色'],['完成','中宫显示五行局、命主、身主；↑↓ 换宫'],['OK','解读卡：主星按本宫主题解读，加庙旺和四化；空宫借对宫；疾厄宫不做健康判断']],g:['N-CALC 掐指（放在中宫，约 100×100）'],x:['宫格框线样式','解读卡底纹'],e:['排盘：固件里用 C 重写，和 iztro 逐盘对拍','解读：14 主星 × 4 个主题的原创短句，加庙旺、四化修饰']},
 qimen:{sub:'时家奇门：按此刻起局，先选问什么事，再看用神落在哪一宫。',st:[['进入','选问事类型：求财看生门、事业看开门、感情看六合、考试看景门、出行看值使门'],['0–0.5 s','九宫格线描出'],['0.5–1.7 s','金色光点按洛书 1→9 飞宫，经过的宫亮出数字、卦名和地盘干'],['1.7–2.5 s','九星层整体转到位，回弹定位，“咔”一声，轻微震屏；天盘干出现'],['2.6–3.4 s','八门层转到位'],['3.5–4.1 s','八神从值符所在宫起逐宫浮现；顶部显示阴阳遁、局数、元和节气'],['揭晓','用神所在宫描金闪烁，底部显示方位'],['OK','解读卡：门、星、神各一句，综合给出大顺 / 顺 / 平 / 宜缓，附方位建议']],g:['N-CALC（起局期间在中五宫）'],x:['九宫底纹（可选）','解读卡底纹、结论印章'],e:['起局：时家转盘拆补法；和 kinqimen 对拍 600 个随机时间点，局数、地盘、九星、八门、八神全部一致','转盘移动期间只重画外圈 8 格']},
 birth:{sub:'生辰档案：称骨、紫微、星座、今日小票共用。固件里存在 NVS，原型里存在你的浏览器。',st:[['↑ / ↓','滚动当前一格；按住快速滚动，适合调年份'],['OK','跳到下一格：年 → 月 → 日 → 时辰 → 性别'],['实时','下方同步显示农历、四柱八字、生肖和星座'],['最后一格 OK','保存，回到刚才的玩法'],['注意','这一页双击上键不返回，避免快速滚动时误退出']],g:['（可选）N-IDLE 小尺寸放在角落'],x:['滚轮外框（可选）'],e:['农历和八字：固件里用 1900–2100 农历表 + 节气表，整数实现','滚轮滑动：位移缓动']},
-daily:{sub:'每天的主入口：把星座、塔罗、灵签、卦象合成一张热敏小票。',st:[['待机','NABO 站在打印机上方，提示按 OK'],['OK','底部打印机开始出纸，小票向上推出'],['打印中','走纸一步一停，遇到标题行停得久一点，配细碎的针打声'],['打完','撕纸：小票上跳一下，出纸口闪青光'],['内容','日期、星座星级、塔罗日牌、灵签、卦象、宜忌、条码、编号；同一天同一生辰打印结果相同，只有打印次数递增']],g:['N-PRINT 递小票 / 拍打印机'],x:['打印机外壳','小票纸纹（可选）'],e:['小票整张由文字逐行生成；出纸就是改起始行，可用 ST7789 硬件滚动']}};
+daily:{sub:'每日入口：↑↓ 选择命签小票或今日双色球。双色球结合档案、历法、每日小票、称骨、紫微及固定午时奇门，离线生成每日固定的一组娱乐号码，不预测开奖。',st:[['待机','NABO 站在打印机上方，提示按 OK'],['OK','底部打印机开始出纸，小票向上推出'],['打印中','走纸一步一停，遇到标题行停得久一点，配细碎的针打声'],['打完','撕纸：小票上跳一下，出纸口闪青光'],['内容','日期、星座星级、塔罗日牌、灵签、卦象、宜忌、条码、编号；同一天同一生辰打印结果相同，只有打印次数递增']],g:['N-PRINT 递小票 / 拍打印机'],x:['打印机外壳','小票纸纹（可选）'],e:['小票整张由文字逐行生成；出纸就是改起始行，可用 ST7789 硬件滚动']}};
 
 const ORDER=['boot','menu','birth','daily','shake','lot','tarot','bone','star','ziwei','qimen'];
 const chips=document.getElementById('chips');

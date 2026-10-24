@@ -1,19 +1,30 @@
-# 更新记录
+<p align="right"><a href="CHANGELOG.zh_CN.md">简体中文</a> · <strong>English</strong></p>
 
-## v0.1.2 · 2026-10-22 · 首个公开固件
+# Changelog
 
-- 八个离线玩法、22 张 NABO 原创塔罗、29 项道具、Grok 动画与完整源码/原始资源。
-- 正文 16 px、提示至少 14 px，结果解读按键翻页；称骨保留完整白话、52 档原诗与四项骨重。
-- 开机语音“NABO，在此恭候”，11 种音效重配音色和起音渐变。
-- 修复长牌名被截断、重复占满图像句柄而导致牌面与杆秤部件消失。
-- 放大塔罗牌面并延长抽出/翻面节奏；称骨约 9 秒称完后保留杆秤，按 OK 再看解读。
-- 优化旋转绘制，过载帧主动让出 CPU；八玩法及十轮场景切换无异常重启。
-- 真实断电保留生辰，五分钟休眠和上键唤醒通过用户与串口联合验证。
+## v0.1.3 · 2026-10-24
 
-构建：ESP-IDF 5.5.3，ESP32-C3 / 8 MB。app 505648 / 2031616 字节；素材 3677860 / 6291456 字节。最低空闲堆 88144 字节，最低连续块 24576 字节；统计和限制见 validation/M4-device.md。
+- Add Daily SSQ under Daily Fortune, in both the browser prototype and firmware.
+- Combine birth/lunar/four-pillar data, daily zodiac/tarot/lot/hexagram, bone weights, Ziwei and fixed-noon Qimen into one stable daily set of six red balls and one blue ball, with paged explanations. Entertainment only; this does not predict draws or improve winning odds.
+- Preserve the eight-position menu, original daily ticket, NVS profile format and partition layout.
+- Add JS/C comparison, date/restart/paging regression, offline browser checks and macOS sanitizer support.
+- Stop requiring an original-firmware backup or a whole-chip erase. Compatible upgrades retain NVS; backups are an explicit optional choice.
+- Keep development-image acceptance separate from release-image verification; see [v0.1.3 release notes](docs/RELEASE_v0.1.3.md).
 
-app SHA256：`d46453682debe1f4199b66bf2d5e84eda9f256964210cb883c41c9e0aaa72834`。
+## v0.1.2 · 2026-10-22 · First public firmware
 
-assets SHA256：`fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664`。
+- Eight offline modes, 22 original NABO tarot cards, 29 props, Grok animations, full source and original resources.
+- 16 px body text and hints of at least 14 px, paged results, full bone explanations, 52 poems and four weight components.
+- “NABO, waiting here” boot voice, 11 redesigned sound effects with softened attack.
+- Fix truncated long card names exhausting image handles and hiding cards/scale parts.
+- Enlarge tarot art and extend extraction/flip timing. Retain the balanced scale around nine seconds; OK opens its explanation.
+- Optimize rotation and yield on slow frames. Eight modes and ten scene cycles showed no unexpected reboot.
+- User and serial checks confirmed birth-profile retention across power-off, five-minute sleep and upper-key wake.
 
-完整镜像 SHA256：`60a4c53d426b43c2e163936479ea7f6885baafb26486bb9be50948590d00c1cd`。
+ESP-IDF 5.5.3; ESP32-C3 / 8 MB. Application: 505648 / 2031616 bytes; assets: 3677860 / 6291456 bytes. Sampled minimum free heap 88144 bytes, largest block 24576 bytes. Statistics and limitations: validation/M4-device.md.
+
+App SHA256: `d46453682debe1f4199b66bf2d5e84eda9f256964210cb883c41c9e0aaa72834`.
+
+Assets SHA256: `fe7922bfa7f986c99b8100c6fec727310667150a3842e11789234ec1296c0664`.
+
+Merged SHA256: `60a4c53d426b43c2e163936479ea7f6885baafb26486bb9be50948590d00c1cd`.

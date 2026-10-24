@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "version": "0.1.3-dev",
+  "app_sha256": "fa9a3db991102e8de538673858eaf12f4e72b77d033555c6e1ea7c7888728a31",
+  "assets_sha256": "9a0c9063b73403a2415a7fcd0190ad06c75b1bf7532c1901ab7a435d90e49c80",
+  "full_bin_sha256": "03013c4035fcbb3bd6822b0730af4c347563105dc6c14db1d50341dcd19838e4",
+  "app_elf_sha256": "4e96d4b32e1fa1483672ea02cd774f20720acd61b1a59502dccc69187d878257",
+  "nvs_preserved_byte_for_byte": true,
+  "serial_routes_exercised": [
+    "daily_ssq_print",
+    "ssq_basis_page_cycle",
+    "repeat_print",
+    "scene_reentry",
+    "original_daily_ticket",
+    "software_restart_and_print"
+  ],
+  "profile_retained_across_restart": true,
+  "calibrated_clock_retained": true,
+  "unexpected_restarts": 0,
+  "image_misses_zero": true,
+  "sampled_min_free_heap_bytes": 97476,
+  "sampled_min_largest_block_bytes": 73728,
+  "user_confirmed_display_numbers_and_physical_navigation": true,
+  "host_validation": {
+    "complete_gate": "PASS",
+    "js_c_pairs": 1795,
+    "mutation_checks": "19/19",
+    "existing_ui_frames": 4113,
+    "ssq_ui_frames": 6628,
+    "mismatch_frames": 0,
+    "image_misses": 0,
+    "asan_ubsan": "PASS",
+    "font_gaps": 0,
+    "browser": "PASS"
+  },
+  "unverified": [
+    "speaker quality",
+    "five-minute idle sleep/wake",
+    "sleep current"
+  ],
+  "privacy": "No MAC, birth profile, NVS bytes or raw logs are included.",
+  "scope": "This record applies to the 0.1.3-dev bytes above. Formal release-image verification is recorded separately."
+}

@@ -1,5 +1,6 @@
 """M4 host checks: synthesized PCM bounds and rejection of unsafe flash bundles."""
 import contextlib
+import argparse
 import ctypes
 import importlib.util
 import io
@@ -119,10 +120,15 @@ def bundle_check(tmp):
     return {'valid_bundle_passed': True, 'unsafe_bundles_rejected': rejected}
 
 
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--sound-only', action='store_true', help='Host-only checks; bundle checks run after firmware build/merge')
+parser.add_argument('--out', type=Path, default=ROOT/'private/ssq-validation/m4-host.json')
+options = parser.parse_args()
 with tempfile.TemporaryDirectory(prefix='fortune-m4-') as directory:
     tmp = Path(directory)
-    result = {'sound': sound_check(tmp), 'bundle': bundle_check(tmp)}
-dest = ROOT/'validation/m4-host/host-checks.json'
+    result = {'sound': sound_check(tmp)}
+    result['bundle'] = {'status': 'NOT RUN', 'reason': 'sound-only host check'} if options.sound_only else bundle_check(tmp)
+dest = options.out
 dest.parent.mkdir(parents=True, exist_ok=True)
 dest.write_text(json.dumps(result, indent=2) + '\n')
 print(json.dumps(result, indent=2))

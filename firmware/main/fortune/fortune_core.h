@@ -113,6 +113,21 @@ typedef struct {
 } fc_ziwei_t;
 bool fc_ziwei(int y, int m, int d, int time_index, fc_ziwei_t *out); /* time_index 0..11 */
 
+/* Daily SSQ v1. East-8 calendar date; Qimen is fixed at 12:00. No global RNG,
+ * interaction timing, print count or saved state participates. Entertainment only. */
+typedef struct {
+  uint32_t seed;
+  uint8_t red[6], blue, lucky;
+  fc_ticket_t ticket;
+  fc_lunar_t lunar;
+  int8_t day_gz;
+  uint8_t bone_total;
+  int8_t soul, body, five;
+  bool q_yang;
+  int8_t q_yuan, q_ju, q_palace;
+} fc_ssq_t;
+bool fc_daily_ssq(int y, int m, int d, int py, int pm, int pd, int ph, int pg, fc_ssq_t *out);
+
 #ifdef __cplusplus
 }
 #endif
